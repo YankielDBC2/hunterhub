@@ -1,0 +1,150 @@
+{
+  "header": {
+    "docs": "Documentazione",
+    "community": "Community",
+    "team": "Team",
+    "app": "🚀 App",
+    "whitepaper": "Whitepaper",
+    "lore_bible": "Bibbia del Lore",
+    "dev_notes": "Note dello sviluppatore",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "language_selector": {
+      "EN": "Inglese",
+      "ES": "Spagnolo",
+      "RU": "Russo",
+      "ZH": "Cinese",
+      "DE": "Tedesco",
+      "FR": "Francese",
+      "IT": "Italiano",
+      "JA": "Giapponese",
+      "KO": "Coreano",
+      "PT": "Portoghese"
+    },
+    "hcash_price": "0.018 USD"
+  },
+
+  "hub_carousel": {
+    "title_part1": "Hunter",
+    "title_part2": "Hub",
+    "title_accent": "App",
+    "description": "La nostra app centralizza funzionalità potenti per migliorare la comodità dell'utente e offrire un'esperienza immersiva."
+  },
+
+  "self_economy": {
+    "title": "Web3 Auto-Economia",
+    "subtitle": "Semplice, guadagna token $HCASH giocando",
+    "steps": [
+      { "title": "3 Clic", "highlight": "Registrati" },
+      { "title": "Gioca ai nostri", "highlight": "Giochi" },
+      { "title": "Guadagna", "highlight": "Crypto" },
+      { "title": "Invita i tuoi", "highlight": "Amici" }
+    ],
+    "final_description": "Combinando meccaniche Faucet e Peer-to-Peer, abbiamo costruito un'economia dinamica guidata dai giocatori. Oltre l'80% degli oggetti di gioco sono consumabili e scompaiono dopo l'uso, contribuendo a ridurre l'offerta in circolazione. I restanti sono non consumabili con quantità molto limitate, garantendone il valore e l'esclusività."
+  },
+
+  "trending": {
+    "title": "Asset di Tendenza - Cap",
+    "charts": {
+      "hunter_credit": "Hunter Credit - HCREDIT",
+      "burned": "Bruciati",
+      "circulating": "In circolazione",
+      "media_value": "Valore Mediatico",
+      "marketplace": "Marketplace HUB",
+      "listed": "In elenco",
+      "sold": "Venduti",
+      "store": "Negozio HUB",
+      "users": "Utenti",
+      "transactions": "Transazioni"
+    },
+    "item": {
+      "supply": "Offerta",
+      "value": "Valore"
+    },
+    "pagination": {
+      "prev": "Precedente",
+      "next": "Successivo"
+    }
+  },
+
+  "what_we_are_building": {
+    "title": "Cosa Stiamo Costruendo?",
+    "paragraph_1": "Stiamo creando un universo interconnesso — da giochi e strumenti a piattaforme comunitarie e sistemi di ricompensa.",
+    "paragraph_2": "Tutto è alimentato dalla blockchain e migliorato dal coinvolgimento dei giocatori."
+  },
+"why_join": {
+  "animated_title": "La Migliore Esperienza Web3 {{value}}",
+  "subtitle_rotation": [
+    "Play-To-Earn",
+    "Free-To-Play",
+    "Engage-To-Earn"
+  ],
+  "description": "Registrati ora per accedere a contenuti esclusivi, tracciare i tuoi progressi e connetterti con una community globale di giocatori. Non perdere offerte speciali pensate solo per te!",
+  "benefits": [
+    {
+      "title": "Accedi a",
+      "highlight": "Giochi Esclusivi",
+      "description": "Ottieni accesso anticipato a nuovi giochi e gemme nascoste — solo per membri registrati. Sii il primo a giocare!"
+    },
+    {
+      "title": "Esplora",
+      "highlight": "Membership & Vantaggi",
+      "description": "Monitora statistiche di gioco, segui i tuoi successi e condividi i tuoi progressi con altri giocatori facilmente."
+    },
+    {
+      "title": "Vera",
+      "highlight": "Connessione con la Community",
+      "description": "Connettiti con una community di giocatori appassionati. Condividi consigli, strategie ed esperienze di gioco."
+    },
+    {
+      "title": "A lungo termine &",
+      "highlight": "Tokenomics Deflazionistica",
+      "description": "Goditi sconti esclusivi per membri su giochi di alta qualità, DLC e oggetti in-game. Risparmia sui tuoi preferiti!"
+    }
+  ]
+},
+  "ecosystem": {
+    "title": "Cosa Stiamo Costruendo?",
+    "description": "Stiamo sviluppando l’Ecosistema Space Hunters — un metaverso di gioco completamente immersivo e interoperabile, alimentato dalla blockchain e dall’ambizione dei giocatori.",
+    "tech_generators": "Include Tech Generators, un gioco di gestione delle risorse dove i giocatori ottimizzano l’energia, assumono ingegneri e migliorano le operazioni minerarie per ottenere ricompense reali.",
+    "economy": "La nostra economia si basa su $HCASH e $HCREDIT, permettendo staking, potenziamenti, acquisti in-game e scambi.",
+    "webhub": "L'app Web Hub connette tutto — traccia i progressi, partecipa a eventi live, gestisci i tuoi NFT, interagisci con la community e sblocca funzioni future come collezionabili, strumenti di staking e sistemi sociali."
+  },
+
+  "games": {
+    "tech-generators": {
+      "title": "Tech Generators",
+      "description": "Tech Generators è un gioco di mining sci-fi sviluppato dal team Space Hunters. Offre gameplay in tempo reale, meccaniche uniche e premi Play‑To‑Earn.",
+      "release": "23 Dic 2024",
+      "genre": "Sci‑Fi - Mining - RPG",
+      "tags": [
+        "TMA",
+        "Browser",
+        "TON Chain"
+      ]
+    },
+    "chat-adventure": {
+      "title": "Chat Adventure",
+      "description": "Chat Adventure è un gioco narrativo dove i giocatori creano personaggi, esplorano fazioni e sbloccano obiettivi tramite interazione con l’IA.",
+      "release": "10 Mar 2025",
+      "genre": "RPG Testuale - IA - Interattivo",
+      "tags": [
+        "Telegram",
+        "IA",
+        "Gioco di ruolo"
+      ]
+    },
+    "space-hunters": {
+      "title": "The Reborn",
+      "description": "Un’esperienza multiplayer intensa che combina combattimenti spaziali, esplorazione e guerre di fazione nell’universo rinnovato di Space Hunters.",
+      "release": "Q3 2025",
+      "genre": "Shooter - MMO - Spazio",
+      "tags": [
+        "Shooter",
+        "MMO",
+        "Unity"
+      ]
+    }
+  }
+}

@@ -1,32 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
-const benefits = [
-  {
-    title: 'Access',
-    highlight: 'Exclusive Games',
-    description:
-      'Get early access to new releases and hidden gems, only for registered members. Be the first to play!',
-  },
-  {
-    title: 'Explore',
-    highlight: 'Memberships & Benefits',
-    description:
-      'Monitor gameplay stats, track achievements, and share your progress with fellow gamers easily.',
-  },
-  {
-    title: 'Real',
-    highlight: 'Community Engagement',
-    description:
-      'Connect with a passionate community of gamers. Share tips, strategies, and gaming experiences.',
-  },
-  {
-    title: 'Long-Term &',
-    highlight: 'Deflationary Tokenomic',
-    description:
-      'Enjoy member-only discounts on top-rated games, DLCs, and in-game items. Save on your favorites!',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const floatAnim = {
   animate: {
@@ -55,37 +29,42 @@ const glowPulse = {
 };
 
 export default function WhyJoin() {
-  const titles = ['Play-To-Earn', 'Free-To-Play', 'Engage-To-Earn'];
+  const { t } = useTranslation();
+  const subtitles = t('why_join.subtitle_rotation', { returnObjects: true }) || [];
+  const template = t('why_join.animated_title');
+
   const [index, setIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
+  const [displayText, setDisplayText] = useState('');
+  const [charIndex, setCharIndex] = useState(0);
+  const [typing, setTyping] = useState(true);
 
   useEffect(() => {
-    let currentIndex = 0;
-    let currentText = '';
-    let typingInterval;
+    if (!subtitles.length) return;
+    const fullText = subtitles[index];
 
-    const typeText = () => {
-      const fullText = titles[index];
-      currentText = '';
-      currentIndex = 0;
+    if (typing && charIndex <= fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(fullText.slice(0, charIndex));
+        setCharIndex((prev) => prev + 1);
+      }, 80);
+      return () => clearTimeout(timeout);
+    }
 
-      typingInterval = setInterval(() => {
-        currentText += fullText[currentIndex];
-        setDisplayedText(currentText);
-        currentIndex++;
+    if (charIndex > fullText.length) {
+      const pause = setTimeout(() => {
+        setTyping(false);
+        setTimeout(() => {
+          setCharIndex(0);
+          setIndex((prev) => (prev + 1) % subtitles.length);
+          setTyping(true);
+        }, 300);
+      }, 1200);
+      return () => clearTimeout(pause);
+    }
+  }, [charIndex, typing, index, subtitles]);
 
-        if (currentIndex === fullText.length) {
-          clearInterval(typingInterval);
-          setTimeout(() => {
-            setIndex((prev) => (prev + 1) % titles.length);
-          }, 1600);
-        }
-      }, 70);
-    };
-
-    typeText();
-    return () => clearInterval(typingInterval);
-  }, [index]);
+  const parts = template.split('{{value}}');
+  const benefits = t('why_join.benefits', { returnObjects: true });
 
   return (
     <section className="relative text-white py-28 px-6 sm:px-8 overflow-hidden">
@@ -98,9 +77,12 @@ export default function WhyJoin() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            The Ultimate Web3{' '}
-            <span className="text-red-500 inline-block">{displayedText}</span>{' '}
-            Experience
+            {parts[0]}
+            <span className="text-red-500 inline-block">
+              {displayText}
+              <span className="inline-block animate-pulse">|</span>
+            </span>
+            {parts[1]}
           </motion.h2>
 
           <motion.p
@@ -110,7 +92,7 @@ export default function WhyJoin() {
             transition={{ delay: 0.2, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Sign up now to dive into exclusive content, track your progress, and connect with a global community of gamers. Don’t miss out on special offers made just for you!
+            {t('why_join.description')}
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -135,13 +117,13 @@ export default function WhyJoin() {
         </div>
 
         <motion.div
-          className="flex flex-col items-center gap-8"
+          className="flex flex-col items-center gap-6"
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex gap-6">
+          <div className="flex gap-5">
             <motion.img
               src="/images/box1.png"
               alt="Loot Box"

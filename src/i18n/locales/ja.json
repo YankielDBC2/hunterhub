@@ -1,0 +1,150 @@
+{
+  "header": {
+    "docs": "ドキュメント",
+    "community": "コミュニティ",
+    "team": "チーム",
+    "app": "🚀 アプリ",
+    "whitepaper": "ホワイトペーパー",
+    "lore_bible": "ロアバイブル",
+    "dev_notes": "開発ノート",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "language_selector": {
+      "EN": "英語",
+      "ES": "スペイン語",
+      "RU": "ロシア語",
+      "ZH": "中国語",
+      "DE": "ドイツ語",
+      "FR": "フランス語",
+      "IT": "イタリア語",
+      "JA": "日本語",
+      "KO": "韓国語",
+      "PT": "ポルトガル語"
+    },
+    "hcash_price": "0.018 USD"
+  },
+
+  "hub_carousel": {
+    "title_part1": "ハンター",
+    "title_part2": "ハブ",
+    "title_accent": "アプリ",
+    "description": "当アプリは、ユーザーの利便性を高め、没入感のある体験を提供するために強力な機能を集約しています。"
+  },
+
+  "self_economy": {
+    "title": "Web3 自立経済",
+    "subtitle": "シンプルに、ゲームをして $HCASH トークンを稼ごう",
+    "steps": [
+      { "title": "3クリックで", "highlight": "登録" },
+      { "title": "当社の", "highlight": "ゲームで遊ぶ" },
+      { "title": "報酬として", "highlight": "暗号資産を獲得" },
+      { "title": "友達を", "highlight": "招待" }
+    ],
+    "final_description": "ファウセットとピアツーピアのメカニズムを組み合わせ、プレイヤー主導のダイナミックな経済を構築しました。ゲーム内アイテムの80％以上が消費型で、使用後に消えることで流通供給量が減少します。残りは非常に限定された数量の非消費型アイテムであり、価値と希少性を維持しています。"
+  },
+
+  "trending": {
+    "title": "トレンド資産 - キャップ",
+    "charts": {
+      "hunter_credit": "ハンタークレジット - HCREDIT",
+      "burned": "焼却済み",
+      "circulating": "流通中",
+      "media_value": "メディア価値",
+      "marketplace": "マーケットプレイス HUB",
+      "listed": "出品中",
+      "sold": "販売済み",
+      "store": "ストア HUB",
+      "users": "ユーザー数",
+      "transactions": "取引数"
+    },
+    "item": {
+      "supply": "供給量",
+      "value": "価値"
+    },
+    "pagination": {
+      "prev": "前へ",
+      "next": "次へ"
+    }
+  },
+
+  "what_we_are_building": {
+    "title": "私たちは何を構築しているのか？",
+    "paragraph_1": "私たちは、ゲーム、ツール、コミュニティプラットフォーム、報酬システムなど、すべてをつなぐ世界を創造しています。",
+    "paragraph_2": "すべてはブロックチェーンによって支えられ、プレイヤーの参加によって強化されています。"
+  },
+"why_join": {
+  "animated_title": "究極の Web3 {{value}}",
+  "subtitle_rotation": [
+    "プレイして稼ぐ",
+    "無料で遊ぶ",
+    "参加して報酬を得る"
+  ],
+  "description": "今すぐ登録して、限定コンテンツにアクセスし、自分の進捗を確認し、世界中のゲーマーとつながろう。あなたのためだけの特別なオファーをお見逃しなく！",
+  "benefits": [
+    {
+      "title": "アクセス",
+      "highlight": "限定ゲーム",
+      "description": "登録ユーザー限定で、新作や隠れた名作への先行アクセスが可能に。誰よりも早くプレイしよう！"
+    },
+    {
+      "title": "探索",
+      "highlight": "メンバーシップと特典",
+      "description": "ゲームの統計を管理し、実績を追跡し、簡単に進捗を共有できます。"
+    },
+    {
+      "title": "本物の",
+      "highlight": "コミュニティとの交流",
+      "description": "情熱的なゲーマーコミュニティとつながりましょう。ヒント、戦略、体験を共有できます。"
+    },
+    {
+      "title": "長期的な",
+      "highlight": "デフレ型トークノミクス",
+      "description": "人気ゲームやDLC、ゲーム内アイテムのメンバー限定割引が受けられます。お気に入りをお得に手に入れよう！"
+    }
+  ]
+},
+  "ecosystem": {
+    "title": "私たちは何を構築しているのか？",
+    "description": "私たちは、Space Hunters エコシステムを構築中です — ブロックチェーンとプレイヤーの野心によって支えられた、完全に没入型で相互運用可能なゲームメタバースです。",
+    "tech_generators": "Tech Generators は、エネルギーを最適化し、技術者を雇い、採掘作業をアップグレードして実際の報酬を得る、リソース管理ゲームです。",
+    "economy": "$HCASH と $HCREDIT によって支えられた私たちの経済では、ステーキング、強化、ゲーム内購入、取引が可能です。",
+    "webhub": "Web Hub アプリはすべてをつなぎます — 進捗の追跡、ライブイベントへの参加、NFT の管理、コミュニティとの交流、そしてコレクティブル、ステーキングツール、ソーシャル機能など、今後の機能も解放されます。"
+  },
+
+  "games": {
+    "tech-generators": {
+      "title": "Tech Generators",
+      "description": "Tech Generators は、Space Hunters チームによって開発された SF 採掘ゲームです。リアルタイムのゲームプレイ、独自のメカニクス、Play‑To‑Earn 報酬を提供します。",
+      "release": "2024年12月23日",
+      "genre": "SF - 採掘 - RPG",
+      "tags": [
+        "TMA",
+        "ブラウザ",
+        "TON チェーン"
+      ]
+    },
+    "chat-adventure": {
+      "title": "Chat Adventure",
+      "description": "Chat Adventure は、プレイヤーがキャラクターを構築し、派閥を探索し、AI 主導の対話で実績を解除する物語重視のゲームです。",
+      "release": "2025年3月10日",
+      "genre": "テキストRPG - AI - インタラクティブ",
+      "tags": [
+        "Telegram",
+        "AI",
+        "ロールプレイ"
+      ]
+    },
+    "space-hunters": {
+      "title": "The Reborn",
+      "description": "復活した Space Hunters 宇宙を舞台に、宇宙戦闘、探索、派閥戦争を融合した、迫力のあるマルチプレイヤー体験。",
+      "release": "2025年第3四半期",
+      "genre": "シューティング - MMO - 宇宙",
+      "tags": [
+        "シューティング",
+        "MMO",
+        "Unity"
+      ]
+    }
+  }
+}

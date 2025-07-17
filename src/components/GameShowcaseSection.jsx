@@ -2,49 +2,31 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Particles from 'react-tsparticles'
 import { loadFull } from 'tsparticles'
+import { useTranslation } from 'react-i18next'
 
 const games = [
   {
     id: 'tech-generators',
-    title: 'Tech Generators',
-    status: 'Alpha',
-    releaseDate: 'Dec 23, 2024',
-    genre: 'Sci‑Fi - Mining - RPG',
-    description:
-      'Tech Generators is a sci‑fi mining game developed by the Space Hunters team. It offers real‑time gameplay, unique mechanics, and play‑to‑earn rewards.',
-    tags: ['TMA', 'Browser', 'TON Chain'],
     banner: '/images/tech-banner.jpg',
     image: '/images/tech-card.jpg'
   },
   {
     id: 'chat-adventure',
-    title: 'Chat Adventure',
-    status: 'Pre‑Alpha',
-    releaseDate: 'Mar 10, 2025',
-    genre: 'Text RPG - AI - Interactive',
-    description:
-      'Chat Adventure is a narrative‑driven game where players build characters, explore factions, and unlock achievements through AI‑powered interaction.',
-    tags: ['Telegram', 'AI', 'Roleplay'],
     banner: '/images/chat-banner.jpg',
     image: '/images/chat-card.jpg'
   },
   {
     id: 'space-hunters',
-    title: 'The Reborn',
-    status: 'Coming Soon',
-    releaseDate: 'Q3 2025',
-    genre: 'Shooter - MMO - Space',
-    description:
-      'An intense multiplayer experience combining space combat, exploration and faction wars in the revived Space Hunters universe.',
-    tags: ['Shooter', 'MMO', 'Unity'],
     banner: '/images/hunters-banner.jpg',
     image: '/images/hunters-card.jpg'
   }
 ]
 
 export default function GameShowcaseSection() {
+  const { t } = useTranslation()
   const [selectedIndex, setSelectedIndex] = useState(0)
   const selectedGame = games[selectedIndex]
+  const gameData = t(`games.${selectedGame.id}`, { returnObjects: true })
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -101,7 +83,7 @@ export default function GameShowcaseSection() {
         />
       </div>
 
-      {/* 🖼️ MAIN BANNER WITH PREVIEWS */}
+      {/* 🖼️ MAIN BANNER */}
       <motion.div
         key={selectedGame.id}
         className="absolute inset-x-0 top-0 mx-auto w-full max-w-7xl h-[60vh] bg-no-repeat bg-cover z-0 shadow-lg rounded-b-3xl border-b border-white/10"
@@ -114,7 +96,7 @@ export default function GameShowcaseSection() {
         transition={{ duration: 2 }}
       />
 
-      {/* 📦 CONTENT BELOW BANNER */}
+      {/* 📦 CONTENT */}
       <div className="relative z-10 pt-[55vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col md:flex-row justify-between items-end gap-10">
           {/* 🧠 INFO BOX */}
@@ -126,12 +108,12 @@ export default function GameShowcaseSection() {
             transition={{ delay: 0.3 }}
           >
             <div className="absolute inset-0 rounded-2xl bg-white/5 blur-md -z-10" />
-            <h2 className="text-3xl font-extrabold text-white mb-2">{selectedGame.title}</h2>
-            <p className="text-gray-200 mb-4">{selectedGame.description}</p>
-            <p className="text-sm text-white/60 mb-1">🗓 {selectedGame.releaseDate}</p>
-            <p className="text-sm text-white/60 mb-4">🎮 {selectedGame.genre}</p>
+            <h2 className="text-3xl font-extrabold text-white mb-2">{gameData.title}</h2>
+            <p className="text-gray-200 mb-4">{gameData.description}</p>
+            <p className="text-sm text-white/60 mb-1">🗓 {gameData.release}</p>
+            <p className="text-sm text-white/60 mb-4">🎮 {gameData.genre}</p>
             <div className="flex flex-wrap gap-2">
-              {selectedGame.tags.map((tag, i) => (
+              {gameData.tags?.map((tag, i) => (
                 <span
                   key={i}
                   className="bg-white/10 hover:bg-white/20 transition px-3 py-1 rounded-full text-sm text-white/80"
@@ -142,7 +124,7 @@ export default function GameShowcaseSection() {
             </div>
           </motion.div>
 
-          {/* 🧩 MINIATURES SELECTOR */}
+          {/* 🧩 MINIATURE SELECTOR */}
           <div className="hidden md:flex gap-6 items-center">
             {games.map((game, i) => (
               <motion.div
@@ -155,7 +137,7 @@ export default function GameShowcaseSection() {
                 onClick={() => setSelectedIndex(i)}
                 whileHover={{ scale: i === selectedIndex ? 1.1 : 1.05 }}
               >
-                <img src={game.image} alt={game.title} className="w-full h-full object-cover" />
+                <img src={game.image} alt={game.id} className="w-full h-full object-cover" />
               </motion.div>
             ))}
           </div>

@@ -1,0 +1,158 @@
+{
+  "header": {
+    "docs": "Documentación",
+    "community": "Comunidad",
+    "team": "Equipo",
+    "app": "🚀 App",
+    "whitepaper": "Whitepaper",
+    "lore_bible": "Biblia de Lore",
+    "dev_notes": "Notas del Desarrollador",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "language_selector": {
+      "EN": "Inglés",
+      "ES": "Español",
+      "RU": "Ruso",
+      "ZH": "Chino",
+      "DE": "Alemán",
+      "FR": "Francés",
+      "IT": "Italiano",
+      "JA": "Japonés",
+      "KO": "Coreano",
+      "PT": "Portugués"
+    },
+    "hcash_price": "0.018 USD"
+  },
+  "hub_carousel": {
+    "title_part1": "Hunter",
+    "title_part2": "Hub",
+    "title_accent": "App",
+    "description": "Nuestra app centraliza potentes funciones para mejorar la comodidad del usuario y ofrecer una experiencia inmersiva."
+  },
+  "self_economy": {
+    "title": "Economía Web3 Autogestionada",
+    "subtitle": "Fácil, gana tokens $HCASH jugando",
+    "steps": [
+      {
+        "title": "3 Clics",
+        "highlight": "Regístrate"
+      },
+      {
+        "title": "Juega nuestros",
+        "highlight": "Juegos"
+      },
+      {
+        "title": "Gana",
+        "highlight": "Cripto"
+      },
+      {
+        "title": "Invita a tus",
+        "highlight": "Amigos"
+      }
+    ],
+    "final_description": "Combinando mecánicas de grifo (faucet) y peer-to-peer, hemos construido una economía dinámica impulsada por los jugadores. Más del 80% de los ítems del juego son consumibles que desaparecen tras usarse, lo que ayuda a reducir la oferta en circulación. El resto son no consumibles con cantidades muy limitadas, lo que garantiza que mantengan su valor y exclusividad."
+  },
+  "trending": {
+    "title": "Activos Populares - Cap",
+    "charts": {
+      "hunter_credit": "Hunter Credit - HCREDIT",
+      "burned": "Quemado",
+      "circulating": "En circulación",
+      "media_value": "Valor de Medios",
+      "marketplace": "Marketplace HUB",
+      "listed": "Listados",
+      "sold": "Vendidos",
+      "store": "Tienda HUB",
+      "users": "Usuarios",
+      "transactions": "Transacciones"
+    },
+    "item": {
+      "supply": "Suministro",
+      "value": "Valor"
+    },
+    "pagination": {
+      "prev": "Anterior",
+      "next": "Siguiente"
+    }
+  },
+  "what_we_are_building": {
+    "title": "¿Qué Estamos Construyendo?",
+    "paragraph_1": "Estamos creando un universo interconectado — desde juegos y herramientas hasta plataformas comunitarias y sistemas de recompensas.",
+    "paragraph_2": "Todo está potenciado por blockchain y mejorado por la participación del jugador."
+  },
+  "why_join": {
+    "animated_title": "La Experiencia Web3 {{value}}",
+    "subtitle_rotation": [
+      "Play-To-Earn",
+      "Free-To-Play",
+      "Engage-To-Earn"
+    ],
+    "subtitle_suffix": "Experiencia",
+    "description": "Regístrate ahora para acceder a contenido exclusivo, seguir tu progreso y conectar con una comunidad global de jugadores. ¡No te pierdas las ofertas especiales hechas solo para ti!",
+    "benefits": [
+      {
+        "title": "Accede a",
+        "highlight": "Juegos Exclusivos",
+        "description": "Obtén acceso anticipado a nuevos lanzamientos y joyas ocultas, solo para miembros registrados. ¡Sé el primero en jugar!"
+      },
+      {
+        "title": "Explora",
+        "highlight": "Membresías y Beneficios",
+        "description": "Monitorea estadísticas de juego, sigue logros y comparte tu progreso con otros jugadores fácilmente."
+      },
+      {
+        "title": "Verdadera",
+        "highlight": "Conexión Comunitaria",
+        "description": "Conecta con una comunidad apasionada de jugadores. Comparte consejos, estrategias y experiencias de juego."
+      },
+      {
+        "title": "A Largo Plazo &",
+        "highlight": "Tokenómica Deflacionaria",
+        "description": "Disfruta de descuentos exclusivos para miembros en juegos destacados, DLCs e ítems del juego. ¡Ahorra en tus favoritos!"
+      }
+    ]
+  },
+  "ecosystem": {
+    "title": "¿Qué Estamos Construyendo?",
+    "description": "Estamos desarrollando el Ecosistema Space Hunters — un metaverso de juegos totalmente inmersivo e interoperable, potenciado por blockchain y la ambición de los jugadores.",
+    "tech_generators": "Incluye Tech Generators, un juego de gestión de recursos donde los jugadores optimizan energía, contratan ingenieros y mejoran operaciones mineras para obtener recompensas reales.",
+    "economy": "Nuestra economía se basa en $HCASH y $HCREDIT, permitiendo staking, mejoras, compras dentro del juego e intercambios.",
+    "webhub": "La App Web Hub conecta todo — sigue tu progreso, participa en eventos en vivo, gestiona NFTs, interactúa con la comunidad y desbloquea futuras funciones como coleccionables, herramientas de staking y sistemas sociales."
+  },
+  "games": {
+    "tech-generators": {
+      "title": "Tech Generators",
+      "description": "Tech Generators es un juego de minería sci‑fi desarrollado por el equipo de Space Hunters. Ofrece jugabilidad en tiempo real, mecánicas únicas y recompensas Play‑To‑Earn.",
+      "release": "23 Dic 2024",
+      "genre": "Sci‑Fi - Minería - RPG",
+      "tags": [
+        "TMA",
+        "Navegador",
+        "TON Chain"
+      ]
+    },
+    "chat-adventure": {
+      "title": "Chat Adventure",
+      "description": "Chat Adventure es un juego narrativo donde los jugadores crean personajes, exploran facciones y desbloquean logros mediante interacción impulsada por IA.",
+      "release": "10 Mar 2025",
+      "genre": "RPG de Texto - IA - Interactivo",
+      "tags": [
+        "Telegram",
+        "IA",
+        "Rol"
+      ]
+    },
+    "space-hunters": {
+      "title": "The Reborn",
+      "description": "Una experiencia multijugador intensa que combina combate espacial, exploración y guerras de facciones en el universo renovado de Space Hunters.",
+      "release": "Q3 2025",
+      "genre": "Shooter - MMO - Espacio",
+      "tags": [
+        "Shooter",
+        "MMO",
+        "Unity"
+      ]
+    }
+  }
+}

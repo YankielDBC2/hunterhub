@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 const images = [
   '/images/hub1.png',
@@ -17,6 +18,7 @@ const images = [
 export default function HubCarouselSection() {
   const [centerIndex, setCenterIndex] = useState(0)
   const containerRef = useRef(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,31 +27,17 @@ export default function HubCarouselSection() {
     return () => clearInterval(interval)
   }, [])
 
-  const getTransformStyle = (index) => {
-    const offset = index - centerIndex
-    const absOffset = Math.abs(offset)
-
-    if (absOffset > 3) return 'hidden'
-
-    let scale = 1 - absOffset * 0.15
-    let opacity = 1 - absOffset * 0.3
-    let translateX = offset * 120
-    let blur = absOffset > 0 ? 'blur-sm' : ''
-
-    return `absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 translate-x-[${translateX}px] scale-[${scale}] opacity-[${opacity}] ${blur} transition-all duration-700`
-  }
-
   return (
     <section className="relative text-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-orbitron font-bold text-center text-white">
-          <span className="text-white">Hunter </span>
-          <span className="text-red-500">Hub</span> App
+          <span className="text-white">{t('hub_carousel.title_part1')} </span>
+          <span className="text-red-500">{t('hub_carousel.title_part2')}</span> {t('hub_carousel.title_accent')}
         </h2>
-        <p className="text-center text-lg text-gray-300 mt-4 mb-16 max-w-2xl mx-auto">
-          Our app centralizes powerful features to enhance user convenience and provide an immersive experience.
-        </p>
 
+        <p className="text-center text-lg text-gray-300 mt-4 mb-16 max-w-2xl mx-auto">
+          {t('hub_carousel.description')}
+        </p>
 
         <div ref={containerRef} className="relative h-[650px] w-full flex items-center justify-center">
           {images.map((src, index) => {

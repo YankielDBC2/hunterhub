@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const thumbnail = "/images/video-thumbnail.png"
 
 export default function WhatWeAreBuilding() {
   const [videoStarted, setVideoStarted] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <section className="relative w-full text-white pt-16 pb-28 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center max-w-7xl mx-auto px-4">
-        {/* VIDEO */}
+        {/* 🎥 VIDEO */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +58,7 @@ export default function WhatWeAreBuilding() {
           )}
         </motion.div>
 
-        {/* TEXTO */}
+        {/* 🧠 TEXT */}
         <motion.div
           className="w-full md:w-1/2"
           initial="hidden"
@@ -65,38 +67,39 @@ export default function WhatWeAreBuilding() {
           viewport={{ once: true }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl font-extrabold mb-6 leading-tight text-cyan-400 font-orbitron"
+            className="text-3xl md:text-3xl font-extrabold mb-6 leading-tight text-cyan-400 font-orbitron"
             variants={{ hidden: { opacity: 0, y: -20 }, visible: { opacity: 1, y: 0 } }}
           >
-            What We Are Building<span className="text-cyan-300">?</span>
+            {t('ecosystem.title').replace('?', '')}
+            <span className="text-cyan-300">?</span>
           </motion.h2>
 
           <motion.p
             className="text-white text-sm md:text-base leading-relaxed tracking-wide font-sans mb-4"
             variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           >
-            We are engineering the <span className="text-cyan-300 font-semibold">Space Hunters Ecosystem</span> — a fully immersive, interoperable gaming metaverse powered by blockchain and player ambition.
+            {t('ecosystem.description')}
           </motion.p>
 
           <motion.p
             className="text-white text-sm md:text-base leading-relaxed tracking-wide font-sans mb-4"
             variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           >
-            It includes <span className="text-cyan-300 font-semibold">Tech Generators</span>, a resource-management game where players optimize energy, hire engineers, and upgrade mining operations to earn real rewards.
+            {t('ecosystem.tech_generators')}
           </motion.p>
 
           <motion.p
             className="text-white text-sm md:text-base leading-relaxed tracking-wide font-sans mb-4"
             variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           >
-            Our economy runs on <span className="text-yellow-300 font-semibold">$HCASH</span> and <span className="text-yellow-300 font-semibold">$HCREDIT</span>, allowing for staking, enhancements, in-game purchases, and trading.
+            {t('ecosystem.economy')}
           </motion.p>
 
           <motion.p
             className="text-white text-sm md:text-base leading-relaxed tracking-wide font-sans"
             variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           >
-            The <span className="text-cyan-300 font-semibold">Web Hub App</span> connects everything — track progress, participate in live events, manage NFTs, engage with the community, and unlock future features like collectibles, staking tools, and social systems.
+            {t('ecosystem.webhub')}
           </motion.p>
         </motion.div>
       </div>

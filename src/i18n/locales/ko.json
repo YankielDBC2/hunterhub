@@ -1,0 +1,150 @@
+{
+  "header": {
+    "docs": "문서",
+    "community": "커뮤니티",
+    "team": "팀",
+    "app": "🚀 앱",
+    "whitepaper": "백서",
+    "lore_bible": "세계관 바이블",
+    "dev_notes": "개발자 노트",
+    "discord": "디스코드",
+    "telegram": "텔레그램",
+    "twitter": "트위터",
+    "language_selector": {
+      "EN": "영어",
+      "ES": "스페인어",
+      "RU": "러시아어",
+      "ZH": "중국어",
+      "DE": "독일어",
+      "FR": "프랑스어",
+      "IT": "이탈리아어",
+      "JA": "일본어",
+      "KO": "한국어",
+      "PT": "포르투갈어"
+    },
+    "hcash_price": "0.018 USD"
+  },
+
+  "hub_carousel": {
+    "title_part1": "헌터",
+    "title_part2": "허브",
+    "title_accent": "앱",
+    "description": "우리 앱은 사용자 편의성과 몰입감 있는 경험을 제공하기 위해 강력한 기능을 중앙 집중화합니다."
+  },
+
+  "self_economy": {
+    "title": "Web3 자율 경제",
+    "subtitle": "간단하게 게임을 하며 $HCASH 토큰을 벌자",
+    "steps": [
+      { "title": "3번 클릭", "highlight": "회원가입" },
+      { "title": "우리의", "highlight": "게임 플레이" },
+      { "title": "보상으로", "highlight": "암호화폐 획득" },
+      { "title": "친구를", "highlight": "초대" }
+    ],
+    "final_description": "파우셋과 P2P 메커니즘을 결합하여 플레이어 중심의 역동적인 경제를 구축했습니다. 게임 내 아이템의 80% 이상은 사용 후 사라지는 소모품으로, 유통 공급량 감소에 기여합니다. 나머지는 매우 제한된 수량의 비소모품으로 구성되어 가치와 희소성을 보장합니다."
+  },
+
+  "trending": {
+    "title": "인기 자산 - 시가총액",
+    "charts": {
+      "hunter_credit": "헌터 크레딧 - HCREDIT",
+      "burned": "소각됨",
+      "circulating": "유통 중",
+      "media_value": "미디어 가치",
+      "marketplace": "마켓플레이스 HUB",
+      "listed": "리스트됨",
+      "sold": "판매됨",
+      "store": "스토어 HUB",
+      "users": "사용자 수",
+      "transactions": "거래 수"
+    },
+    "item": {
+      "supply": "공급량",
+      "value": "가치"
+    },
+    "pagination": {
+      "prev": "이전",
+      "next": "다음"
+    }
+  },
+
+  "what_we_are_building": {
+    "title": "우리는 무엇을 만들고 있나요?",
+    "paragraph_1": "우리는 게임, 도구, 커뮤니티 플랫폼, 보상 시스템이 연결된 세계를 구축하고 있습니다.",
+    "paragraph_2": "모든 것은 블록체인 기술에 의해 구동되고, 플레이어의 참여로 강화됩니다."
+  },
+
+"why_join": {
+  "animated_title": "궁극의 Web3 {{value}}",
+  "subtitle_rotation": [
+    "플레이 투 언",
+    "프리 투 플레이",
+    "참여로 보상 받기"
+  ],
+  "description": "지금 가입하고 독점 콘텐츠에 접근하고, 진행 상황을 추적하며, 전 세계 게이머들과 연결하세요. 당신만을 위한 특별한 혜택도 놓치지 마세요!",
+  "benefits": [
+    {
+      "title": "접근",
+      "highlight": "독점 게임",
+      "description": "등록된 사용자만을 위한 신규 출시 및 숨겨진 명작을 먼저 경험하세요. 가장 먼저 플레이하세요!"
+    },
+    {
+      "title": "탐색",
+      "highlight": "멤버십 및 혜택",
+      "description": "게임 통계 확인, 업적 추적, 그리고 다른 게이머들과 손쉽게 진행 상황 공유."
+    },
+    {
+      "title": "진정한",
+      "highlight": "커뮤니티 참여",
+      "description": "열정적인 게이머 커뮤니티와 연결하세요. 팁, 전략, 게임 경험을 공유해보세요."
+    },
+    {
+      "title": "장기적인",
+      "highlight": "디플레이션형 토크노믹스",
+      "description": "상위 게임, DLC, 인게임 아이템을 회원 전용 할인으로 즐기세요. 즐겨 찾는 게임을 더 저렴하게!"
+    }
+  ]
+},  "ecosystem": {
+    "title": "우리는 무엇을 만들고 있나요?",
+    "description": "우리는 Space Hunters 생태계를 구축하고 있습니다 — 블록체인과 플레이어의 열망으로 구동되는 완전히 몰입형이고 상호운용 가능한 게임 메타버스입니다.",
+    "tech_generators": "Tech Generators는 자원을 관리하며 에너지를 최적화하고, 엔지니어를 고용하며, 채굴 작업을 업그레이드하여 실질적인 보상을 얻는 게임입니다.",
+    "economy": "우리의 경제는 $HCASH 및 $HCREDIT를 기반으로 하며, 스테이킹, 강화, 인게임 구매 및 거래를 지원합니다.",
+    "webhub": "Web Hub 앱은 모든 것을 연결합니다 — 진행 상황을 추적하고, 실시간 이벤트에 참여하며, NFT를 관리하고, 커뮤니티에 참여하며, 수집품, 스테이킹 도구, 소셜 시스템과 같은 향후 기능도 잠금 해제할 수 있습니다."
+  },
+
+  "games": {
+    "tech-generators": {
+      "title": "Tech Generators",
+      "description": "Tech Generators는 Space Hunters 팀이 개발한 SF 채굴 게임입니다. 실시간 게임 플레이, 독특한 메커니즘, 그리고 Play-To-Earn 보상을 제공합니다.",
+      "release": "2024년 12월 23일",
+      "genre": "SF - 채굴 - RPG",
+      "tags": [
+        "TMA",
+        "브라우저",
+        "TON 체인"
+      ]
+    },
+    "chat-adventure": {
+      "title": "Chat Adventure",
+      "description": "Chat Adventure는 플레이어가 캐릭터를 육성하고, 진영을 탐험하며, AI 기반 상호작용을 통해 업적을 달성하는 서사형 게임입니다.",
+      "release": "2025년 3월 10일",
+      "genre": "텍스트 RPG - AI - 인터랙티브",
+      "tags": [
+        "텔레그램",
+        "AI",
+        "롤플레잉"
+      ]
+    },
+    "space-hunters": {
+      "title": "The Reborn",
+      "description": "우주 전투, 탐험, 진영 간 전쟁을 결합한, 부활한 Space Hunters 유니버스에서의 강렬한 멀티플레이어 경험.",
+      "release": "2025년 3분기",
+      "genre": "슈팅 - MMO - 우주",
+      "tags": [
+        "슈팅",
+        "MMO",
+        "Unity"
+      ]
+    }
+  }
+}

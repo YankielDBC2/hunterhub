@@ -1,0 +1,150 @@
+{
+  "header": {
+    "docs": "Docs",
+    "community": "Community",
+    "team": "Team",
+    "app": "🚀 App",
+    "whitepaper": "Whitepaper",
+    "lore_bible": "Lore Bible",
+    "dev_notes": "Dev Notes",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "twitter": "Twitter",
+    "language_selector": {
+      "EN": "English",
+      "ES": "Español",
+      "RU": "Русский",
+      "ZH": "中文",
+      "DE": "Deutsch",
+      "FR": "Français",
+      "IT": "Italiano",
+      "JA": "日本語",
+      "KO": "한국어",
+      "PT": "Português"
+    },
+    "hcash_price": "0.018 USD"
+  },
+
+  "hub_carousel": {
+    "title_part1": "Hunter",
+    "title_part2": "Hub",
+    "title_accent": "App",
+    "description": "Our app centralizes powerful features to enhance user convenience and provide an immersive experience."
+  },
+
+  "self_economy": {
+    "title": "Web3 Self-Economy",
+    "subtitle": "Simple, earn $HCASH tokens playing games",
+    "steps": [
+      { "title": "3 Click", "highlight": "SignUp" },
+      { "title": "Play our", "highlight": "Games" },
+      { "title": "Earn", "highlight": "Crypto" },
+      { "title": "Invite", "highlight": "Friends" }
+    ],
+    "final_description": "Combining Faucet and Peer-to-Peer mechanics, we've built a dynamic, player-driven economy. Over 80% of in-game items are consumables, vanishing after use, which helps decrease the circulating supply. The rest are non-consumables with a very limited quantity, ensuring they remain valuable and exclusive."
+  },
+
+  "trending": {
+    "title": "Trending Assets Cap",
+    "charts": {
+      "hunter_credit": "Hunter Credit - HCREDIT",
+      "burned": "Burned",
+      "circulating": "Circulating",
+      "media_value": "Media Value",
+      "marketplace": "Marketplace HUB",
+      "listed": "Listed",
+      "sold": "Sold",
+      "store": "Store HUB",
+      "users": "Users",
+      "transactions": "Transactions"
+    },
+    "item": {
+      "supply": "Supply",
+      "value": "Value"
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    }
+  },
+
+  "what_we_are_building": {
+    "title": "What We Are Building?",
+    "paragraph_1": "We are crafting an interconnected universe — from games and tools to community platforms and rewards systems.",
+    "paragraph_2": "Everything is powered by blockchain and enhanced by player engagement."
+  },
+"why_join": {
+  "animated_title": "The Ultimate Web3 {{value}}",
+  "subtitle_rotation": [
+    "Play-To-Earn",
+    "Free-To-Play",
+    "Engage-To-Earn"
+  ],
+  "description": "Sign up now to dive into exclusive content, track your progress, and connect with a global community of gamers. Don’t miss out on special offers made just for you!",
+  "benefits": [
+    {
+      "title": "Access",
+      "highlight": "Exclusive Games",
+      "description": "Get early access to new releases and hidden gems, only for registered members. Be the first to play!"
+    },
+    {
+      "title": "Explore",
+      "highlight": "Memberships & Benefits",
+      "description": "Monitor gameplay stats, track achievements, and share your progress with fellow gamers easily."
+    },
+    {
+      "title": "Real",
+      "highlight": "Community Engagement",
+      "description": "Connect with a passionate community of gamers. Share tips, strategies, and gaming experiences."
+    },
+    {
+      "title": "Long-Term &",
+      "highlight": "Deflationary Tokenomic",
+      "description": "Enjoy member-only discounts on top-rated games, DLCs, and in-game items. Save on your favorites!"
+    }
+  ]
+},
+  "ecosystem": {
+    "title": "What We Are Building?",
+    "description": "We are engineering the Space Hunters Ecosystem — a fully immersive, interoperable gaming metaverse powered by blockchain and player ambition.",
+    "tech_generators": "It includes Tech Generators, a resource-management game where players optimize energy, hire engineers, and upgrade mining operations to earn real rewards.",
+    "economy": "Our economy runs on $HCASH and $HCREDIT, allowing for staking, enhancements, in-game purchases, and trading.",
+    "webhub": "The Web Hub App connects everything — track progress, participate in live events, manage NFTs, engage with the community, and unlock future features like collectibles, staking tools, and social systems."
+  },
+
+  "games": {
+    "tech-generators": {
+      "title": "Tech Generators",
+      "description": "Tech Generators is a sci‑fi mining game developed by the Space Hunters team. It offers real‑time gameplay, unique mechanics, and play‑to‑earn rewards.",
+      "release": "Dec 23, 2024",
+      "genre": "Sci‑Fi - Mining - RPG",
+      "tags": [
+        "TMA",
+        "Browser",
+        "TON Chain"
+      ]
+    },
+    "chat-adventure": {
+      "title": "Chat Adventure",
+      "description": "Chat Adventure is a narrative‑driven game where players build characters, explore factions, and unlock achievements through AI‑powered interaction.",
+      "release": "Mar 10, 2025",
+      "genre": "Text RPG - AI - Interactive",
+      "tags": [
+        "Telegram",
+        "AI",
+        "Roleplay"
+      ]
+    },
+    "space-hunters": {
+      "title": "The Reborn",
+      "description": "An intense multiplayer experience combining space combat, exploration and faction wars in the revived Space Hunters universe.",
+      "release": "Q3 2025",
+      "genre": "Shooter - MMO - Space",
+      "tags": [
+        "Shooter",
+        "MMO",
+        "Unity"
+      ]
+    }
+  }
+}
