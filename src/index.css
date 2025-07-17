@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animación Glow Rojo */
+@keyframes glowCyan {
+  0%, 100% {
+    box-shadow: 0 0 10px 2px rgba(0, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px 6px rgba(0, 255, 255, 0.4);
+  }
+}
+
+.animate-glow-cyan {
+  animation: glowCyan 3s ease-in-out infinite;
+}
+
+@font-face {
+  font-family: 'Ethnocentric';
+  src: url('/src/assets/fonts/Ethnocentric-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-ethno {
+  font-family: 'Ethnocentric', sans-serif;
+}
+
+@keyframes fly-vertical {
+  0% {
+    transform: translateX(-50%) translateY(400px) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-2000px) scale(1.8) rotate(5deg);
+    opacity: 0;
+  }
+}
+
+
