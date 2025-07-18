@@ -1,4 +1,26 @@
 {
+  "about_hcash": {
+  "about": "Über",
+  "hcash_description": "$HCASH ist die Hauptwährung des Projekts – vollständig spielergesteuert und gestützt durch strategische Spielmechaniken. Mit einer sorgfältig geplanten Verteilung über mehr als 10 Jahre wird $HCASH zu einem seltenen und wertvollen Vermögenswert – einem echten Luxus im Ökosystem.",
+  "buy_sell": "$HCASH hier kaufen/verkaufen",
+
+  "max_supply_label1": "Maximales Angebot: 1 Mrd.",
+  "max_supply_label2": "Bisher geprägt:",
+  "tokens_mined_label1": "Geminte Tokens",
+  "tokens_mined_label2": "Im Spiel",
+  "tokens_spent_label1": "Von Spielern ausgegebene Tokens",
+  "tokens_spent_label2": "Im Spiel",
+  "tokens_ingame_label1": "Umlaufende Tokens",
+  "tokens_ingame_label2": "Im Spiel",
+  "tokens_onchain_label1": "Umlaufende Tokens",
+  "tokens_onchain_label2": "On-Chain",
+
+  "max_supply_desc": "Vergleich zwischen dem prognostizierten Gesamtangebot und dem derzeit aktiven Angebot (On-Chain + In-Game kombiniert)",
+  "tokens_mined_desc": "$HCASH, das Spieler als Mining-Belohnung erhalten – jede Blockbelohnung wird je nach Aktivität und Leistung verteilt",
+  "tokens_spent_desc": "Gesamtes $HCASH, das von Spielern für Upgrades, Käufe im Shop und Spielfunktionen reinvestiert wurde",
+  "tokens_ingame_desc": "$HCASH im Spiel im Umlauf – wird von Spielern gehalten, aber noch nicht auf der Blockchain geprägt",
+  "tokens_onchain_desc": "$HCASH im Umlauf auf der Blockchain – beinhaltet Spielerguthaben, DEX-Liquidität und Hauptvertragsguthaben (für Abhebungen und Einzahlungen)"
+},
   "header": {
     "docs": "Dokumentation",
     "community": "Community",

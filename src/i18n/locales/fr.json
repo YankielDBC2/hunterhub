@@ -1,4 +1,26 @@
 {
+  "about_hcash": {
+  "about": "À propos",
+  "hcash_description": "$HCASH est la monnaie centrale du projet — entièrement dirigée par les joueurs, soutenue par des mécaniques stratégiques complexes. Avec une distribution soigneusement planifiée sur plus de 10 ans, $HCASH devient un actif rare et précieux : un véritable luxe au sein de l’écosystème.",
+  "buy_sell": "Acheter/Vendre $HCASH Ici",
+
+  "max_supply_label1": "Offre Totale de 1B",
+  "max_supply_label2": "Déjà minté :",
+  "tokens_mined_label1": "Tokens Minés",
+  "tokens_mined_label2": "En Jeu",
+  "tokens_spent_label1": "Tokens Dépensés par les Joueurs",
+  "tokens_spent_label2": "En Jeu",
+  "tokens_ingame_label1": "Tokens en Circulation",
+  "tokens_ingame_label2": "Dans le Jeu",
+  "tokens_onchain_label1": "Tokens en Circulation",
+  "tokens_onchain_label2": "Sur la Blockchain",
+
+  "max_supply_desc": "Comparaison entre l'offre totale projetée et l'offre active actuelle (chaîne + jeu combinés)",
+  "tokens_mined_desc": "$HCASH gagné par les joueurs comme récompense minière — chaque bloc est réparti selon l’activité et la performance du joueur",
+  "tokens_spent_desc": "Total de $HCASH réinvesti par les joueurs dans les améliorations, les achats en boutique et les fonctionnalités du jeu",
+  "tokens_ingame_desc": "$HCASH en circulation dans le jeu — détenu par les joueurs mais pas encore minté sur la blockchain",
+  "tokens_onchain_desc": "$HCASH en circulation sur la blockchain — inclut les portefeuilles des joueurs, la liquidité sur DEX et le solde du contrat principal (utilisé pour les retraits et dépôts)"
+},
   "header": {
     "docs": "Documentation",
     "community": "Communauté",

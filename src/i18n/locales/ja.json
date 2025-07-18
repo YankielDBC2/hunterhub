@@ -1,4 +1,26 @@
 {
+  "about_hcash": {
+  "about": "概要",
+  "hcash_description": "$HCASHは本プロジェクトの中核となる通貨です — プレイヤー主導で運営され、多層的な戦略メカニクスに支えられています。10年以上にわたる綿密な配布計画により、$HCASHは希少で価値ある資産、つまりエコシステム内の本物のラグジュアリーとなります。",
+  "buy_sell": "ここで$HCASHを購入・売却",
+
+  "max_supply_label1": "最大供給量：10億",
+  "max_supply_label2": "現在までに発行された：",
+  "tokens_mined_label1": "マイニング済みトークン",
+  "tokens_mined_label2": "ゲーム内",
+  "tokens_spent_label1": "プレイヤーによる使用済みトークン",
+  "tokens_spent_label2": "ゲーム内",
+  "tokens_ingame_label1": "流通中トークン",
+  "tokens_ingame_label2": "ゲーム内",
+  "tokens_onchain_label1": "流通中トークン",
+  "tokens_onchain_label2": "オンチェーン",
+
+  "max_supply_desc": "予測される最大供給量と現在のアクティブ供給量（オンチェーンとゲーム内の合計）の比較",
+  "tokens_mined_desc": "プレイヤーがマイニング報酬として得た$HCASH — ブロックごとに活動と成果に応じて分配",
+  "tokens_spent_desc": "アップグレード、ストア購入、ゲーム内機能などにプレイヤーが再投資した$HCASHの総量",
+  "tokens_ingame_desc": "ゲーム内で流通中の$HCASH — プレイヤーが保有しているが、まだブロックチェーン上で発行されていないトークン",
+  "tokens_onchain_desc": "オンチェーンで流通中の$HCASH — プレイヤーのウォレット、DEXの流動性、主契約の残高（出金や預金に使用）を含む"
+},
   "header": {
     "docs": "ドキュメント",
     "community": "コミュニティ",

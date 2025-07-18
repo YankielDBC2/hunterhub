@@ -7,9 +7,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   Legend,
+  CartesianGrid, // IMPORTANTE
 } from "recharts";
 import { motion } from "framer-motion";
 
+// Datos simulados
 const stats = {
   hunterCredit: [
     { time: "08:00", burned: 1.5, circulating: 1.0, mediaValue: 0.5 },
@@ -34,6 +36,7 @@ const stats = {
   ],
 };
 
+// Componente de tarjeta de gráfica
 const ChartCard = ({ title, data, areas }) => (
   <motion.div
     className="w-full max-w-md"
@@ -45,20 +48,37 @@ const ChartCard = ({ title, data, areas }) => (
       className="text-white text-[18px] font-orbitron mb-4"
       dangerouslySetInnerHTML={{ __html: title }}
     />
-    <ResponsiveContainer width="95%" height={240}>
+    <ResponsiveContainer width="100%" height={240}>
       <AreaChart data={data}>
-        <XAxis dataKey="time" stroke="#888" fontSize={11} />
-        <YAxis stroke="#888" fontSize={11} domain={[0, 2]} />
-        <Tooltip />
-        <Legend iconType="circle" wrapperStyle={{ fontSize: 12 }} />
         <defs>
           {areas.map(({ key, color }) => (
             <linearGradient key={key} id={`gradient-${key}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={color} stopOpacity={0.4} />
+              <stop offset="5%" stopColor={color} stopOpacity={0.6} />
               <stop offset="95%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           ))}
         </defs>
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+        <XAxis dataKey="time" stroke="#aaa" fontSize={11} />
+        <YAxis stroke="#aaa" fontSize={11} domain={['auto', 'auto']} />
+        <Tooltip
+          content={({ active, payload, label }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
+                  {payload.map((entry, i) => (
+                    <div key={i} style={{ color: entry.stroke }}>
+                      {entry.name}: {entry.value}
+                    </div>
+                  ))}
+                  <div className="text-gray-400 mt-1 text-xs">{label}</div>
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+        <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
         {areas.map(({ key, color, name }) => (
           <Area
             key={key}
@@ -67,8 +87,8 @@ const ChartCard = ({ title, data, areas }) => (
             stroke={color}
             fill={`url(#gradient-${key})`}
             strokeWidth={2.5}
-            dot={{ r: 4 }}
-            activeDot={{ r: 6 }}
+            dot={false}
+            activeDot={{ r: 5 }}
             name={name}
           />
         ))}
@@ -77,6 +97,7 @@ const ChartCard = ({ title, data, areas }) => (
   </motion.div>
 );
 
+// Componente principal
 const TrendingAssetsSection = () => {
   const [page, setPage] = useState(0);
   const ITEMS_PER_PAGE = 12;
@@ -92,9 +113,8 @@ const TrendingAssetsSection = () => {
 
   return (
     <section className="relative py-20 px-4 text-white overflow-hidden">
-    
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-row justify-center items-start gap-8 mb-20">
+        <div className="flex flex-col lg:flex-row justify-center items-start gap-8 mb-20">
           <ChartCard
             title='<span class="text-red-500">Hunter Credit</span> - HCREDIT'
             data={stats.hunterCredit}

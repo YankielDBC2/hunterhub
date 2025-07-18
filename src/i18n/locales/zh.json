@@ -1,4 +1,26 @@
 {
+  "about_hcash": {
+  "about": "关于",
+  "hcash_description": "$HCASH 是本项目的核心货币 — 完全由玩家驱动，并由多策略机制支撑。通过超过10年的精心分配计划，$HCASH 成为一种稀有且珍贵的资产，是生态系统中的真正奢侈品。",
+  "buy_sell": "在此买卖 $HCASH",
+
+  "max_supply_label1": "最大供应量：10亿",
+  "max_supply_label2": "已铸造：",
+  "tokens_mined_label1": "已挖矿的代币",
+  "tokens_mined_label2": "游戏内",
+  "tokens_spent_label1": "玩家已消费代币",
+  "tokens_spent_label2": "游戏内",
+  "tokens_ingame_label1": "流通中的代币",
+  "tokens_ingame_label2": "游戏内",
+  "tokens_onchain_label1": "流通中的代币",
+  "tokens_onchain_label2": "链上",
+
+  "max_supply_desc": "对比预计的总供应量与当前实际供应量（链上与游戏内合计）",
+  "tokens_mined_desc": "玩家通过挖矿获得的 $HCASH 奖励 — 每个区块根据玩家活跃度与表现进行分配",
+  "tokens_spent_desc": "玩家用于升级、商城购买和游戏功能的 $HCASH 总量",
+  "tokens_ingame_desc": "游戏内流通中的 $HCASH — 玩家持有但尚未铸造到区块链",
+  "tokens_onchain_desc": "链上流通中的 $HCASH — 包含玩家钱包、DEX 流动性及主合约余额（用于提现和存款）"
+},
   "header": {
     "docs": "文档",
     "community": "社区",

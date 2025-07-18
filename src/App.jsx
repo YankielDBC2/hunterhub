@@ -9,6 +9,8 @@ import TrendingAssetsSection from './components/TrendingAssetsSection';
 import FloatingObjects from './components/FloatingObjects';
 import FlyingShip from './components/FlyingShip'; // ✅ nuevo
 import StarBackground from './components/StarBackground';
+import HcashAboutSection from "./components/HcashAboutSection";
+import TokenomicsShip from "./components/Tokenomics/TokenomicsShip";
 
 const App = () => {
   return (
@@ -24,6 +26,10 @@ const App = () => {
       <HubCarouselSection />
       <SelfEconomy />
       <TrendingAssetsSection />
+      <HcashAboutSection />
+      <TokenomicsShip />
+
+
     </div>
   );
 };

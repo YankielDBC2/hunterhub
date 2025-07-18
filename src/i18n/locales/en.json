@@ -1,4 +1,39 @@
 {
+
+  "top_players": {
+    "title": "Meet Our <span class='text-red-500'>Top Players</span>",
+    "joined": "Joined",
+    "rank": "4th",
+    "nft": "NFT",
+    "hcash": "$HCASH",
+    "medal_leader1": "🏅 Leader Rank 1",
+    "medal_leader2": "🥈 Leader Rank 2",
+    "medal_leader3": "🥉 Leader Rank 3",
+    "medal_elite3": "⚡ Elite Player",
+    "medal_veteran1": "🔥 Veteran Champion"
+  },
+"about_hcash": {
+  "about": "About",
+  "hcash_description": "$HCASH is the core currency of the project — fully player-driven...",
+  "buy_sell": "Buy/Sell $HCASH Here",
+
+  "max_supply_label1": "1B Max Supply",
+  "max_supply_label2": "Minted so far:",
+  "tokens_mined_label1": "Tokens Mined",
+  "tokens_mined_label2": "In-Game",
+  "tokens_spent_label1": "Tokens Spent by Users",
+  "tokens_spent_label2": "In-Game",
+  "tokens_ingame_label1": "Tokens Circulating",
+  "tokens_ingame_label2": "In-Game",
+  "tokens_onchain_label1": "Tokens Circulating",
+  "tokens_onchain_label2": "On-Chain",
+
+  "max_supply_desc": "Comparison between total projected supply and the current active supply (on-chain and in-game combined)",
+  "tokens_mined_desc": "$HCASH earned by players as mining rewards — split each block according to player activity and performance",
+  "tokens_spent_desc": "Total $HCASH reinvested by players through upgrades, store purchases, and in-game features",
+  "tokens_ingame_desc": "In-game circulating $HCASH — held by players but not yet minted on the blockchain",
+  "tokens_onchain_desc": "On-chain circulating $HCASH — includes player wallets, DEX liquidity, and the main contract balance (used for withdrawals and holding user deposits)"
+},
   "header": {
     "docs": "Docs",
     "community": "Community",

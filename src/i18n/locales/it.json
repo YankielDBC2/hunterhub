@@ -1,4 +1,26 @@
 {
+  "about_hcash": {
+  "about": "Informazioni",
+  "hcash_description": "$HCASH è la valuta principale del progetto — completamente guidata dai giocatori, supportata da meccaniche strategiche avanzate. Con una distribuzione attentamente pianificata per oltre 10 anni, $HCASH diventa un bene raro e prezioso: un vero lusso all'interno dell'ecosistema.",
+  "buy_sell": "Compra/Vendi $HCASH Qui",
+
+  "max_supply_label1": "Offerta Massima di 1B",
+  "max_supply_label2": "Già coniati:",
+  "tokens_mined_label1": "Token Estratti",
+  "tokens_mined_label2": "Nel Gioco",
+  "tokens_spent_label1": "Token Spesi dai Giocatori",
+  "tokens_spent_label2": "Nel Gioco",
+  "tokens_ingame_label1": "Token in Circolazione",
+  "tokens_ingame_label2": "Nel Gioco",
+  "tokens_onchain_label1": "Token in Circolazione",
+  "tokens_onchain_label2": "On-Chain",
+
+  "max_supply_desc": "Confronto tra l'offerta totale prevista e l'offerta attiva attuale (combinazione tra on-chain e in-game)",
+  "tokens_mined_desc": "$HCASH guadagnato dai giocatori come ricompensa per l'estrazione — ogni blocco è distribuito in base all'attività e alle prestazioni del giocatore",
+  "tokens_spent_desc": "Totale di $HCASH reinvestito dai giocatori in upgrade, acquisti nel negozio e funzionalità di gioco",
+  "tokens_ingame_desc": "$HCASH in circolazione nel gioco — detenuto dai giocatori ma non ancora coniato sulla blockchain",
+  "tokens_onchain_desc": "$HCASH in circolazione sulla blockchain — include portafogli dei giocatori, liquidità su DEX e saldo del contratto principale (utilizzato per prelievi e depositi)"
+},
   "header": {
     "docs": "Documentazione",
     "community": "Community",
