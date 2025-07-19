@@ -79,30 +79,30 @@
     "final_description": "Combining Faucet and Peer-to-Peer mechanics, we've built a dynamic, player-driven economy. Over 80% of in-game items are consumables, vanishing after use, which helps decrease the circulating supply. The rest are non-consumables with a very limited quantity, ensuring they remain valuable and exclusive."
   },
 
-  "trending": {
-    "title": "Trending Assets Cap",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "Burned",
-      "circulating": "Circulating",
-      "media_value": "Media Value",
-      "marketplace": "Marketplace HUB",
-      "listed": "Listed",
-      "sold": "Sold",
-      "store": "Store HUB",
-      "users": "Users",
-      "transactions": "Transactions"
-    },
-    "item": {
-      "supply": "Supply",
-      "value": "Value"
-    },
-    "pagination": {
-      "prev": "Previous",
-      "next": "Next"
-    }
+"trending": {
+  "title": "Trending Assets Cap",
+  "description": "Track the top Hunter assets in real time with live statistics and performance metrics.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "Burned",
+    "circulating": "Circulating",
+    "media_value": "Media Value",
+    "marketplace": "Marketplace",
+    "listed": "Listed",
+    "sold": "Sold",
+    "store": "Store",
+    "users": "Users",
+    "transactions": "Transactions"
   },
-
+  "item": {
+    "supply": "Supply",
+    "value": "Value"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  }
+},
   "what_we_are_building": {
     "title": "What We Are Building?",
     "paragraph_1": "We are crafting an interconnected universe — from games and tools to community platforms and rewards systems.",
