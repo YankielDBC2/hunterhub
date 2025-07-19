@@ -87,25 +87,26 @@ const MobileHeader = () => {
         >
           <img src="/images/HCASH_01.png" alt="HCASH" className="w-5 h-5" />
           <span className="text-sm text-white font-medium">${priceUsd}</span>
+
           {tooltipOpen && (
             <div
               ref={tooltipRef}
               className="absolute left-0 top-8 bg-black text-white text-sm rounded-md shadow-xl p-3 z-50 w-64 border border-white/10"
             >
               <div className="flex items-center gap-2 mb-2">
-                <img src="/images/tonicon.png" alt="TON" className="w-4 h-4" />
+                <img src="/images/ton_icon.png" alt="TON" className="w-4 h-4" />
                 <span>1 HCASH</span>
                 <span className="text-cyan-400 font-bold">{priceTon} TON</span>
               </div>
               <div className="flex items-center gap-2 mb-2">
-                <img src="/images/HCASH_01.png" alt="USD" className="w-4 h-4" />
-                <span>1 HCASH</span>
-                <span className="text-green-400 font-bold">${priceUsd} USD</span>
-              </div>
-              <div className="flex items-center gap-2">
                 <img src="/images/sun.png" alt="SOL" className="w-4 h-4" />
                 <span>1 HCASH</span>
                 <span className="text-yellow-400 font-bold">soon</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <img src="/images/ron_icon.png" alt="RON" className="w-4 h-4" />
+                <span>1 HCASH</span>
+                <span className="text-blue-400 font-bold">soon</span>
               </div>
             </div>
           )}
@@ -133,7 +134,6 @@ const MobileHeader = () => {
           ref={menuRef}
           className="absolute top-full right-0 mt-2 w-72 max-h-[75vh] overflow-y-auto bg-black/90 border border-white/10 py-4 px-5 text-sm rounded-2xl shadow-2xl backdrop-blur-xl z-40 space-y-5 scrollbar-thin scrollbar-thumb-white/10"
         >
-          {/* Documentación */}
           <div>
             <h3 className="text-white font-semibold flex items-center gap-2 mb-2 uppercase tracking-wider text-xs">
               <FileText className="w-4 h-4 text-white" /> {t('header.docs')}
@@ -157,7 +157,6 @@ const MobileHeader = () => {
             </ul>
           </div>
 
-          {/* Comunidad */}
           <div>
             <h3 className="text-white font-semibold flex items-center gap-2 mb-2 uppercase tracking-wider text-xs">
               <Globe className="w-4 h-4 text-white" /> {t('header.community')}
@@ -181,7 +180,6 @@ const MobileHeader = () => {
             </ul>
           </div>
 
-          {/* Equipo */}
           <div>
             <a
               href="#"
@@ -191,7 +189,6 @@ const MobileHeader = () => {
             </a>
           </div>
 
-          {/* Selector de idioma */}
           <div>
             <button
               onClick={() => setLangOpen(!langOpen)}
