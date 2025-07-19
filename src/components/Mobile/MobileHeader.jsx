@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  Menu, X, ChevronDown, FileText, BookOpen, Wrench,
-  Globe, MessageCircle, Send, Twitter, Users
+  Menu,
+  X,
+  ChevronDown,
+  FileText,
+  BookOpen,
+  Wrench,
+  Globe,
+  MessageCircle,
+  Send,
+  Twitter,
+  Users
 } from 'lucide-react'
 
 const MobileHeader = () => {
@@ -17,10 +26,11 @@ const MobileHeader = () => {
     (localStorage.getItem('preferredLang') || i18n.language).toUpperCase()
   )
 
+  const [priceUsd, setPriceUsd] = useState('0.0000')
+  const [priceTon, setPriceTon] = useState('0.000000')
+
   const allLangs = ['EN', 'ES', 'RU', 'ZH', 'DE', 'FR', 'IT', 'JA', 'KO', 'PT']
   const otherLangs = allLangs.filter((l) => l !== selectedLang)
-
-  const [hcashPrice, setHcashPrice] = useState({ usd: null, ton: null })
 
   useEffect(() => {
     const savedLang = localStorage.getItem('preferredLang')?.toLowerCase()
@@ -37,20 +47,6 @@ const MobileHeader = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [i18n])
 
-  useEffect(() => {
-    const fetchPrice = async () => {
-      try {
-        const res = await fetch('https://api.hunterhub.online/api/public/hcash/price')
-        const data = await res.json()
-        setHcashPrice({ usd: data.usd, ton: data.ton })
-      } catch (err) {
-        console.warn('Failed to fetch HCASH price:', err.message)
-      }
-    }
-
-    fetchPrice()
-  }, [])
-
   const handleLangSelect = (lang) => {
     const lower = lang.toLowerCase()
     localStorage.setItem('preferredLang', lower)
@@ -59,12 +55,30 @@ const MobileHeader = () => {
     setLangOpen(false)
   }
 
+  useEffect(() => {
+    async function fetchPrice() {
+      try {
+        const res = await fetch(
+          `https://corsproxy.io/?https://api.hunterhub.online/api/public/hcash/price`
+        )
+        const json = await res.json()
+        setPriceUsd(json.data?.usd?.toFixed(4) || '0.0000')
+        setPriceTon(json.data?.ton?.toFixed(6) || '0.000000')
+      } catch (err) {
+        console.error('Failed to fetch HCASH price:', err)
+      }
+    }
+
+    fetchPrice()
+  }, [])
+
   return (
     <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-black/30 backdrop-blur-md rounded-full px-4 py-2 flex items-center justify-between shadow-lg border border-white/10 lg:hidden">
       {/* Logo + HCASH + Tooltip */}
       <div className="flex items-center gap-3 relative">
         <h1 className="text-xl font-bold tracking-wide">
-          <span className="text-red-500">H</span><span className="text-red">UB</span>
+          <span className="text-red-500">H</span>
+          <span className="text-red">UB</span>
         </h1>
 
         <div
@@ -72,9 +86,7 @@ const MobileHeader = () => {
           onClick={() => setTooltipOpen(!tooltipOpen)}
         >
           <img src="/images/HCASH_01.png" alt="HCASH" className="w-5 h-5" />
-          <span className="text-sm text-white font-medium">
-            {hcashPrice.usd ? `$${hcashPrice.usd.toFixed(4)}` : '...'}
-          </span>
+          <span className="text-sm text-white font-medium">${priceUsd}</span>
           {tooltipOpen && (
             <div
               ref={tooltipRef}
@@ -83,21 +95,17 @@ const MobileHeader = () => {
               <div className="flex items-center gap-2 mb-2">
                 <img src="/images/tonicon.png" alt="TON" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-cyan-400 font-bold">
-                  {hcashPrice.ton ? `${hcashPrice.ton.toFixed(6)} TON` : '...'}
-                </span>
+                <span className="text-cyan-400 font-bold">{priceTon} TON</span>
               </div>
               <div className="flex items-center gap-2 mb-2">
                 <img src="/images/HCASH_01.png" alt="USD" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-green-400 font-bold">
-                  {hcashPrice.usd ? `$${hcashPrice.usd.toFixed(4)} USD` : '...'}
-                </span>
+                <span className="text-green-400 font-bold">${priceUsd} USD</span>
               </div>
               <div className="flex items-center gap-2">
                 <img src="/images/sun.png" alt="SOL" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-yellow-400 font-bold">Soon</span>
+                <span className="text-yellow-400 font-bold">soon</span>
               </div>
             </div>
           )}
@@ -131,9 +139,21 @@ const MobileHeader = () => {
               <FileText className="w-4 h-4 text-white" /> {t('header.docs')}
             </h3>
             <ul className="space-y-2 pl-6 text-white/90">
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><BookOpen size={14} /> {t('header.whitepaper')}</a></li>
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><BookOpen size={14} /> {t('header.lore_bible')}</a></li>
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><Wrench size={14} /> {t('header.dev_notes')}</a></li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <BookOpen size={14} /> {t('header.whitepaper')}
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <BookOpen size={14} /> {t('header.lore_bible')}
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <Wrench size={14} /> {t('header.dev_notes')}
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -143,15 +163,30 @@ const MobileHeader = () => {
               <Globe className="w-4 h-4 text-white" /> {t('header.community')}
             </h3>
             <ul className="space-y-2 pl-6 text-white/90">
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><MessageCircle size={14} /> {t('header.discord')}</a></li>
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><Send size={14} /> {t('header.telegram')}</a></li>
-              <li><a href="#" className="hover:text-teal-400 flex items-center gap-2"><Twitter size={14} /> {t('header.twitter')}</a></li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <MessageCircle size={14} /> {t('header.discord')}
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <Send size={14} /> {t('header.telegram')}
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
+                  <Twitter size={14} /> {t('header.twitter')}
+                </a>
+              </li>
             </ul>
           </div>
 
           {/* Equipo */}
           <div>
-            <a href="#" className="flex items-center gap-2 text-white font-semibold hover:text-teal-400 transition pl-1">
+            <a
+              href="#"
+              className="flex items-center gap-2 text-white font-semibold hover:text-teal-400 transition pl-1"
+            >
               <Users size={16} /> {t('header.team')}
             </a>
           </div>
