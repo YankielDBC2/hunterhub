@@ -13,7 +13,7 @@ import HcashAboutSectionMobile from "./components/Mobile/HcashAboutSectionMobile
 import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipMobile';
 
 // Componente Tablets
-import GameShowcaseTablet from './components/tablet/GameShowcaseTablet'
+import GameShowcaseTablet from './components/Tablet/GameShowcaseTablet'
 import HeaderTablet from './components/Tablet/HeaderTablet' 
 
 // 💻 Componentes de escritorio
