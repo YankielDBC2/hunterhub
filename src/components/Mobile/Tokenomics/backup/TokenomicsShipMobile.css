@@ -1,0 +1,32 @@
+/* 🎯 Tooltip personalizado para el gráfico de pastel (PieChart) */
+.custom-pie-tooltip {
+  background: rgba(0, 10, 20, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+  font-size: 13px;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  pointer-events: none;
+  text-align: center;
+}
+
+
+/* 🧱 Título del segmento */
+.custom-pie-tooltip .segment-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #00f0ff;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+/* 💡 Valor numérico del segmento */
+.custom-pie-tooltip .segment-value {
+  color: #ccc;
+  font-size: 13px;
+  text-align: center;
+}

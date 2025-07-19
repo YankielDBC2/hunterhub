@@ -10,7 +10,11 @@ import SelfEconomyMobile from './components/Mobile/SelfEconomyMobile'
 import TrendingAssetsSectionMobile from './components/Mobile/TrendingAssetsSectionMobile'
 import FloatingObjectsMobile from './components/Mobile/FloatingObjectsMobile'
 import HcashAboutSectionMobile from "./components/Mobile/HcashAboutSectionMobile"
-import TokenomicsPieChartMobile from './components/Mobile/Tokenomics/TokenomicsPieChartMobile';
+import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipMobile';
+
+// Componente Tablets
+import GameShowcaseTablet from './components/tablet/GameShowcaseTablet'
+import HeaderTablet from './components/Tablet/HeaderTablet' 
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -47,16 +51,23 @@ const App = () => {
       <FlyingShip />
 
       {/* Header */}
+      <div className="block md:hidden">
+        <MobileHeader />
+      </div>
+      <div className="hidden md:block lg:hidden">
+        <HeaderTablet />
+      </div>
       <div className="hidden lg:block">
         <Header />
       </div>
-      <div className="lg:hidden">
-        <MobileHeader />
-      </div>
+
 
       {/* Game Showcase */}
       <div className="hidden lg:block">
         <GameShowcaseSection />
+      </div>
+      <div className="hidden md:block lg:hidden">
+        <GameShowcaseTablet />
       </div>
       <div className="lg:hidden">
         <GameShowcaseMobile />
@@ -115,7 +126,7 @@ const App = () => {
         <TokenomicsShip />
       </div>
       <div className="lg:hidden">
-        <TokenomicsPieChartMobile />
+        <TokenomicsShipMobile />
       </div>
     </div>
   )

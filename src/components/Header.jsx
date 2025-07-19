@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ChevronDown } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ChevronDown } from 'lucide-react'
 
 const Dropdown = ({ title, items }) => {
-  const [open, setOpen] = useState(false);
-  const timeoutRef = useRef(null);
+  const [open, setOpen] = useState(false)
+  const timeoutRef = useRef(null)
 
   const handleMouseEnter = () => {
-    clearTimeout(timeoutRef.current);
-    setOpen(true);
-  };
+    clearTimeout(timeoutRef.current)
+    setOpen(true)
+  }
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setOpen(false);
-    }, 200);
-  };
+      setOpen(false)
+    }, 200)
+  }
 
   return (
     <div
@@ -47,75 +47,125 @@ const Dropdown = ({ title, items }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 const Header = () => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation()
   const [selectedLang, setSelectedLang] = useState(() => {
-    const saved = localStorage.getItem('preferredLang');
-    return saved ? saved.toUpperCase() : i18n.language.toUpperCase();
-  });
-  const [langOpen, setLangOpen] = useState(false);
-  const timeoutRef = useRef(null);
-  const [forceRerender, setForceRerender] = useState(0); // 🔁 para forzar re-render
+    const saved = localStorage.getItem('preferredLang')
+    return saved ? saved.toUpperCase() : i18n.language.toUpperCase()
+  })
+  const [langOpen, setLangOpen] = useState(false)
+  const [tooltipOpen, setTooltipOpen] = useState(false)
+  const tooltipRef = useRef()
+  const [forceRerender, setForceRerender] = useState(0)
+  const timeoutRef = useRef(null)
 
-  const allLangs = ['EN', 'ES', 'RU', 'ZH', 'DE', 'FR', 'IT', 'JA', 'KO', 'PT'];
-  const otherLangs = allLangs.filter((l) => l !== selectedLang);
+  const [priceUsd, setPriceUsd] = useState('0.0000')
+  const [priceTon, setPriceTon] = useState('0.000000')
+
+  const allLangs = ['EN', 'ES', 'RU', 'ZH', 'DE', 'FR', 'IT', 'JA', 'KO', 'PT']
+  const otherLangs = allLangs.filter((l) => l !== selectedLang)
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('preferredLang')?.toLowerCase();
+    const savedLang = localStorage.getItem('preferredLang')?.toLowerCase()
     if (savedLang && savedLang !== i18n.language) {
       i18n.changeLanguage(savedLang).then(() => {
-        setForceRerender((prev) => prev + 1); // ✅ re-render al cargar idioma
-      });
+        setForceRerender((prev) => prev + 1)
+      })
     }
-  }, [i18n]);
 
-  const handleLangEnter = () => {
-    clearTimeout(timeoutRef.current);
-    setLangOpen(true);
-  };
+    const handleClickOutside = (e) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(e.target)) {
+        setTooltipOpen(false)
+      }
+    }
 
-  const handleLangLeave = () => {
-    timeoutRef.current = setTimeout(() => {
-      setLangOpen(false);
-    }, 200);
-  };
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [i18n])
+
+  useEffect(() => {
+    async function fetchPrice() {
+      try {
+        const res = await fetch(
+          'https://corsproxy.io/?https://api.hunterhub.online/api/public/hcash/price'
+        )
+        const json = await res.json()
+        setPriceUsd(json.data?.usd?.toFixed(4) || '0.0000')
+        setPriceTon(json.data?.ton?.toFixed(6) || '0.000000')
+      } catch (err) {
+        console.error('Failed to fetch HCASH price:', err)
+      }
+    }
+
+    fetchPrice()
+  }, [])
 
   const handleLangSelect = (lang) => {
-    const lowerLang = lang.toLowerCase();
-    localStorage.setItem('preferredLang', lowerLang);
+    const lowerLang = lang.toLowerCase()
+    localStorage.setItem('preferredLang', lowerLang)
     i18n.changeLanguage(lowerLang).then(() => {
-      setSelectedLang(lang);
-      setLangOpen(false);
-      setForceRerender((prev) => prev + 1); // ✅ re-render tras cambio de idioma
-    });
-  };
+      setSelectedLang(lang)
+      setLangOpen(false)
+      setForceRerender((prev) => prev + 1)
+    })
+  }
 
   const docsItems = [
     { label: t('header.whitepaper'), link: '#' },
     { label: t('header.lore_bible'), link: '#' },
-    { label: t('header.dev_notes'), link: '#' },
-  ];
+    { label: t('header.dev_notes'), link: '#' }
+  ]
 
   const communityItems = [
     { label: t('header.discord'), link: '#' },
     { label: t('header.telegram'), link: '#' },
-    { label: t('header.twitter'), link: '#' },
-  ];
+    { label: t('header.twitter'), link: '#' }
+  ]
 
   return (
-    <header key={forceRerender} className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-black/30 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between shadow-lg border border-white/10">
-      {/* Logo + HCASH */}
-      <div className="flex items-center gap-6">
+    <header
+      key={forceRerender}
+      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-7xl bg-black/30 backdrop-blur-md rounded-full px-6 py-3 flex items-center justify-between shadow-lg border border-white/10"
+    >
+      {/* Logo + HCASH + Tooltip */}
+      <div className="flex items-center gap-6 relative">
         <h1 className="text-2xl font-bold tracking-wide">
           <span className="text-red-500">H</span>
           <span className="text-red">UB</span>
         </h1>
-        <div className="flex items-center gap-2">
+
+        <div
+          className="relative flex items-center gap-1 cursor-pointer"
+          onClick={() => setTooltipOpen(!tooltipOpen)}
+        >
           <img src="/images/HCASH_01.png" alt="HCASH" className="w-5 h-5" />
-          <span className="text-white text-sm font-semibold">{t('header.hcash_price')}</span>
+          <span className="text-sm text-white font-medium">${priceUsd}</span>
+
+          {tooltipOpen && (
+            <div
+              ref={tooltipRef}
+              className="absolute left-0 top-8 bg-black text-white text-sm rounded-md shadow-xl p-3 z-50 w-64 border border-white/10"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <img src="/images/ton_icon.png" alt="TON" className="w-4 h-4" />
+                <span>1 HCASH</span>
+                <span className="text-cyan-400 font-bold">{priceTon} TON</span>
+              </div>
+              <div className="flex items-center gap-2 mb-2">
+                <img src="/images/sun.png" alt="SOL" className="w-4 h-4" />
+                <span>1 HCASH</span>
+                <span className="text-yellow-400 font-bold">soon</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <img src="/images/ron_icon.png" alt="RON" className="w-4 h-4" />
+                <span>1 HCASH</span>
+                <span className="text-blue-400 font-bold">soon</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -123,7 +173,9 @@ const Header = () => {
       <nav className="flex items-center space-x-6 text-sm">
         <Dropdown title={t('header.docs')} items={docsItems} />
         <Dropdown title={t('header.community')} items={communityItems} />
-        <a href="#" className="hover:text-teal-400 transition">{t('header.team')}</a>
+        <a href="#" className="hover:text-teal-400 transition">
+          {t('header.team')}
+        </a>
         <a
           href="https://t.me/spacehuntersbot"
           target="_blank"
@@ -136,8 +188,8 @@ const Header = () => {
         {/* Language Selector */}
         <div
           className="relative"
-          onMouseEnter={handleLangEnter}
-          onMouseLeave={handleLangLeave}
+          onMouseEnter={() => setLangOpen(true)}
+          onMouseLeave={() => setLangOpen(false)}
         >
           <button
             onClick={() => setLangOpen((prev) => !prev)}
@@ -163,7 +215,7 @@ const Header = () => {
         </div>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

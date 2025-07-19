@@ -3,19 +3,28 @@ import { motion } from "framer-motion";
 import "./TokenomicsShipMobile.css";
 
 const shipLayout = [
-  "000000000001111000000000",
-  "000000000000110000000000",
-  "000000000000111000000000",
-  "000001011011111000001100",
-  "000111111111111100101100",
-  "011111111111111111111110",
-  "111111111111111111111111",
-  "011111111111111111111110",
-  "000111111111111100101100",
-  "000001011011111000001100",
-  "000000000000111000000000",
-  "000000000000110000000000",
-  "000000000001111000000000",
+  "0000001000000",
+  "0000011100000",
+  "0000011100000",
+  "0000111110000",
+  "0000111110000",
+  "0001111111000",
+  "0000111110000",
+  "0001111111000",
+  "0001111111000",
+  "0000111110000",
+  "0001111111000",
+  "1001111111001",
+  "1111111111111",
+  "1111111111111",
+  "1101111111101",
+  "0000111110000",
+  "0000011100000",
+  "0000011100000",
+  "0000111110000",
+  "0001111111000",
+  "0000011100000",
+  "0000001000000",
 ];
 
 const percentageData = [
@@ -65,14 +74,7 @@ const TokenomicsShipMobile = () => {
 
   return (
     <div className="tokenomics-ship-wrapper">
-      <motion.h2
-        className="tokenomics-title"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        TOKENOMICS
-      </motion.h2>
+      <h2 className="tokenomics-title">TOKENOMICS</h2>
 
       {/* Tooltip */}
       <div className="tooltip-static-container">
@@ -90,7 +92,7 @@ const TokenomicsShipMobile = () => {
         )}
       </div>
 
-      {/* Nave escalada */}
+      {/* Nave con escala 0.3 */}
       <div className="ship-scale-wrapper">
         <motion.div
           animate={{ y: [0, -6, 0] }}
@@ -98,13 +100,20 @@ const TokenomicsShipMobile = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "4px",
-            transform: "scale(0.6)",
+            gap: "0.5px",
+            transform: "scale(0.3)",
             transformOrigin: "center center",
           }}
         >
           {shipLayout.map((row, rowIndex) => (
-            <div key={rowIndex} className="ship-row">
+            <div
+              key={rowIndex}
+              style={{
+                display: "flex",
+                gap: "0.5px",
+                justifyContent: "center",
+              }}
+            >
               {row.split("").map((cell, colIndex) => {
                 const zone = getZoneByCell(rowIndex, colIndex);
                 const isHighlighted = zone && zone.id === activeZone;
@@ -112,19 +121,23 @@ const TokenomicsShipMobile = () => {
                 return (
                   <div
                     key={colIndex}
-                    className={`ship-cell ${cell === "1" ? "visible" : ""}`}
                     style={{
+                      width: "1.5px",
+                      height: "1.5px",
                       backgroundColor: isHighlighted
                         ? zone.color
                         : zone
                         ? `${zone.color}22`
                         : "#132235",
-                      opacity: cell === "1" ? (zone ? 1 : 0.3) : 0,
+                      borderRadius: "1px",
+                      opacity: cell === "1" ? (zone ? 1 : 0.25) : 0,
                       boxShadow: isHighlighted
                         ? `0 0 10px ${zone.color}, 0 0 16px ${zone.color}88`
                         : "",
                       transform: isHighlighted ? "scale(1.2)" : "",
                       zIndex: isHighlighted ? 2 : 1,
+                      transition: "all 0.3s ease",
+                      cursor: "pointer",
                     }}
                     onMouseEnter={() => zone && setActiveZone(zone.id)}
                   />
@@ -135,52 +148,23 @@ const TokenomicsShipMobile = () => {
         </motion.div>
       </div>
 
-      {/* Botones animados en 2 columnas */}
-      <motion.div
-        className="tokenomics-ledger-columns"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="ledger-column">
-          {tooltipData.slice(0, 3).map((zone, i) => (
-            <motion.button
-              key={zone.id}
-              className={`ledger-button ${activeZone === zone.id ? "active" : ""}`}
-              style={{
-                borderColor: zone.color,
-                color: zone.color,
-                backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
-              }}
-              onClick={() => setActiveZone(zone.id)}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + i * 0.1 }}
-            >
-              {zone.label}
-            </motion.button>
-          ))}
-        </div>
-        <div className="ledger-column">
-          {tooltipData.slice(3, 6).map((zone, i) => (
-            <motion.button
-              key={zone.id}
-              className={`ledger-button ${activeZone === zone.id ? "active" : ""}`}
-              style={{
-                borderColor: zone.color,
-                color: zone.color,
-                backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
-              }}
-              onClick={() => setActiveZone(zone.id)}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + (i + 3) * 0.1 }}
-            >
-              {zone.label}
-            </motion.button>
-          ))}
-        </div>
-      </motion.div>
+      {/* Botones de zonas */}
+      <div className="tokenomics-ledger">
+        {tooltipData.map((zone) => (
+          <button
+            key={zone.id}
+            className={`ledger-button ${activeZone === zone.id ? "active" : ""}`}
+            style={{
+              borderColor: zone.color,
+              color: zone.color,
+              backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
+            }}
+            onClick={() => setActiveZone(zone.id)}
+          >
+            {zone.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

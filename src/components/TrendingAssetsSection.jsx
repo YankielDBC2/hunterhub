@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -6,200 +6,222 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Legend,
-  CartesianGrid, // IMPORTANTE
+  CartesianGrid,
 } from "recharts";
-import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { getMarketplaceStats } from "@/api/getMarketplaceStats";
 
-// Datos simulados
-const stats = {
-  hunterCredit: [
-    { time: "08:00", burned: 1.5, circulating: 1.0, mediaValue: 0.5 },
-    { time: "10:00", burned: 1.7, circulating: 0.8, mediaValue: 0.9 },
-    { time: "12:00", burned: 0.3, circulating: 0.6, mediaValue: 1.2 },
-    { time: "14:00", burned: 0.9, circulating: 1.1, mediaValue: 1.4 },
-    { time: "16:00", burned: 1.6, circulating: 0.9, mediaValue: 1.1 },
-  ],
-  marketplace: [
-    { time: "08:00", hcash: 1.5, listed: 1.0, sold: 0.5 },
-    { time: "10:00", hcash: 1.7, listed: 0.8, sold: 0.9 },
-    { time: "12:00", hcash: 0.3, listed: 0.6, sold: 1.2 },
-    { time: "14:00", hcash: 0.9, listed: 1.1, sold: 1.4 },
-    { time: "16:00", hcash: 1.6, listed: 0.9, sold: 1.1 },
-  ],
-  store: [
-    { time: "08:00", hcash: 1.5, users: 1.0, transactions: 0.5 },
-    { time: "10:00", hcash: 1.7, users: 0.8, transactions: 0.9 },
-    { time: "12:00", hcash: 0.3, users: 0.6, transactions: 1.2 },
-    { time: "14:00", hcash: 0.9, users: 1.1, transactions: 1.4 },
-    { time: "16:00", hcash: 1.6, users: 0.9, transactions: 1.1 },
-  ],
-};
+export default function TrendingAssetsSection() {
+  const { t } = useTranslation();
+  const [timeFilter, setTimeFilter] = useState("24h");
+  const [marketplaceData, setMarketplaceData] = useState([
+    { time: "08:00", fees: 1.5, listed: 1.0, sold: 0.5 },
+    { time: "10:00", fees: 1.7, listed: 0.8, sold: 0.9 },
+    { time: "12:00", fees: 0.3, listed: 0.6, sold: 1.2 },
+    { time: "14:00", fees: 0.9, listed: 1.1, sold: 1.4 },
+    { time: "16:00", fees: 1.6, listed: 0.9, sold: 1.1 },
+  ]);
 
-// Componente de tarjeta de gráfica
-const ChartCard = ({ title, data, areas }) => (
-  <motion.div
-    className="w-full max-w-md"
-    whileInView={{ opacity: 1, y: 0 }}
-    initial={{ opacity: 0, y: 30 }}
-    transition={{ duration: 0.5 }}
-  >
-    <h3
-      className="text-white text-[18px] font-orbitron mb-4"
-      dangerouslySetInnerHTML={{ __html: title }}
-    />
-    <ResponsiveContainer width="100%" height={240}>
-      <AreaChart data={data}>
-        <defs>
-          {areas.map(({ key, color }) => (
-            <linearGradient key={key} id={`gradient-${key}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={color} stopOpacity={0.6} />
-              <stop offset="95%" stopColor={color} stopOpacity={0} />
-            </linearGradient>
-          ))}
-        </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-        <XAxis dataKey="time" stroke="#aaa" fontSize={11} />
-        <YAxis stroke="#aaa" fontSize={11} domain={['auto', 'auto']} />
-        <Tooltip
-          content={({ active, payload, label }) => {
-            if (active && payload && payload.length) {
-              return (
-                <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
-                  {payload.map((entry, i) => (
-                    <div key={i} style={{ color: entry.stroke }}>
-                      {entry.name}: {entry.value}
-                    </div>
-                  ))}
-                  <div className="text-gray-400 mt-1 text-xs">{label}</div>
-                </div>
-              );
-            }
-            return null;
-          }}
-        />
-        <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ fontSize: 12 }} />
-        {areas.map(({ key, color, name }) => (
-          <Area
-            key={key}
-            type="monotone"
-            dataKey={key}
-            stroke={color}
-            fill={`url(#gradient-${key})`}
-            strokeWidth={2.5}
-            dot={false}
-            activeDot={{ r: 5 }}
-            name={name}
-          />
-        ))}
-      </AreaChart>
-    </ResponsiveContainer>
-  </motion.div>
-);
+  const stats = {
+    hunter_credit: [
+      { time: "08:00", burned: 1.5, circulating: 1.0, media_value: 0.5 },
+      { time: "10:00", burned: 1.7, circulating: 0.8, media_value: 0.9 },
+      { time: "12:00", burned: 0.3, circulating: 0.6, media_value: 1.2 },
+      { time: "14:00", burned: 0.9, circulating: 1.1, media_value: 1.4 },
+      { time: "16:00", burned: 1.6, circulating: 0.9, media_value: 1.1 },
+    ],
+    store: [
+      { time: "08:00", hcash: 1.5, users: 1.0, transactions: 0.5 },
+      { time: "10:00", hcash: 1.7, users: 0.8, transactions: 0.9 },
+      { time: "12:00", hcash: 0.3, users: 0.6, transactions: 1.2 },
+      { time: "14:00", hcash: 0.9, users: 1.1, transactions: 1.4 },
+      { time: "16:00", hcash: 1.6, users: 0.9, transactions: 1.1 },
+    ],
+  };
 
-// Componente principal
-const TrendingAssetsSection = () => {
-  const [page, setPage] = useState(0);
-  const ITEMS_PER_PAGE = 12;
-  const tempItems = Array.from({ length: 24 }, (_, i) => ({
-    id: i,
-    name: "Orichalcum Metal",
-    quantity: 122,
-    value: 122599,
-    image: "/images/YggdrasilWood.png",
-  }));
-  const totalPages = Math.ceil(tempItems.length / ITEMS_PER_PAGE);
-  const paginatedItems = tempItems.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);
+  const timeFilterMap = {
+    "24h": "today",
+    "7d": "week",
+    "30d": "month",
+  };
+
+  useEffect(() => {
+    async function fetchMarketplaceStats() {
+      const response = await getMarketplaceStats(timeFilterMap[timeFilter]);
+      if (response) {
+        const newPoint = {
+          time: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          fees: parseFloat(response.fee.toFixed(2)),
+          listed: response.listed,
+          sold: response.sold,
+        };
+        const newData = [...marketplaceData.slice(1), newPoint];
+        setMarketplaceData(newData);
+      }
+    }
+    fetchMarketplaceStats();
+  }, [timeFilter]);
+
+  const chartTitles = [
+    {
+      key: "hunter_credit",
+      label: (
+        <>
+          <span className="text-red-500">Hunter Credit</span>
+          <span className="text-white"> - HCREDIT</span>
+        </>
+      ),
+      data: stats.hunter_credit,
+      areas: [
+        { key: "burned", color: "#FF0000" },
+        { key: "circulating", color: "#177DDC" },
+        { key: "media_value", color: "#02FD2A" },
+      ],
+    },
+    {
+      key: "marketplace",
+      label: (
+        <>
+          <span className="text-red-500">Marketplace</span>
+          <span className="text-white"> HUB</span>
+        </>
+      ),
+      data: marketplaceData,
+      areas: [
+        { key: "fees", color: "#ffaa00" },
+        { key: "listed", color: "#177DDC" },
+        { key: "sold", color: "#02FD2A" },
+      ],
+    },
+    {
+      key: "store",
+      label: (
+        <>
+          <span className="text-red-500">Store</span>
+          <span className="text-white"> HUB</span>
+        </>
+      ),
+      data: stats.store,
+      areas: [
+        { key: "hcash", color: "#ffaa00" },
+        { key: "users", color: "#3399ff" },
+        { key: "transactions", color: "#33ff66" },
+      ],
+    },
+  ];
 
   return (
-    <section className="relative py-20 px-4 text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-8 mb-20">
-          <ChartCard
-            title='<span class="text-red-500">Hunter Credit</span> - HCREDIT'
-            data={stats.hunterCredit}
-            areas={[
-              { key: "burned", color: "#FF0000", name: "Burned" },
-              { key: "circulating", color: "#177DDC", name: "Circulating" },
-              { key: "mediaValue", color: "#02FD2A", name: "Media Value" },
-            ]}
-          />
-          <ChartCard
-            title='<span class="text-red-500">Marketplace</span> HUB'
-            data={stats.marketplace}
-            areas={[
-              { key: "hcash", color: "#ffaa00", name: "HCASH" },
-              { key: "listed", color: "#177DDC", name: "Listed" },
-              { key: "sold", color: "#02FD2A", name: "Sold" },
-            ]}
-          />
-          <ChartCard
-            title='<span class="text-red-500">Store</span> HUB'
-            data={stats.store}
-            areas={[
-              { key: "hcash", color: "#ffaa00", name: "HCASH" },
-              { key: "users", color: "#3399ff", name: "Users" },
-              { key: "transactions", color: "#33ff66", name: "Transactions" },
-            ]}
-          />
-        </div>
+    <section className="hidden lg:block px-8 py-12 text-white">
+      <div className="flex justify-center gap-12 mb-6">
+        {chartTitles.map((title, idx) => (
+          <h3 key={idx} className="text-sm font-orbitron text-center">
+            {title.label}
+          </h3>
+        ))}
+      </div>
 
-        <h3 className="text-1.5xl font-orbitron font-bold text-left mb-3">
-          Trending <span className="text-red-500">Assets</span> Cap
-        </h3>
+      <div className="flex justify-center gap-4 mb-8">
+        {["24h", "7d", "30d"].map((time) => (
+          <button
+            key={time}
+            className={`relative px-4 py-1.5 rounded-md font-orbitron text-sm border-2 transition duration-200
+              ${
+                timeFilter === time
+                  ? "border-cyan-400 text-cyan-300 bg-cyan-900 shadow-inner shadow-cyan-500/20"
+                  : "border-gray-600 text-gray-300 hover:border-cyan-500 hover:text-white"
+              }`}
+            onClick={() => setTimeFilter(time)}
+          >
+            {time.toUpperCase()}
+          </button>
+        ))}
+      </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {paginatedItems.map((item) => (
-            <motion.div
-              key={item.id}
-              className="flex items-center gap-3 bg-[#1c1b29] border border-red-600 rounded px-3 py-2 w-full hover:shadow-red-500/20 hover:shadow transition"
-              whileHover={{ scale: 1.02 }}
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-10 h-10 object-contain"
-              />
-              <div className="text-white text-[13px]">
-                <div className="font-semibold">{item.name}</div>
-                <div className="flex gap-4 mt-1 items-center">
-                  <div className="flex items-center gap-1">
-                    <img src="/images/inventory_icon.png" alt="supply" className="w-4 h-4" />
-                    {item.quantity}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <img src="/images/HCASH001.png" alt="value" className="w-4 h-4" />
-                    {item.value.toLocaleString()}
-                  </div>
+      <div className="grid grid-cols-3 gap-8">
+        {chartTitles.map(({ key, label, data, areas }) => (
+          <div key={key} className="w-full">
+            <div className="mb-3 flex justify-center gap-3 text-xs font-semibold">
+              {areas.map(({ key: areaKey, color }) => (
+                <div key={areaKey} className="flex items-center gap-1">
+                  <span
+                    className="w-3 h-3 rounded-full inline-block"
+                    style={{ backgroundColor: color }}
+                  />
+                  <span>{t(`trending.charts.${areaKey}`)}</span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="flex justify-end mt-6 gap-2 items-center">
-          <button
-            className="w-10 h-10 rounded border border-white flex items-center justify-center hover:bg-white hover:text-black transition"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
-          >
-            ←
-          </button>
-          <button
-            className="w-10 h-10 rounded border border-white flex items-center justify-center hover:bg-white hover:text-black transition"
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
-          >
-            →
-          </button>
-        </div>
+              ))}
+            </div>
+            <ResponsiveContainer width="100%" height={220}>
+              <AreaChart data={data}>
+                <defs>
+                  {areas.map(({ key, color }) => (
+                    <linearGradient
+                      key={key}
+                      id={`gradient-${key}`}
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor={color}
+                        stopOpacity={0.6}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor={color}
+                        stopOpacity={0}
+                      />
+                    </linearGradient>
+                  ))}
+                </defs>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="rgba(255,255,255,0.1)"
+                />
+                <XAxis dataKey="time" stroke="#aaa" fontSize={11} />
+                <YAxis stroke="#aaa" fontSize={11} />
+                <Tooltip
+                  wrapperStyle={{ zIndex: 50 }}
+                  isAnimationActive={false}
+                  cursor={{ stroke: "#888", strokeDasharray: "3 3" }}
+                  content={({ active, payload, label }) =>
+                    active && payload ? (
+                      <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
+                        {payload.map((entry, i) => (
+                          <div key={i} style={{ color: entry.stroke }}>
+                            {entry.name}: {entry.value}
+                          </div>
+                        ))}
+                        <div className="text-gray-400 mt-1 text-xs">
+                          {label}
+                        </div>
+                      </div>
+                    ) : null
+                  }
+                />
+                {areas.map(({ key: areaKey, color }) => (
+                  <Area
+                    key={areaKey}
+                    type="monotone"
+                    dataKey={areaKey}
+                    stroke={color}
+                    fill={`url(#gradient-${areaKey})`}
+                    strokeWidth={2.5}
+                    dot={{ r: 3 }}
+                    activeDot={{ r: 6 }}
+                    name={t(`trending.charts.${areaKey}`)}
+                  />
+                ))}
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        ))}
       </div>
     </section>
   );
-};
-
-export default TrendingAssetsSection;
+}

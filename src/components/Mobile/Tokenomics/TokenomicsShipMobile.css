@@ -1,32 +1,94 @@
-/* 🎯 Tooltip personalizado para el gráfico de pastel (PieChart) */
-.custom-pie-tooltip {
-  background: rgba(0, 10, 20, 0.95);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 8px 12px;
+.tokenomics-ship-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+}
+
+.tokenomics-title {
   font-family: 'Orbitron', sans-serif;
-  color: white;
-  font-size: 13px;
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  pointer-events: none;
-  text-align: center;
-}
-
-
-/* 🧱 Título del segmento */
-.custom-pie-tooltip .segment-name {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 1.8rem;
   color: #00f0ff;
-  margin-bottom: 4px;
+  text-shadow: 0 0 10px #00f0ff88;
+  margin-bottom: 16px;
   text-align: center;
 }
 
-/* 💡 Valor numérico del segmento */
-.custom-pie-tooltip .segment-value {
-  color: #ccc;
+.tooltip-static-container {
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.tooltip-static {
+  padding: 10px 14px;
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  max-width: 340px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.tooltip-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.tooltip-content {
+  color: #ddd;
   font-size: 13px;
   text-align: center;
+}
+
+.ship-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.ship-cell {
+  width: 12px;
+  height: 12px;
+  background-color: #132235;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.tokenomics-ledger-columns {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 0 1rem;
+}
+
+.ledger-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ledger-button {
+  width: 140px;
+  font-size: 14px;
+  font-family: 'Orbitron', sans-serif;
+  padding: 10px 12px;
+  border: 2px solid;
+  border-radius: 10px;
+  background: transparent;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ledger-button:hover {
+  filter: brightness(1.2);
+  box-shadow: 0 0 10px currentColor;
+  transform: scale(1.03);
 }
