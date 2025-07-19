@@ -66,20 +66,21 @@
     "final_description": "En combinant des mécaniques de type robinet (faucet) et peer-to-peer, nous avons construit une économie dynamique dirigée par les joueurs. Plus de 80 % des objets en jeu sont des consommables qui disparaissent après utilisation, ce qui aide à réduire l'offre en circulation. Les autres sont des objets non consommables en quantités très limitées, ce qui garantit leur valeur et leur exclusivité."
   },
 
-  "trending": {
-    "title": "Actifs Tendance - Cap",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "Brûlés",
-      "circulating": "En circulation",
-      "media_value": "Valeur Média",
-      "marketplace": "Marketplace HUB",
-      "listed": "Listés",
-      "sold": "Vendus",
-      "store": "Boutique HUB",
-      "users": "Utilisateurs",
-      "transactions": "Transactions"
-    },
+"trending": {
+  "title": "Actifs Tendance",
+  "description": "Suivez les principaux actifs Hunter en temps réel avec des statistiques en direct et des mesures de performance.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "Brûlés",
+    "circulating": "En circulation",
+    "media_value": "Valeur médiatique",
+    "marketplace": "Marché",
+    "listed": "Listés",
+    "sold": "Vendues",
+    "store": "Boutique",
+    "users": "Utilisateurs",
+    "transactions": "Transactions"
+  },
     "item": {
       "supply": "Offre",
       "value": "Valeur"

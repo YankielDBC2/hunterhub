@@ -75,20 +75,21 @@
     ],
     "final_description": "Combinando mecánicas de grifo (faucet) y peer-to-peer, hemos construido una economía dinámica impulsada por los jugadores. Más del 80% de los ítems del juego son consumibles que desaparecen tras usarse, lo que ayuda a reducir la oferta en circulación. El resto son no consumibles con cantidades muy limitadas, lo que garantiza que mantengan su valor y exclusividad."
   },
-  "trending": {
-    "title": "Activos Populares - Cap",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "Quemado",
-      "circulating": "En circulación",
-      "media_value": "Valor de Medios",
-      "marketplace": "Marketplace HUB",
-      "listed": "Listados",
-      "sold": "Vendidos",
-      "store": "Tienda HUB",
-      "users": "Usuarios",
-      "transactions": "Transacciones"
-    },
+"trending": {
+  "title": "Top de Activos",
+  "description": "Sigue los principales activos de Hunter en tiempo real con estadísticas en vivo y métricas de rendimiento.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "Quemado",
+    "circulating": "Circulando",
+    "media_value": "Valor Mediático",
+    "marketplace": "Mercado",
+    "listed": "Listados",
+    "sold": "Vendidos",
+    "store": "Tienda",
+    "users": "Usuarios",
+    "transactions": "Transacciones"
+  },
     "item": {
       "supply": "Suministro",
       "value": "Valor"

@@ -1,17 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
-  Menu,
-  X,
-  ChevronDown,
-  FileText,
-  BookOpen,
-  Wrench,
-  Globe,
-  MessageCircle,
-  Send,
-  Twitter,
-  Users
+  Menu, X, ChevronDown, FileText, BookOpen, Wrench,
+  Globe, MessageCircle, Send, Twitter, Users
 } from 'lucide-react'
 
 const MobileHeader = () => {
@@ -29,6 +20,8 @@ const MobileHeader = () => {
   const allLangs = ['EN', 'ES', 'RU', 'ZH', 'DE', 'FR', 'IT', 'JA', 'KO', 'PT']
   const otherLangs = allLangs.filter((l) => l !== selectedLang)
 
+  const [hcashPrice, setHcashPrice] = useState({ usd: null, ton: null })
+
   useEffect(() => {
     const savedLang = localStorage.getItem('preferredLang')?.toLowerCase()
     if (savedLang && savedLang !== i18n.language) {
@@ -43,6 +36,20 @@ const MobileHeader = () => {
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [i18n])
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        const res = await fetch('https://api.hunterhub.online/api/public/hcash/price')
+        const data = await res.json()
+        setHcashPrice({ usd: data.usd, ton: data.ton })
+      } catch (err) {
+        console.warn('Failed to fetch HCASH price:', err.message)
+      }
+    }
+
+    fetchPrice()
+  }, [])
 
   const handleLangSelect = (lang) => {
     const lower = lang.toLowerCase()
@@ -60,9 +67,14 @@ const MobileHeader = () => {
           <span className="text-red-500">H</span><span className="text-red">UB</span>
         </h1>
 
-        <div className="relative flex items-center gap-1 cursor-pointer" onClick={() => setTooltipOpen(!tooltipOpen)}>
+        <div
+          className="relative flex items-center gap-1 cursor-pointer"
+          onClick={() => setTooltipOpen(!tooltipOpen)}
+        >
           <img src="/images/HCASH_01.png" alt="HCASH" className="w-5 h-5" />
-          <span className="text-sm text-white font-medium">$0.0176</span>
+          <span className="text-sm text-white font-medium">
+            {hcashPrice.usd ? `$${hcashPrice.usd.toFixed(4)}` : '...'}
+          </span>
           {tooltipOpen && (
             <div
               ref={tooltipRef}
@@ -71,17 +83,21 @@ const MobileHeader = () => {
               <div className="flex items-center gap-2 mb-2">
                 <img src="/images/tonicon.png" alt="TON" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-cyan-400 font-bold">0.005549 TON</span>
+                <span className="text-cyan-400 font-bold">
+                  {hcashPrice.ton ? `${hcashPrice.ton.toFixed(6)} TON` : '...'}
+                </span>
               </div>
               <div className="flex items-center gap-2 mb-2">
                 <img src="/images/HCASH_01.png" alt="USD" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-green-400 font-bold">$0.0176 USD</span>
+                <span className="text-green-400 font-bold">
+                  {hcashPrice.usd ? `$${hcashPrice.usd.toFixed(4)} USD` : '...'}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <img src="/images/sun.png" alt="SOL" className="w-4 h-4" />
                 <span>1 HCASH</span>
-                <span className="text-yellow-400 font-bold">0.0001 SOL</span>
+                <span className="text-yellow-400 font-bold">Soon</span>
               </div>
             </div>
           )}

@@ -66,20 +66,21 @@
     "final_description": "Combinando meccaniche Faucet e Peer-to-Peer, abbiamo costruito un'economia dinamica guidata dai giocatori. Oltre l'80% degli oggetti di gioco sono consumabili e scompaiono dopo l'uso, contribuendo a ridurre l'offerta in circolazione. I restanti sono non consumabili con quantità molto limitate, garantendone il valore e l'esclusività."
   },
 
-  "trending": {
-    "title": "Asset di Tendenza - Cap",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "Bruciati",
-      "circulating": "In circolazione",
-      "media_value": "Valore Mediatico",
-      "marketplace": "Marketplace HUB",
-      "listed": "In elenco",
-      "sold": "Venduti",
-      "store": "Negozio HUB",
-      "users": "Utenti",
-      "transactions": "Transazioni"
-    },
+"trending": {
+  "title": "Asset in Tendenza",
+  "description": "Monitora i principali asset di Hunter in tempo reale con statistiche live e metriche di performance.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "Bruciati",
+    "circulating": "In circolazione",
+    "media_value": "Valore mediatico",
+    "marketplace": "Mercato",
+    "listed": "Elencati",
+    "sold": "Venduti",
+    "store": "Negozio",
+    "users": "Utenti",
+    "transactions": "Transazioni"
+  },
     "item": {
       "supply": "Offerta",
       "value": "Valore"

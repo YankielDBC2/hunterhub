@@ -66,21 +66,22 @@
     "final_description": "Durch die Kombination von Faucet- und Peer-to-Peer-Mechaniken haben wir eine dynamische, spielergesteuerte Wirtschaft aufgebaut. Über 80 % der Spielgegenstände sind Verbrauchsartikel, die nach dem Gebrauch verschwinden, was dazu beiträgt, das zirkulierende Angebot zu reduzieren. Der Rest besteht aus nicht verbrauchbaren Gegenständen mit sehr begrenzter Menge, was ihren Wert und ihre Exklusivität sichert."
   },
 
-  "trending": {
-    "title": "Trendende Assets - Cap",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "Verbrannt",
-      "circulating": "Im Umlauf",
-      "media_value": "Medienwert",
-      "marketplace": "Marktplatz HUB",
-      "listed": "Gelistet",
-      "sold": "Verkauft",
-      "store": "Shop HUB",
-      "users": "Benutzer",
-      "transactions": "Transaktionen"
-    },
-    "item": {
+"trending": {
+  "title": "Top-Assets-Übersicht",
+  "description": "Verfolge die besten Hunter-Assets in Echtzeit mit Live-Statistiken und Leistungsmetriken.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "Verbrannt",
+    "circulating": "Umlaufend",
+    "media_value": "Medienwert",
+    "marketplace": "Marktplatz",
+    "listed": "Gelistet",
+    "sold": "Verkauft",
+    "store": "Shop",
+    "users": "Nutzer",
+    "transactions": "Transaktionen"
+  },
+      "item": {
       "supply": "Angebot",
       "value": "Wert"
     },

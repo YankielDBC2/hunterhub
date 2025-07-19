@@ -66,20 +66,21 @@
     "final_description": "通过结合水龙头（Faucet）和点对点（P2P）机制，我们构建了一个由玩家驱动的动态经济系统。超过 80% 的游戏物品为消耗品，用后即失，有助于减少市场流通量；其余为限量非消耗品，保持其稀有性和价值。"
   },
 
-  "trending": {
-    "title": "热门资产总览",
-    "charts": {
-      "hunter_credit": "Hunter Credit - HCREDIT",
-      "burned": "销毁",
-      "circulating": "流通中",
-      "media_value": "媒体价值",
-      "marketplace": "交易市场 HUB",
-      "listed": "已上架",
-      "sold": "已售出",
-      "store": "商城 HUB",
-      "users": "用户数",
-      "transactions": "交易数"
-    },
+"trending": {
+  "title": "热门资产概览",
+  "description": "通过实时统计和性能指标跟踪最热门的 Hunter 资产。",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "已销毁",
+    "circulating": "流通中",
+    "media_value": "媒体价值",
+    "marketplace": "市场",
+    "listed": "已上市",
+    "sold": "已售出",
+    "store": "商店",
+    "users": "用户",
+    "transactions": "交易"
+  },
     "item": {
       "supply": "供应量",
       "value": "价值"

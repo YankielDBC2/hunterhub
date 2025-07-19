@@ -9,6 +9,8 @@ import HubCarouselSectionMobile from './components/Mobile/HubCarouselSectionMobi
 import SelfEconomyMobile from './components/Mobile/SelfEconomyMobile'
 import TrendingAssetsSectionMobile from './components/Mobile/TrendingAssetsSectionMobile'
 import FloatingObjectsMobile from './components/Mobile/FloatingObjectsMobile'
+import HcashAboutSectionMobile from "./components/Mobile/HcashAboutSectionMobile"
+import TokenomicsPieChartMobile from './components/Mobile/Tokenomics/TokenomicsPieChartMobile';
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -19,20 +21,21 @@ import HubCarouselSection from './components/HubCarouselSection'
 import SelfEconomy from './components/SelfEconomy'
 import TrendingAssetsSection from './components/TrendingAssetsSection'
 import FloatingObjects from './components/FloatingObjects'
+import HcashAboutSection from "./components/HcashAboutSection"
+import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
 
 // 🔧 Secciones comunes
 import FlyingShip from './components/FlyingShip'
 import StarBackground from './components/StarBackground'
-import HcashAboutSection from './components/HcashAboutSection'
-import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
 
 const App = () => {
   return (
     <div className="min-h-screen text-white font-sans bg-gradient-to-b from-[#111B28] via-[#0D1620] to-[#080D15] relative overflow-hidden">
+
       {/* Efectos visuales de fondo */}
       <StarBackground />
-      
-      {/* Floating Objects según dispositivo */}
+
+      {/* Floating Objects */}
       <div className="hidden lg:block">
         <FloatingObjects />
       </div>
@@ -40,6 +43,7 @@ const App = () => {
         <FloatingObjectsMobile />
       </div>
 
+      {/* Flying Ship */}
       <FlyingShip />
 
       {/* Header */}
@@ -98,9 +102,21 @@ const App = () => {
         <TrendingAssetsSectionMobile />
       </div>
 
-      {/* Comunes */}
-      <HcashAboutSection />
-      <TokenomicsShip />
+      {/* Hcash About Section */}
+      <div className="hidden lg:block">
+        <HcashAboutSection />
+      </div>
+      <div className="lg:hidden">
+        <HcashAboutSectionMobile />
+      </div>
+
+      {/* Tokenomics */}
+      <div className="hidden lg:block">
+        <TokenomicsShip />
+      </div>
+      <div className="lg:hidden">
+        <TokenomicsPieChartMobile />
+      </div>
     </div>
   )
 }

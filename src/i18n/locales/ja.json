@@ -65,21 +65,22 @@
     ],
     "final_description": "ファウセットとピアツーピアのメカニズムを組み合わせ、プレイヤー主導のダイナミックな経済を構築しました。ゲーム内アイテムの80％以上が消費型で、使用後に消えることで流通供給量が減少します。残りは非常に限定された数量の非消費型アイテムであり、価値と希少性を維持しています。"
   },
-
-  "trending": {
-    "title": "トレンド資産 - キャップ",
-    "charts": {
-      "hunter_credit": "ハンタークレジット - HCREDIT",
-      "burned": "焼却済み",
-      "circulating": "流通中",
-      "media_value": "メディア価値",
-      "marketplace": "マーケットプレイス HUB",
-      "listed": "出品中",
-      "sold": "販売済み",
-      "store": "ストア HUB",
-      "users": "ユーザー数",
-      "transactions": "取引数"
-    },
+  
+"trending": {
+  "title": "トレンド資産キャップ",
+  "description": "ライブ統計とパフォーマンス指標でハンターの主要資産をリアルタイムで追跡。",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "バーンド",
+    "circulating": "循環中",
+    "media_value": "メディア価値",
+    "marketplace": "マーケットプレイス",
+    "listed": "リスト済み",
+    "sold": "販売済み",
+    "store": "ストア",
+    "users": "ユーザー",
+    "transactions": "トランザクション"
+  },
     "item": {
       "supply": "供給量",
       "value": "価値"

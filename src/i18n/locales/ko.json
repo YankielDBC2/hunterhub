@@ -66,20 +66,21 @@
     "final_description": "파우셋과 P2P 메커니즘을 결합하여 플레이어 중심의 역동적인 경제를 구축했습니다. 게임 내 아이템의 80% 이상은 사용 후 사라지는 소모품으로, 유통 공급량 감소에 기여합니다. 나머지는 매우 제한된 수량의 비소모품으로 구성되어 가치와 희소성을 보장합니다."
   },
 
-  "trending": {
-    "title": "인기 자산 - 시가총액",
-    "charts": {
-      "hunter_credit": "헌터 크레딧 - HCREDIT",
-      "burned": "소각됨",
-      "circulating": "유통 중",
-      "media_value": "미디어 가치",
-      "marketplace": "마켓플레이스 HUB",
-      "listed": "리스트됨",
-      "sold": "판매됨",
-      "store": "스토어 HUB",
-      "users": "사용자 수",
-      "transactions": "거래 수"
-    },
+"trending": {
+  "title": "트렌딩 자산 현황",
+  "description": "실시간 통계와 성능 지표로 상위 Hunter 자산을 추적하세요.",
+  "charts": {
+    "hunter_credit": "HCREDIT",
+    "burned": "소각됨",
+    "circulating": "유통 중",
+    "media_value": "미디어 가치",
+    "marketplace": "마켓플레이스",
+    "listed": "리스트됨",
+    "sold": "판매됨",
+    "store": "스토어",
+    "users": "사용자",
+    "transactions": "거래"
+  },
     "item": {
       "supply": "공급량",
       "value": "가치"
