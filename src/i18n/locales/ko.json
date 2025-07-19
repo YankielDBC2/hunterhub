@@ -70,6 +70,7 @@
   "title": "트렌딩 자산 현황",
   "description": "실시간 통계와 성능 지표로 상위 Hunter 자산을 추적하세요.",
   "charts": {
+    "fees": "수수료",
     "hunter_credit": "HCREDIT",
     "burned": "소각됨",
     "circulating": "유통 중",

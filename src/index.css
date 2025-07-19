@@ -48,3 +48,15 @@
 }
 
 
+/* Oculta el cursor de texto en todos los elementos que no sean inputs o textareas */
+body *:not(input):not(textarea) {
+  caret-color: transparent;
+}
+
+.recharts-wrapper *:focus {
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+}

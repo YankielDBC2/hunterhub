@@ -70,6 +70,7 @@
   "title": "Top-Assets-Übersicht",
   "description": "Verfolge die besten Hunter-Assets in Echtzeit mit Live-Statistiken und Leistungsmetriken.",
   "charts": {
+    "fees": "Gebühren",
     "hunter_credit": "HCREDIT",
     "burned": "Verbrannt",
     "circulating": "Umlaufend",

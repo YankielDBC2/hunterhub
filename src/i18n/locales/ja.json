@@ -70,6 +70,7 @@
   "title": "トレンド資産キャップ",
   "description": "ライブ統計とパフォーマンス指標でハンターの主要資産をリアルタイムで追跡。",
   "charts": {
+    "fees": "手数料",
     "hunter_credit": "HCREDIT",
     "burned": "バーンド",
     "circulating": "循環中",

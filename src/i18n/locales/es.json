@@ -79,6 +79,7 @@
   "title": "Top de Activos",
   "description": "Sigue los principales activos de Hunter en tiempo real con estadísticas en vivo y métricas de rendimiento.",
   "charts": {
+    "fees": "Comisión",
     "hunter_credit": "HCREDIT",
     "burned": "Quemado",
     "circulating": "Circulando",

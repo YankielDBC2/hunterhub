@@ -1,4 +1,12 @@
 {
+"mvp_assets": {
+  "title": "MVP Assets",
+  "tooltip": {
+    "supply": "This represents the total supply available of this item across the ecosystem.",
+    "value": "This is the estimated value of the asset based on recent marketplace activity.",
+    "image": "Tap to view a quick description of the item."
+  }
+},
 
   "top_players": {
     "title": "Meet Our <span class='text-red-500'>Top Players</span>",
@@ -83,6 +91,7 @@
   "title": "Trending Assets Cap",
   "description": "Track the top Hunter assets in real time with live statistics and performance metrics.",
   "charts": {
+    "fees": "Fees",
     "hunter_credit": "HCREDIT",
     "burned": "Burned",
     "circulating": "Circulating",
@@ -102,7 +111,9 @@
     "prev": "Previous",
     "next": "Next"
   }
+  
 },
+
   "what_we_are_building": {
     "title": "What We Are Building?",
     "paragraph_1": "We are crafting an interconnected universe — from games and tools to community platforms and rewards systems.",

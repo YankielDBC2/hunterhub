@@ -70,6 +70,7 @@
   "title": "Top de Ativos",
   "description": "Acompanhe os principais ativos de Hunter em tempo real com estatísticas ao vivo e métricas de desempenho.",
   "charts": {
+    "fees": "Taxas",
     "hunter_credit": "HCREDIT",
     "burned": "Queimados",
     "circulating": "Circulando",

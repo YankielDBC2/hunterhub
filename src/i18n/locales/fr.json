@@ -70,6 +70,7 @@
   "title": "Actifs Tendance",
   "description": "Suivez les principaux actifs Hunter en temps réel avec des statistiques en direct et des mesures de performance.",
   "charts": {
+    "fees": "Frais",
     "hunter_credit": "HCREDIT",
     "burned": "Brûlés",
     "circulating": "En circulation",

@@ -70,6 +70,7 @@
   "title": "Asset in Tendenza",
   "description": "Monitora i principali asset di Hunter in tempo reale con statistiche live e metriche di performance.",
   "charts": {
+    "fees": "Commissioni",
     "hunter_credit": "HCREDIT",
     "burned": "Bruciati",
     "circulating": "In circolazione",
