@@ -45,30 +45,38 @@ export async function getMarketplaceStats(filter = "today") {
 
 function formatLabel(interval, filter) {
   if (filter === "today") {
-    // Mostrar hora militar directamente (ej: "14:00")
+    // Mostrar solo hora (ej. 00:00, 13:00)
     return interval;
   }
 
-  // Para semana y mes, formatear la fecha si incluye día
-  const parts = interval.split("-");
-  if (parts.length === 3) {
-    const [year, month, day] = parts;
-    const date = new Date(`${year}-${month}-${day}`);
-    return date.toLocaleDateString("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-    }); // Ej: "Thu, Jul 18"
+  if (filter === "week") {
+    // interval: YYYY-MM-DD
+    const [year, month, day] = interval.split("-");
+    if (day) {
+      const date = new Date(`${year}-${month}-${day}`);
+      return date.toDateString();
+    }
   }
 
-  if (parts.length === 2) {
-    const [year, month] = parts;
-    const date = new Date(`${year}-${month}-01`);
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      year: "numeric",
-    }); // Ej: "Jul 1925"
+  if (filter === "month") {
+    // interval: YYYY-Wxx → convertir a fecha de inicio de semana
+    const [year, week] = interval.split("-W");
+    if (year && week) {
+      const weekNumber = parseInt(week, 10);
+      const janFirst = new Date(parseInt(year), 0, 1);
+      const firstDay = janFirst.getDay(); // día de la semana (0 = domingo)
+
+      // Calcular el primer lunes del año
+      const firstMonday = new Date(janFirst);
+      firstMonday.setDate(janFirst.getDate() + ((firstDay <= 4 ? 1 : 8) - firstDay));
+
+      // Calcular fecha correspondiente a la semana
+      const resultDate = new Date(firstMonday);
+      resultDate.setDate(firstMonday.getDate() + (weekNumber - 1) * 7);
+
+      return resultDate.toDateString(); // Ej: "Mon Jul 15 2025"
+    }
   }
 
-  return interval; // fallback
+  return interval;
 }
