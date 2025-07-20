@@ -135,51 +135,30 @@ const TokenomicsShipMobile = () => {
         </motion.div>
       </div>
 
-      {/* Botones animados en 2 columnas */}
+      {/* Botones en 2 columnas x 3 filas */}
       <motion.div
-        className="tokenomics-ledger-columns"
+        className="tokenomics-buttons-grid"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
       >
-        <div className="ledger-column">
-          {tooltipData.slice(0, 3).map((zone, i) => (
-            <motion.button
-              key={zone.id}
-              className={`ledger-button ${activeZone === zone.id ? "active" : ""}`}
-              style={{
-                borderColor: zone.color,
-                color: zone.color,
-                backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
-              }}
-              onClick={() => setActiveZone(zone.id)}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + i * 0.1 }}
-            >
-              {zone.label}
-            </motion.button>
-          ))}
-        </div>
-        <div className="ledger-column">
-          {tooltipData.slice(3, 6).map((zone, i) => (
-            <motion.button
-              key={zone.id}
-              className={`ledger-button ${activeZone === zone.id ? "active" : ""}`}
-              style={{
-                borderColor: zone.color,
-                color: zone.color,
-                backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
-              }}
-              onClick={() => setActiveZone(zone.id)}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 + (i + 3) * 0.1 }}
-            >
-              {zone.label}
-            </motion.button>
-          ))}
-        </div>
+        {tooltipData.map((zone, i) => (
+          <motion.button
+            key={zone.id}
+            className={`tokenomics-button ${activeZone === zone.id ? "active" : ""}`}
+            style={{
+              borderColor: zone.color,
+              color: zone.color,
+              backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
+            }}
+            onClick={() => setActiveZone(zone.id)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 + i * 0.1 }}
+          >
+            {zone.label}
+          </motion.button>
+        ))}
       </motion.div>
     </div>
   );

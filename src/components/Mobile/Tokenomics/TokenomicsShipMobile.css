@@ -1,94 +1,99 @@
-.tokenomics-ship-wrapper {
+.tokenomics-mobile-wrapper {
+  width: 100%;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 1rem;
+  gap: 25px;
 }
 
-.tokenomics-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
-  color: #00f0ff;
-  text-shadow: 0 0 10px #00f0ff88;
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.tooltip-static-container {
-  height: 64px;
+/* NAVE - NO TOCAR */
+.ship-scale-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
+  transform: scale(0.45);
+  transform-origin: top center;
 }
 
-.tooltip-static {
-  padding: 10px 14px;
-  border-radius: 10px;
-  backdrop-filter: blur(4px);
-  max-width: 340px;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.tooltip-title {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: bold;
-  color: #fff;
-  font-size: 14px;
-  margin-bottom: 6px;
-  text-align: center;
-}
-
-.tooltip-content {
-  color: #ddd;
-  font-size: 13px;
-  text-align: center;
+.ship-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 
 .ship-row {
   display: flex;
-  gap: 4px;
-  justify-content: center;
+  gap: 1px;
 }
 
 .ship-cell {
-  width: 12px;
-  height: 12px;
-  background-color: #132235;
-  border-radius: 3px;
-  transition: all 0.3s ease;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
 }
 
-.tokenomics-ledger-columns {
-  display: flex;
+/* ✅ BOTONES en 2 columnas, mismo tamaño */
+.tokenomics-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 20px;
   justify-content: center;
-  gap: 18px;
-  margin-top: 28px;
-  padding: 0 1rem;
+  width: 100%;
+  max-width: 320px;
+  margin-top: -150px;
 }
 
-.ledger-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ledger-button {
-  width: 140px;
+.tokenomics-button {
+  font-family: Orbitron, sans-serif;
+  font-weight: 600;
   font-size: 14px;
-  font-family: 'Orbitron', sans-serif;
-  padding: 10px 12px;
-  border: 2px solid;
+  padding: 10px 16px;
   border-radius: 10px;
-  background: transparent;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  min-width: 140px;
+  min-height: 42px;
   text-align: center;
+  background: transparent;
   transition: all 0.3s ease;
-  cursor: pointer;
+  color: inherit;
 }
 
-.ledger-button:hover {
-  filter: brightness(1.2);
+.tokenomics-button.active {
   box-shadow: 0 0 10px currentColor;
-  transform: scale(1.03);
+  background-color: currentColor;
+  color: #000;
+}
+
+/* ✅ BOTONES tipo neón */
+.ledger-button {
+  font-family: Orbitron, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-align: center;
+  background: transparent;
+  transition: all 0.3s ease;
+  color: inherit;
+  min-width: 140px;
+  min-height: 46px;
+  box-shadow: 0 0 6px currentColor;
+  text-shadow: 0 0 3px currentColor;
+}
+
+.ledger-button.active {
+  background-color: currentColor;
+  color: #000;
+  box-shadow: 0 0 12px currentColor, 0 0 20px currentColor;
+  text-shadow: none;
 }
