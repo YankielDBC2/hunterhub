@@ -5,21 +5,24 @@
   padding: 1rem;
 }
 
+/* Título */
 .tokenomics-title {
   font-family: 'Orbitron', sans-serif;
   font-size: 2.5rem;
   color: #00f0ff;
   text-shadow: 0 0 10px #00f0ff88;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
+/* Tooltip superior */
 .tooltip-static-container {
-  height: 64px; /* Reservar espacio fijo sin empujar */
+  height: 64px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 50px;
 }
+
 
 .tooltip-static {
   padding: 12px 16px;
@@ -44,15 +47,17 @@
   text-align: center;
 }
 
+/* Nave */
 .ship-grid {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px; /* más compacto */
+  margin-bottom: 24px; /* espacio reducido antes de los botones */
 }
 
 .ship-row {
   display: flex;
-  gap: 7px;
+  gap: 6px;
   justify-content: center;
 }
 
@@ -63,3 +68,40 @@
   border-radius: 4px;
   transition: all 0.3s ease;
 }
+
+/* Botones (2 columnas, 3 filas) */
+.tokenomics-buttons-grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 16px 28px;
+  padding: 0 30px;
+  margin-top: 0; /* sin separación extra */
+  justify-content: center;
+  align-items: center;
+}
+
+.tokenomics-button-desktop {
+  padding: 12px 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+  color: inherit;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tokenomics-button-desktop.active {
+  background-color: currentColor;
+  color: #fff !important;
+  box-shadow: 0 0 10px currentColor, 0 0 18px currentColor;
+}
+

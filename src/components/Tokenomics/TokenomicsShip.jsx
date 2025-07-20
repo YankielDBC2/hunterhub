@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./TokenomicsShip.css";
-import { motion, AnimatePresence } from "framer-motion";
-
+import { motion } from "framer-motion";
 
 const shipLayout = [
   "000000000001111000000000",
@@ -68,7 +67,6 @@ const TokenomicsShip = () => {
     <div className="tokenomics-ship-wrapper">
       <h2 className="tokenomics-title">TOKENOMICS</h2>
 
-      {/* Tooltip debajo del título, sin empujar nada */}
       <div className="tooltip-static-container">
         {currentData && (
           <div
@@ -84,7 +82,7 @@ const TokenomicsShip = () => {
         )}
       </div>
 
-      {/* Nave animada */}
+      {/* Nave */}
       <motion.div
         className="ship-grid"
         animate={{ y: [0, -10, 0] }}
@@ -113,6 +111,32 @@ const TokenomicsShip = () => {
               );
             })}
           </div>
+        ))}
+      </motion.div>
+
+      {/* Botones - Escritorio */}
+      <motion.div
+        className="tokenomics-buttons-grid-desktop"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+      >
+        {tooltipData.map((zone, i) => (
+          <motion.button
+            key={zone.id}
+            className={`tokenomics-button-desktop ${activeZone === zone.id ? "active" : ""}`}
+            style={{
+              borderColor: zone.color,
+              color: zone.color,
+              backgroundColor: activeZone === zone.id ? `${zone.color}22` : "transparent",
+            }}
+            onClick={() => setActiveZone(zone.id)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 + i * 0.1 }}
+          >
+            {zone.label}
+          </motion.button>
         ))}
       </motion.div>
     </div>
