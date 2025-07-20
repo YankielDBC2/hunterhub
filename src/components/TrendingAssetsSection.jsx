@@ -10,20 +10,15 @@ import {
 } from "recharts";
 import { useTranslation } from "react-i18next";
 import { getMarketplaceStats } from "@/api/getMarketplaceStats";
+import { getHcreditStats } from "@/api/getHcreditStats";
 
 export default function TrendingAssetsSection() {
   const { t } = useTranslation();
   const [timeFilter, setTimeFilter] = useState("24h");
   const [marketplaceData, setMarketplaceData] = useState([]);
+  const [hunterCreditData, setHunterCreditData] = useState([]);
 
   const stats = {
-    hunter_credit: [
-      { time: "08:00", burned: 1.5, circulating: 1.0, media_value: 0.5 },
-      { time: "10:00", burned: 1.7, circulating: 0.8, media_value: 0.9 },
-      { time: "12:00", burned: 0.3, circulating: 0.6, media_value: 1.2 },
-      { time: "14:00", burned: 0.9, circulating: 1.1, media_value: 1.4 },
-      { time: "16:00", burned: 1.6, circulating: 0.9, media_value: 1.1 },
-    ],
     store: [
       { time: "08:00", hcash: 1.5, users: 1.0, transactions: 0.5 },
       { time: "10:00", hcash: 1.7, users: 0.8, transactions: 0.9 },
@@ -49,6 +44,16 @@ export default function TrendingAssetsSection() {
     fetchMarketplaceStats();
   }, [timeFilter]);
 
+  useEffect(() => {
+    async function fetchHcreditStats() {
+      const response = await getHcreditStats(timeFilterMap[timeFilter]);
+      if (response.length > 0) {
+        setHunterCreditData(response);
+      }
+    }
+    fetchHcreditStats();
+  }, [timeFilter]);
+
   const chartTitles = [
     {
       key: "hunter_credit",
@@ -58,7 +63,7 @@ export default function TrendingAssetsSection() {
           <span className="text-white"> - HCREDIT</span>
         </>
       ),
-      data: stats.hunter_credit,
+      data: hunterCreditData,
       areas: [
         { key: "burned", color: "#FF0000" },
         { key: "circulating", color: "#177DDC" },

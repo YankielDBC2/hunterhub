@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { getMarketplaceStats } from "@/api/getMarketplaceStats";
 import MvpAssetsMobile from "./MvpAssetsMobile";
+import { getHcreditStats } from "@/api/getHcreditStats";
 
 const timeFilterMap = {
   "24h": "today",
@@ -23,35 +24,26 @@ const colors = {
   fees: "#ffaa00",
   listed: "#177DDC",
   sold: "#02FD2A",
+  burned: "#FF0000",
+  circulating: "#177DDC",
+  media_value: "#02FD2A",
 };
-
-const defaultMarketplaceData = [
-  { time: "08:00", fees: 1.5, listed: 1.0, sold: 0.5, label: "08:00" },
-  { time: "10:00", fees: 1.7, listed: 0.8, sold: 0.9, label: "10:00" },
-  { time: "12:00", fees: 0.3, listed: 0.6, sold: 1.2, label: "12:00" },
-  { time: "14:00", fees: 0.9, listed: 1.1, sold: 1.4, label: "14:00" },
-  { time: "16:00", fees: 1.6, listed: 0.9, sold: 1.1, label: "16:00" },
-];
 
 export default function TrendingAssetsSectionMobile() {
   const { t } = useTranslation();
-  const [current, setCurrent] = useState(1); // Marketplace
+  const [current, setCurrent] = useState(0); // hunter_credit
   const [timeFilter, setTimeFilter] = useState("24h");
-  const [marketplaceData, setMarketplaceData] = useState(defaultMarketplaceData);
-
-  const stats = {
-    hunter_credit: defaultMarketplaceData,
-    store: defaultMarketplaceData,
-  };
+  const [marketplaceData, setMarketplaceData] = useState([]);
+  const [hcreditData, setHcreditData] = useState([]);
 
   const charts = [
     {
       key: "hunter_credit",
-      data: stats.hunter_credit,
+      data: hcreditData,
       areas: [
-        { key: "burned", color: "#FF0000" },
-        { key: "circulating", color: "#177DDC" },
-        { key: "media_value", color: "#02FD2A" },
+        { key: "burned", color: colors.burned },
+        { key: "circulating", color: colors.circulating },
+        { key: "media_value", color: colors.media_value },
       ],
     },
     {
@@ -61,15 +53,6 @@ export default function TrendingAssetsSectionMobile() {
         { key: "fees", color: colors.fees },
         { key: "listed", color: colors.listed },
         { key: "sold", color: colors.sold },
-      ],
-    },
-    {
-      key: "store",
-      data: stats.store,
-      areas: [
-        { key: "hcash", color: "#ffaa00" },
-        { key: "users", color: "#3399ff" },
-        { key: "transactions", color: "#33ff66" },
       ],
     },
   ];
@@ -84,18 +67,17 @@ export default function TrendingAssetsSectionMobile() {
   const next = () => setCurrent((prev) => (prev + 1) % charts.length);
   const prev = () => setCurrent((prev) => (prev - 1 + charts.length) % charts.length);
 
-  // ✅ SOLO PARA MARKETPLACE: datos reales desde la API
   useEffect(() => {
-    if (key !== "marketplace") return;
-
-    async function fetchMarketplaceData() {
-      const result = await getMarketplaceStats(timeFilterMap[timeFilter]);
-      if (Array.isArray(result)) {
-        setMarketplaceData(result);
-      }
+    if (key === "marketplace") {
+      getMarketplaceStats(timeFilterMap[timeFilter]).then((result) => {
+        if (Array.isArray(result)) setMarketplaceData(result);
+      });
     }
-
-    fetchMarketplaceData();
+    if (key === "hunter_credit") {
+      getHcreditStats(timeFilterMap[timeFilter]).then((result) => {
+        if (Array.isArray(result)) setHcreditData(result);
+      });
+    }
   }, [timeFilter, key]);
 
   return (
@@ -109,7 +91,7 @@ export default function TrendingAssetsSectionMobile() {
         {t("trending.description")}
       </p>
 
-      {key === "marketplace" && (
+      {key === "marketplace" || key === "hunter_credit" ? (
         <div className="flex justify-center gap-2 mb-4">
           {["24h", "7d", "30d"].map((time) => (
             <button
@@ -125,7 +107,7 @@ export default function TrendingAssetsSectionMobile() {
             </button>
           ))}
         </div>
-      )}
+      ) : null}
 
       <h3 className="text-white text-sm font-orbitron mb-2">{title}</h3>
 
@@ -159,11 +141,7 @@ export default function TrendingAssetsSectionMobile() {
                 ))}
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-              <XAxis
-                dataKey="label"
-                stroke="#aaa"
-                fontSize={11}
-              />
+              <XAxis dataKey="label" stroke="#aaa" fontSize={11} />
               <YAxis stroke="#aaa" fontSize={11} />
               <Tooltip
                 isAnimationActive={false}
