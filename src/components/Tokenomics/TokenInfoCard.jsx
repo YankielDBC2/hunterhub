@@ -14,6 +14,7 @@ import { useSpring, animated } from "react-spring";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import CustomTooltip from "./CustomTooltip";
+import "./TokenInfoCard.css"; // Asegúrate de tener esta línea
 
 const formatNumber = (num) => {
   if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(2)}M`;
@@ -62,12 +63,12 @@ const TokenInfoCard = () => {
 
   return (
     <div className="w-full px-4 py-6 flex justify-center">
-      <div className="bg-[rgba(12, 12, 56, 0.8)] backdrop-blur-sm rounded-2xl p-6 min-w-[1000px] max-w-[1200px] ">
-        <h2 className="text-cyan-400 font-bold text-2xl mb-4 text-center">
+      <div className="bg-[rgba(12, 12, 56, 0.8)] backdrop-blur-sm rounded-2xl p-6 min-w-[1000px] max-w-[1200px]">
+        <h2 className="token-title">
           {t("tokenomics.title")}
         </h2>
 
-        <div className="text-white text-lg mb-6 text-left space-y-1">
+        <div className="token-info-text">
           <p>
             <strong>{t("tokenomics.name")}:</strong> Hunter Cash
           </p>

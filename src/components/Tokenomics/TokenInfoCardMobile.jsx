@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ResponsiveContainer,
   BarChart,
@@ -14,8 +14,8 @@ import { useSpring, animated } from "react-spring";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import CustomTooltip from "./CustomTooltip";
+import "./TokenInfoCardMobile.css";
 
-// Cambiar tamaño de las barras
 const formatNumber = (num) => {
   if (num >= 1_000_000) return `${(num / 1_000_000).toFixed(2)}M`;
   if (num >= 1_000) return `${(num / 1_000).toFixed(1)}K`;
@@ -31,9 +31,9 @@ const AnimatedLabel = ({ x, y, value, fill }) => {
   return (
     <animated.text
       x={x}
-      y={y - 10}
+      y={y - 8}
       fill={fill}
-      fontSize={14}
+      fontSize={12}
       textAnchor="middle"
     >
       {props.val.to((v) => formatNumber(v))}
@@ -54,64 +54,53 @@ const TokenInfoCardMobile = () => {
 
   const data = [];
   for (let i = 0; i < 10; i++) {
-    const year = `Year ${i + 1}`;
+    const year = `Y${i + 1}`;
     const mined = i === 0 ? minedYear1 : 0;
     const expected = i === 0 ? parseFloat(expectedYear1) : 0;
     data.push({ year, planned, expected, mined });
     planned *= 0.91;
   }
 
-  // Estado para controlar la visibilidad del tooltip
-  const [activeBar, setActiveBar] = useState(null);
-
-  // Función para manejar el clic en las barras
-  const handleBarClick = (data) => {
-    setActiveBar(data);
-  };
-
   return (
     <div className="w-full px-4 py-6 flex justify-center">
-      <div className="token-info-card-mobile">
-        <h2 className="token-title-mobile">{t("tokenomics.title")}</h2>
+      <div className="rounded-2xl p-4 w-full max-w-[95%] bg-[rgba(255,255,255,0.03)] backdrop-blur-md">
+        <h2 className="text-[24px] text-center mb-5 text-[#00f0ff] font-[Orbitron] drop-shadow-[0_0_8px_#00f0ff88]">
+          {t("tokenomics.title")}
+        </h2>
 
-        <div className="token-info-list-mobile">
+        <div className="text-white text-[15px] leading-[1.6] px-1 mb-6 font-sans">
           <p>
-            <strong className="font-bold">{t("tokenomics.name")}:</strong> Hunter Cash
+            <strong>{t("tokenomics.name")}:</strong> Hunter Cash
           </p>
           <p>
-            <strong className="font-bold">{t("tokenomics.symbol")}:</strong> $HCASH
+            <strong>{t("tokenomics.symbol")}:</strong> $HCASH
           </p>
           <p>
-            <strong className="font-bold">{t("tokenomics.maxSupply")}:</strong> 1,000,000,000
+            <strong>{t("tokenomics.maxSupply")}:</strong> 1,000,000,000
           </p>
-          <p style={{ fontSize: "12px" }}>
-            <span style={{ fontWeight: "normal" }}>
-              {t("tokenomics.cap")}:
-            </span>{" "}
+          <p className="text-[13px] opacity-90 leading-snug mt-2">
+            <span className="font-normal">{t("tokenomics.cap")}:</span>{" "}
             {t("tokenomics.capDetail")}
           </p>
         </div>
 
-        {/* Asegúrate de que el ResponsiveContainer tenga el tamaño correcto */}
         <div className="token-chart-mobile">
-          <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={data} margin={{ top: 20, right: 30, left: 10, bottom: 30 }}>
+          <ResponsiveContainer width={600} height={300}>
+            <BarChart data={data} margin={{ top: 20, right: 20, left: 5, bottom: 30 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#444" />
               <XAxis dataKey="year" tick={{ fill: "#fff", fontSize: 12 }} />
               <YAxis
                 tickFormatter={formatNumber}
-                domain={[0, 15_000_000]} // Reducir el rango de las barras
+                domain={[0, 15_000_000]}
                 tick={{ fill: "#fff", fontSize: 12 }}
               />
               <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
-              <Legend wrapperStyle={{ color: "#fff", fontSize: 12, paddingTop: "10px" }} />
+              <Legend wrapperStyle={{ fontSize: 12, color: "#fff", paddingTop: 10 }} />
 
-              {/* Eliminar el onClick temporalmente para ver si el gráfico se renderiza */}
               <Bar
                 dataKey="expected"
                 fill="#da7ddf"
                 name={t("tokenomics.expected")}
-                activeBar={{ fill: "#f191ff", radius: [4, 4, 0, 0] }}
               >
                 <LabelList dataKey="expected" content={(props) => <AnimatedLabel {...props} fill="#da7ddf" />} />
               </Bar>
@@ -119,7 +108,6 @@ const TokenInfoCardMobile = () => {
                 dataKey="mined"
                 fill="#5dffcb"
                 name={t("tokenomics.mined")}
-                activeBar={{ fill: "#88ffe0", radius: [4, 4, 0, 0] }}
               >
                 <LabelList dataKey="mined" content={(props) => <AnimatedLabel {...props} fill="#5dffcb" />} />
               </Bar>
@@ -127,7 +115,6 @@ const TokenInfoCardMobile = () => {
                 dataKey="planned"
                 fill="#03e9f4"
                 name={t("tokenomics.planned")}
-                activeBar={{ fill: "#51faff", radius: [4, 4, 0, 0] }}
               >
                 <LabelList dataKey="planned" content={(props) => <AnimatedLabel {...props} fill="#03e9f4" />} />
               </Bar>

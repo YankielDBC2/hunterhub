@@ -136,7 +136,6 @@ const App = () => {
         <TokenomicsShipMobile />
         <TokenInfoCardMobile />
       </div>
-      
       {/* Adventure Section */}
       <AdventureSection />
 
