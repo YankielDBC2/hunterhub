@@ -33,42 +33,33 @@ export default function TrendingAssetsSectionMobile() {
   const [marketplaceData, setMarketplaceData] = useState(defaultMarketplaceData);
   const { t } = useTranslation();
 
-  const updateMarketplaceData = (data) => {
-    const newPoint = {
-      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      fees: parseFloat(data.fee.toFixed(2)),
-      listed: data.listed,
-      sold: data.sold,
-    };
-    const newData = [...marketplaceData.slice(1), newPoint];
-    setMarketplaceData(newData);
-  };
-
   useEffect(() => {
     async function fetchMarketplaceStats() {
       const response = await getMarketplaceStats(timeFilterMap[timeFilter]);
-      if (response) {
-        updateMarketplaceData(response);
-      }
+      if (!response || !Array.isArray(response)) return;
+
+      const formatted = response.map((entry) => {
+        const dateObj = new Date(entry.interval || entry.time);
+        return {
+          time:
+            timeFilter === "24h"
+              ? dateObj.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }) // HH:mm
+              : dateObj.toISOString(), // use ISO for later parsing
+          fees: entry.fees,
+          listed: entry.listed,
+          sold: entry.sold,
+        };
+      });
+
+      setMarketplaceData(formatted);
     }
+
     fetchMarketplaceStats();
   }, [timeFilter]);
 
   const stats = {
-    hunter_credit: [
-      { time: "08:00", burned: 1.5, circulating: 1.0, media_value: 0.5 },
-      { time: "10:00", burned: 1.7, circulating: 0.8, media_value: 0.9 },
-      { time: "12:00", burned: 0.3, circulating: 0.6, media_value: 1.2 },
-      { time: "14:00", burned: 0.9, circulating: 1.1, media_value: 1.4 },
-      { time: "16:00", burned: 1.6, circulating: 0.9, media_value: 1.1 },
-    ],
-    store: [
-      { time: "08:00", hcash: 1.5, users: 1.0, transactions: 0.5 },
-      { time: "10:00", hcash: 1.7, users: 0.8, transactions: 0.9 },
-      { time: "12:00", hcash: 0.3, users: 0.6, transactions: 1.2 },
-      { time: "14:00", hcash: 0.9, users: 1.1, transactions: 1.4 },
-      { time: "16:00", hcash: 1.6, users: 0.9, transactions: 1.1 },
-    ],
+    hunter_credit: defaultMarketplaceData,
+    store: defaultMarketplaceData,
   };
 
   const charts = [
@@ -94,7 +85,7 @@ export default function TrendingAssetsSectionMobile() {
       key: "store",
       data: stats.store,
       areas: [
-        { key: "hcash", color: "#ffaa00", label: "hunter_credit" },
+        { key: "hcash", color: "#ffaa00" },
         { key: "users", color: "#3399ff" },
         { key: "transactions", color: "#33ff66" },
       ],
@@ -108,7 +99,6 @@ export default function TrendingAssetsSectionMobile() {
   const title = t(`trending.charts.${key}`) || key;
   const prevName = t(`trending.charts.${charts[(current - 1 + charts.length) % charts.length].key}`);
   const nextName = t(`trending.charts.${charts[(current + 1) % charts.length].key}`);
-
   const translatedTitle = t("trending.title") || "Trending Assets";
   const titleParts = translatedTitle.split(" ");
 
@@ -164,21 +154,35 @@ export default function TrendingAssetsSectionMobile() {
                 ))}
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-              <XAxis dataKey="time" stroke="#aaa" fontSize={11} />
+              <XAxis
+                dataKey="time"
+                stroke="#aaa"
+                fontSize={11}
+                tickFormatter={(value) => {
+                  if (timeFilter === "24h") return value;
+                  const date = new Date(value);
+                  return `${date.getDate()}/${date.getMonth() + 1}`;
+                }}
+              />
               <YAxis stroke="#aaa" fontSize={11} />
               <Tooltip
-                wrapperStyle={{ zIndex: 50 }}
                 isAnimationActive={false}
-                cursor={{ stroke: "#888", strokeDasharray: "3 3" }}
                 content={({ active, payload, label }) =>
                   active && payload ? (
-                    <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
+                    <div className="bg-black/80 backdrop-blur-md border border-cyan-500/30 rounded-lg p-3 shadow-xl text-sm text-white font-mono space-y-1">
+                      <div className="text-cyan-300">
+                        {new Date(label).toLocaleString("en-GB")}
+                      </div>
                       {payload.map((entry, i) => (
-                        <div key={i} style={{ color: entry.stroke }}>
-                          {entry.name}: {entry.value}
+                        <div key={i} className="flex justify-between text-xs">
+                          <span style={{ color: entry.stroke }}>{entry.name}</span>
+                          <span className="text-white">
+                            {typeof entry.value === "number"
+                              ? entry.value.toFixed(1)
+                              : entry.value}
+                          </span>
                         </div>
                       ))}
-                      <div className="text-gray-400 mt-1 text-xs">{label}</div>
                     </div>
                   ) : null
                 }

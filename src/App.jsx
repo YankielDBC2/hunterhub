@@ -27,6 +27,7 @@ import TrendingAssetsSection from './components/TrendingAssetsSection'
 import FloatingObjects from './components/FloatingObjects'
 import HcashAboutSection from "./components/HcashAboutSection"
 import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
+import TokenInfoCard from './components/Tokenomics/TokenInfoCard' // ⬅️ nuevo componente
 
 // 🔧 Secciones comunes
 import FlyingShip from './components/FlyingShip'
@@ -60,7 +61,6 @@ const App = () => {
       <div className="hidden lg:block">
         <Header />
       </div>
-
 
       {/* Game Showcase */}
       <div className="hidden lg:block">
@@ -124,9 +124,11 @@ const App = () => {
       {/* Tokenomics */}
       <div className="hidden lg:block">
         <TokenomicsShip />
+        <TokenInfoCard />
       </div>
       <div className="lg:hidden">
         <TokenomicsShipMobile />
+        <TokenInfoCard />
       </div>
     </div>
   )

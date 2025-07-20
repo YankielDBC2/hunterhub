@@ -14,13 +14,7 @@ import { getMarketplaceStats } from "@/api/getMarketplaceStats";
 export default function TrendingAssetsSection() {
   const { t } = useTranslation();
   const [timeFilter, setTimeFilter] = useState("24h");
-  const [marketplaceData, setMarketplaceData] = useState([
-    { time: "08:00", fees: 1.5, listed: 1.0, sold: 0.5 },
-    { time: "10:00", fees: 1.7, listed: 0.8, sold: 0.9 },
-    { time: "12:00", fees: 0.3, listed: 0.6, sold: 1.2 },
-    { time: "14:00", fees: 0.9, listed: 1.1, sold: 1.4 },
-    { time: "16:00", fees: 1.6, listed: 0.9, sold: 1.1 },
-  ]);
+  const [marketplaceData, setMarketplaceData] = useState([]);
 
   const stats = {
     hunter_credit: [
@@ -48,18 +42,8 @@ export default function TrendingAssetsSection() {
   useEffect(() => {
     async function fetchMarketplaceStats() {
       const response = await getMarketplaceStats(timeFilterMap[timeFilter]);
-      if (response) {
-        const newPoint = {
-          time: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          fees: parseFloat(response.fee.toFixed(2)),
-          listed: response.listed,
-          sold: response.sold,
-        };
-        const newData = [...marketplaceData.slice(1), newPoint];
-        setMarketplaceData(newData);
+      if (response.length > 0) {
+        setMarketplaceData(response);
       }
     }
     fetchMarketplaceStats();
@@ -166,16 +150,8 @@ export default function TrendingAssetsSection() {
                       x2="0"
                       y2="1"
                     >
-                      <stop
-                        offset="5%"
-                        stopColor={color}
-                        stopOpacity={0.6}
-                      />
-                      <stop
-                        offset="95%"
-                        stopColor={color}
-                        stopOpacity={0}
-                      />
+                      <stop offset="5%" stopColor={color} stopOpacity={0.6} />
+                      <stop offset="95%" stopColor={color} stopOpacity={0} />
                     </linearGradient>
                   ))}
                 </defs>
@@ -183,7 +159,7 @@ export default function TrendingAssetsSection() {
                   strokeDasharray="3 3"
                   stroke="rgba(255,255,255,0.1)"
                 />
-                <XAxis dataKey="time" stroke="#aaa" fontSize={11} />
+                <XAxis dataKey="label" stroke="#aaa" fontSize={11} />
                 <YAxis stroke="#aaa" fontSize={11} />
                 <Tooltip
                   wrapperStyle={{ zIndex: 50 }}

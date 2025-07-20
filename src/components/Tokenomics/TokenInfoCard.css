@@ -1,0 +1,30 @@
+.token-info-card {
+  font-family: 'Orbitron', sans-serif;
+  border: 2px solid #00f0ff;
+  border-radius: 16px;
+  background: rgba(13, 22, 32, 0.8);
+  padding: 24px;
+  margin: 40px auto;
+  max-width: 720px;
+  color: #fff;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.2);
+}
+
+.token-title {
+  font-size: 24px;
+  color: #00f0ff;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 8px #00f0ff88;
+}
+
+.token-info-list {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.token-info-list li {
+  margin-bottom: 12px;
+}

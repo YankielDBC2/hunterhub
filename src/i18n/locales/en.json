@@ -1,12 +1,17 @@
 {
-"mvp_assets": {
-  "title": "MVP Assets",
-  "tooltip": {
-    "supply": "This represents the total supply available of this item across the ecosystem.",
-    "value": "This is the estimated value of the asset based on recent marketplace activity.",
-    "image": "Tap to view a quick description of the item."
-  }
-},
+"tokenomics": {
+  "title": "HASH Allocation",
+  "name": "Token Name",
+  "symbol": "Symbol",
+  "maxSupply": "Max Supply",
+  "cap": "Annual Mining Cap",
+  "capDetail": "9% annually (90M), decreasing each year. Unused portion rolls over as backup for next year.",
+  "planned": "Planned",
+  "expected": "Expected",
+  "mined": "Mined"
+
+}
+,
 
   "top_players": {
     "title": "Meet Our <span class='text-red-500'>Top Players</span>",
@@ -20,6 +25,7 @@
     "medal_elite3": "⚡ Elite Player",
     "medal_veteran1": "🔥 Veteran Champion"
   },
+
 "about_hcash": {
   "about": "About",
   "hcash_description": "$HCASH is the core currency of the project — fully player-driven...",
