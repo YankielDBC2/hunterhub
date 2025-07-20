@@ -5,7 +5,6 @@ export default function Footer() {
     <footer
       className="relative text-white py-12 bg-[#181622] overflow-hidden"
       style={{
-        backgroundImage: `url('/images/footer-bg.jpg')`, // opcional
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

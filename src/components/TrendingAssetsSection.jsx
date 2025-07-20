@@ -16,17 +16,19 @@ export default function TrendingAssetsSection() {
   const { t } = useTranslation();
   const [timeFilter, setTimeFilter] = useState("24h");
   const [marketplaceData, setMarketplaceData] = useState([]);
-  const [hunterCreditData, setHunterCreditData] = useState([]);
+  const [hcreditData, setHcreditData] = useState([]);
 
-  const stats = {
-    store: [
-      { time: "08:00", hcash: 1.5, users: 1.0, transactions: 0.5 },
-      { time: "10:00", hcash: 1.7, users: 0.8, transactions: 0.9 },
-      { time: "12:00", hcash: 0.3, users: 0.6, transactions: 1.2 },
-      { time: "14:00", hcash: 0.9, users: 1.1, transactions: 1.4 },
-      { time: "16:00", hcash: 1.6, users: 0.9, transactions: 1.1 },
-    ],
-  };
+  const [activeKeys, setActiveKeys] = useState({
+    burned: true,
+    circulating: true,
+    media_value: true,
+    fees: true,
+    listed: true,
+    sold: true,
+    hcash: true,
+    users: true,
+    transactions: true,
+  });
 
   const timeFilterMap = {
     "24h": "today",
@@ -35,24 +37,20 @@ export default function TrendingAssetsSection() {
   };
 
   useEffect(() => {
-    async function fetchMarketplaceStats() {
-      const response = await getMarketplaceStats(timeFilterMap[timeFilter]);
-      if (response.length > 0) {
-        setMarketplaceData(response);
-      }
+    async function fetchData() {
+      const [marketRes, hcreditRes] = await Promise.all([
+        getMarketplaceStats(timeFilterMap[timeFilter]),
+        getHcreditStats(timeFilterMap[timeFilter]),
+      ]);
+      if (marketRes.length > 0) setMarketplaceData(marketRes);
+      if (hcreditRes.length > 0) setHcreditData(hcreditRes);
     }
-    fetchMarketplaceStats();
+    fetchData();
   }, [timeFilter]);
 
-  useEffect(() => {
-    async function fetchHcreditStats() {
-      const response = await getHcreditStats(timeFilterMap[timeFilter]);
-      if (response.length > 0) {
-        setHunterCreditData(response);
-      }
-    }
-    fetchHcreditStats();
-  }, [timeFilter]);
+  const toggleKey = (key) => {
+    setActiveKeys((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const chartTitles = [
     {
@@ -63,7 +61,7 @@ export default function TrendingAssetsSection() {
           <span className="text-white"> - HCREDIT</span>
         </>
       ),
-      data: hunterCreditData,
+      data: hcreditData,
       areas: [
         { key: "burned", color: "#FF0000" },
         { key: "circulating", color: "#177DDC" },
@@ -85,33 +83,10 @@ export default function TrendingAssetsSection() {
         { key: "sold", color: "#02FD2A" },
       ],
     },
-    {
-      key: "store",
-      label: (
-        <>
-          <span className="text-red-500">Store</span>
-          <span className="text-white"> HUB</span>
-        </>
-      ),
-      data: stats.store,
-      areas: [
-        { key: "hcash", color: "#ffaa00" },
-        { key: "users", color: "#3399ff" },
-        { key: "transactions", color: "#33ff66" },
-      ],
-    },
   ];
 
   return (
     <section className="hidden lg:block px-8 py-12 text-white">
-      <div className="flex justify-center gap-12 mb-6">
-        {chartTitles.map((title, idx) => (
-          <h3 key={idx} className="text-sm font-orbitron text-center">
-            {title.label}
-          </h3>
-        ))}
-      </div>
-
       <div className="flex justify-center gap-4 mb-8">
         {["24h", "7d", "30d"].map((time) => (
           <button
@@ -129,34 +104,57 @@ export default function TrendingAssetsSection() {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 gap-8">
         {chartTitles.map(({ key, label, data, areas }) => (
           <div key={key} className="w-full">
+            <h3 className="text-sm font-orbitron text-center mb-3">{label}</h3>
+
             <div className="mb-3 flex justify-center gap-3 text-xs font-semibold">
               {areas.map(({ key: areaKey, color }) => (
-                <div key={areaKey} className="flex items-center gap-1">
+                <div
+                  key={areaKey}
+                  className="flex items-center gap-1 cursor-pointer"
+                  onClick={() => toggleKey(areaKey)}
+                >
                   <span
                     className="w-3 h-3 rounded-full inline-block"
-                    style={{ backgroundColor: color }}
+                    style={{
+                      backgroundColor: activeKeys[areaKey] ? color : "#444",
+                    }}
                   />
-                  <span>{t(`trending.charts.${areaKey}`)}</span>
+                  <span
+                    className={
+                      activeKeys[areaKey] ? "" : "opacity-40 line-through"
+                    }
+                  >
+                    {t(`trending.charts.${areaKey}`)}
+                  </span>
                 </div>
               ))}
             </div>
+
             <ResponsiveContainer width="100%" height={220}>
               <AreaChart data={data}>
                 <defs>
-                  {areas.map(({ key, color }) => (
+                  {areas.map(({ key: areaKey, color }) => (
                     <linearGradient
-                      key={key}
-                      id={`gradient-${key}`}
+                      key={areaKey}
+                      id={`gradient-${areaKey}`}
                       x1="0"
                       y1="0"
                       x2="0"
                       y2="1"
                     >
-                      <stop offset="5%" stopColor={color} stopOpacity={0.6} />
-                      <stop offset="95%" stopColor={color} stopOpacity={0} />
+                      <stop
+                        offset="5%"
+                        stopColor={color}
+                        stopOpacity={0.6}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor={color}
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   ))}
                 </defs>
@@ -185,19 +183,22 @@ export default function TrendingAssetsSection() {
                     ) : null
                   }
                 />
-                {areas.map(({ key: areaKey, color }) => (
-                  <Area
-                    key={areaKey}
-                    type="monotone"
-                    dataKey={areaKey}
-                    stroke={color}
-                    fill={`url(#gradient-${areaKey})`}
-                    strokeWidth={2.5}
-                    dot={{ r: 3 }}
-                    activeDot={{ r: 6 }}
-                    name={t(`trending.charts.${areaKey}`)}
-                  />
-                ))}
+                {areas.map(({ key: areaKey, color }) =>
+                  activeKeys[areaKey] ? (
+                    <Area
+                      key={areaKey}
+                      type="monotone"
+                      connectNulls={true}
+                      dataKey={areaKey}
+                      stroke={color}
+                      fill={`url(#gradient-${areaKey})`}
+                      strokeWidth={2.5}
+                      dot={{ r: 3 }}
+                      activeDot={{ r: 6 }}
+                      name={t(`trending.charts.${areaKey}`)}
+                    />
+                  ) : null
+                )}
               </AreaChart>
             </ResponsiveContainer>
           </div>

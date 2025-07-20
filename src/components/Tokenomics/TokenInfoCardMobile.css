@@ -1,0 +1,55 @@
+/* Estilo general para la tarjeta de información de token (móvil) */
+.token-info-card-mobile {
+  font-family: 'Orbitron', sans-serif;
+  background: rgba(12, 12, 56, 0.8);
+  backdrop-blur: sm;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 24px auto;
+  max-width: 100%;
+  width: 100%;
+  box-shadow: none;  /* Eliminamos el neón */
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Título en la versión móvil */
+.token-title-mobile {
+  font-size: 1.5rem;
+  color: #00f0ff;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 8px #00f0ff88;
+}
+
+/* Información de token (texto en móvil) */
+.token-info-list-mobile {
+  list-style: none;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.token-info-list-mobile li {
+  margin-bottom: 12px;
+}
+
+.token-info-list-mobile strong {
+  font-weight: bold; /* Negrita para 'Symbol', 'Max Supply', 'Token Name' */
+}
+
+.token-info-list-mobile p {
+  font-size: 12px; /* Tamaño de texto de 12px */
+}
+
+/* Estilo para la gráfica móvil */
+.token-chart-mobile {
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Ocultar barra de desplazamiento */
+}
+
+.token-chart-mobile::-webkit-scrollbar {
+  display: none; /* Ocultar scrollbar en Webkit */
+}

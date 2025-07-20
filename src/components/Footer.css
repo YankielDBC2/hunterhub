@@ -13,9 +13,3 @@
   }
 }
 
-.smoke {
-  background-image: url('/images/smoke.png'); /* Asegúrate de tener esta imagen */
-  background-repeat: repeat;
-  background-size: 400px;
-  animation: smokeMove 45s ease-in-out infinite;
-}

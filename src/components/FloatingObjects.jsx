@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const allImages = [
   { src: '/images/Techpass.png', size: 70 },
@@ -17,10 +17,10 @@ const FloatingObjects = () => {
   const objects = useRef([]);
   const velocities = useRef([]);
   const rotationAngles = useRef([]);
-  const opacities = useRef([]);
   const timers = useRef([]);
   const scaleFactors = useRef([]);
   const scaleDirections = useRef([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   const generatePosition = (width, height, others, size) => {
     let tries = 0;
@@ -62,7 +62,6 @@ const FloatingObjects = () => {
     };
 
     rotationAngles.current[index] = Math.random() * 360;
-    opacities.current[index] = 0;
     scaleFactors.current[index] = 1;
     scaleDirections.current[index] = Math.random() > 0.5 ? 1 : -1;
 
@@ -72,11 +71,26 @@ const FloatingObjects = () => {
       fadingIn: true,
     };
 
-    // Fade in
     el.style.opacity = '0.7';
   };
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    const target = document.getElementById('TokenInfoCard');
+    if (target) observer.observe(target);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     const activeCount = MAX_FLOATING;
     for (let i = 0; i < activeCount; i++) {
       spawnNewImage(i, objects.current[i]);
@@ -92,7 +106,6 @@ const FloatingObjects = () => {
         const obj = velocities.current[index];
         const timer = timers.current[index];
 
-        // Movimiento
         obj.x += obj.dx;
         obj.y += obj.dy;
         rotationAngles.current[index] += obj.rotSpeed;
@@ -100,8 +113,6 @@ const FloatingObjects = () => {
         if (obj.x <= 0 || obj.x >= width - el.offsetWidth) obj.dx *= -1;
         if (obj.y <= 0 || obj.y >= height - el.offsetHeight) obj.dy *= -1;
 
-        // Escala suave entre 0.85 y 1
-        const scale = scaleFactors.current[index];
         const direction = scaleDirections.current[index];
         scaleFactors.current[index] += 0.0001 * direction;
         if (scaleFactors.current[index] > 1) {
@@ -112,7 +123,6 @@ const FloatingObjects = () => {
           scaleDirections.current[index] = 1;
         }
 
-        // Opacidad y reaparición
         if (!timer.fadingOut && !timer.fadingIn) {
           timer.timeLeft -= 16;
           if (timer.timeLeft <= 2000) {
@@ -131,10 +141,12 @@ const FloatingObjects = () => {
     };
 
     animate();
-  }, []);
+  }, [isVisible]);
+
+  if (!isVisible) return null;
 
   return (
-    <div ref={containerRef} className="pointer-events-none fixed inset-0 z-0">
+    <div ref={containerRef} className="pointer-events-none fixed inset-0 z-[-10]">
       {[...Array(MAX_FLOATING)].map((_, idx) => (
         <img
           key={idx}
@@ -149,7 +161,6 @@ const FloatingObjects = () => {
             transform: 'translate(0px, 0px) rotate(0deg) scale(1)',
             transition: 'opacity 1.5s ease',
             willChange: 'transform, opacity',
-            zIndex: 1,
           }}
         />
       ))}

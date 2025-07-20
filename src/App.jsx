@@ -10,11 +10,8 @@ import SelfEconomyMobile from './components/Mobile/SelfEconomyMobile'
 import TrendingAssetsSectionMobile from './components/Mobile/TrendingAssetsSectionMobile'
 import FloatingObjectsMobile from './components/Mobile/FloatingObjectsMobile'
 import HcashAboutSectionMobile from "./components/Mobile/HcashAboutSectionMobile"
-import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipMobile';
-
-// Componente Tablets
-import GameShowcaseTablet from './components/Tablet/GameShowcaseTablet'
-import HeaderTablet from './components/Tablet/HeaderTablet' 
+import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipMobile'
+import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'  // Móvil
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -27,20 +24,27 @@ import TrendingAssetsSection from './components/TrendingAssetsSection'
 import FloatingObjects from './components/FloatingObjects'
 import HcashAboutSection from "./components/HcashAboutSection"
 import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
-import TokenInfoCard from './components/Tokenomics/TokenInfoCard' // ⬅️ nuevo componente
+import TokenInfoCard from './components/Tokenomics/TokenInfoCard'  // Escritorio
 
-// 🔧 Secciones comunes
+// 🖥️ Componentes Tablet
+import GameShowcaseTablet from './components/Tablet/GameShowcaseTablet'
+import HeaderTablet from './components/Tablet/HeaderTablet'
+
+// 🌌 Fondo y efectos
 import FlyingShip from './components/FlyingShip'
 import StarBackground from './components/StarBackground'
+import AdventureSection from "./components/AdventureSection"
+
+// 🦶 Footer
+import Footer from './components/Footer'
+import './components/Footer.css' // Asegúrate que la ruta sea correcta
 
 const App = () => {
   return (
     <div className="min-h-screen text-white font-sans bg-gradient-to-b from-[#111B28] via-[#0D1620] to-[#080D15] relative overflow-hidden">
 
-      {/* Efectos visuales de fondo */}
+      {/* Efectos visuales */}
       <StarBackground />
-
-      {/* Floating Objects */}
       <div className="hidden lg:block">
         <FloatingObjects />
       </div>
@@ -48,7 +52,7 @@ const App = () => {
         <FloatingObjectsMobile />
       </div>
 
-      {/* Flying Ship */}
+      {/* Nave voladora */}
       <FlyingShip />
 
       {/* Header */}
@@ -121,15 +125,23 @@ const App = () => {
         <HcashAboutSectionMobile />
       </div>
 
-      {/* Tokenomics */}
+      {/* Tokenomics Desktop */}
       <div className="hidden lg:block">
         <TokenomicsShip />
         <TokenInfoCard />
       </div>
+
+      {/* Tokenomics Mobile */}
       <div className="lg:hidden">
         <TokenomicsShipMobile />
-        <TokenInfoCard />
+        <TokenInfoCardMobile />
       </div>
+      
+      {/* Adventure Section */}
+      <AdventureSection />
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
