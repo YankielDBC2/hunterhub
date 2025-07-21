@@ -61,15 +61,14 @@ Landing page oficial del universo **Space Hunters Ecosystem**. Este sitio combin
 
 src/
 ├── components/
-│ ├── GameShowcaseSection.jsx
-│ ├── WhyJoin.jsx
-│ └── WhatWeAreBuilding.jsx
+│   ├── GameShowcaseSection.jsx  
+│   ├── WhyJoin.jsx  
+│   └── WhatWeAreBuilding.jsx  
 ├── assets/
-│ ├── images/
-│ └── cover_video.png
-├── App.jsx
-└── main.jsx
-
+│   ├── images/
+│   └── cover_video.png
+├── App.jsx  
+└── main.jsx  
 
 ---
 
@@ -84,19 +83,3 @@ npm run dev
 
 # 3. Generar build de producción
 npm run build
-
-
-💡 Backlog / Mejoras Futuras
-🌈 Fondo RGB con shader reactivo en tiempo real
-
-🌫️ Niebla dinámica en canvas con noise
-
-📱 Menú mobile tipo drawer completo
-
-🎮 Miniaturas animadas para clases del juego
-
-🧠 Integración de lore y NFTs en tiempo real
-
-
-🛡️ Licencia
-MIT © Space Hunters Studio
