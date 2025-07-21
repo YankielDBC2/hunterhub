@@ -11,12 +11,14 @@ import {
 import { useTranslation } from "react-i18next";
 import { getMarketplaceStats } from "@/api/getMarketplaceStats";
 import { getHcreditStats } from "@/api/getHcreditStats";
+import { getStoreStats } from "@/api/getStoreStats";
 
 export default function TrendingAssetsSection() {
   const { t } = useTranslation();
   const [timeFilter, setTimeFilter] = useState("24h");
   const [marketplaceData, setMarketplaceData] = useState([]);
   const [hcreditData, setHcreditData] = useState([]);
+  const [storeData, setStoreData] = useState([]);
 
   const [activeKeys, setActiveKeys] = useState({
     burned: true,
@@ -26,8 +28,8 @@ export default function TrendingAssetsSection() {
     listed: true,
     sold: true,
     hcash: true,
-    users: true,
-    transactions: true,
+    toncoin: true,
+    assets: true,
   });
 
   const timeFilterMap = {
@@ -38,12 +40,14 @@ export default function TrendingAssetsSection() {
 
   useEffect(() => {
     async function fetchData() {
-      const [marketRes, hcreditRes] = await Promise.all([
+      const [marketRes, hcreditRes, storeRes] = await Promise.all([
         getMarketplaceStats(timeFilterMap[timeFilter]),
         getHcreditStats(timeFilterMap[timeFilter]),
+        getStoreStats(timeFilterMap[timeFilter]),
       ]);
       if (marketRes.length > 0) setMarketplaceData(marketRes);
       if (hcreditRes.length > 0) setHcreditData(hcreditRes);
+      if (storeRes.length > 0) setStoreData(storeRes);
     }
     fetchData();
   }, [timeFilter]);
@@ -52,7 +56,7 @@ export default function TrendingAssetsSection() {
     setActiveKeys((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const chartTitles = [
+  const chartConfigs = [
     {
       key: "hunter_credit",
       label: (
@@ -83,11 +87,26 @@ export default function TrendingAssetsSection() {
         { key: "sold", color: "#02FD2A" },
       ],
     },
+    {
+      key: "store_hub",
+      label: (
+        <>
+          <span className="text-red-500">Store</span>
+          <span className="text-white"> HUB</span>
+        </>
+      ),
+      data: storeData,
+      areas: [
+        { key: "hcash", color: "#FF6B00" },
+        { key: "toncoin", color: "#00B2FF" },
+        { key: "assets", color: "#16FF6C" },
+      ],
+    },
   ];
 
   return (
     <section className="hidden lg:block px-8 py-12 text-white">
-      <div className="flex justify-center gap-4 mb-8">
+      <div className="flex justify-center gap-4 mb-10">
         {["24h", "7d", "30d"].map((time) => (
           <button
             key={time}
@@ -104,12 +123,12 @@ export default function TrendingAssetsSection() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
-        {chartTitles.map(({ key, label, data, areas }) => (
+      <div className="grid grid-cols-3 gap-8">
+        {chartConfigs.map(({ key, label, data, areas }) => (
           <div key={key} className="w-full">
             <h3 className="text-sm font-orbitron text-center mb-3">{label}</h3>
 
-            <div className="mb-3 flex justify-center gap-3 text-xs font-semibold">
+            <div className="mb-3 flex justify-center flex-wrap gap-3 text-xs font-semibold">
               {areas.map(({ key: areaKey, color }) => (
                 <div
                   key={areaKey}
@@ -123,9 +142,7 @@ export default function TrendingAssetsSection() {
                     }}
                   />
                   <span
-                    className={
-                      activeKeys[areaKey] ? "" : "opacity-40 line-through"
-                    }
+                    className={activeKeys[areaKey] ? "" : "opacity-40 line-through"}
                   >
                     {t(`trending.charts.${areaKey}`)}
                   </span>
@@ -133,28 +150,20 @@ export default function TrendingAssetsSection() {
               ))}
             </div>
 
-            <ResponsiveContainer width="100%" height={220}>
+            <ResponsiveContainer key={timeFilter} width="100%" height={220}>
               <AreaChart data={data}>
                 <defs>
                   {areas.map(({ key: areaKey, color }) => (
                     <linearGradient
                       key={areaKey}
-                      id={`gradient-${areaKey}`}
+                      id={`gradient-${key}-${areaKey}`}
                       x1="0"
                       y1="0"
                       x2="0"
                       y2="1"
                     >
-                      <stop
-                        offset="5%"
-                        stopColor={color}
-                        stopOpacity={0.6}
-                      />
-                      <stop
-                        offset="95%"
-                        stopColor={color}
-                        stopOpacity={0}
-                      />
+                      <stop offset="5%" stopColor={color} stopOpacity={0.6} />
+                      <stop offset="95%" stopColor={color} stopOpacity={0} />
                     </linearGradient>
                   ))}
                 </defs>
@@ -162,7 +171,13 @@ export default function TrendingAssetsSection() {
                   strokeDasharray="3 3"
                   stroke="rgba(255,255,255,0.1)"
                 />
-                <XAxis dataKey="label" stroke="#aaa" fontSize={11} />
+                <XAxis
+                  dataKey="label"
+                  stroke="#aaa"
+                  fontSize={11}
+                  angle={-40}
+                  textAnchor="end"
+                />
                 <YAxis stroke="#aaa" fontSize={11} />
                 <Tooltip
                   wrapperStyle={{ zIndex: 50 }}
@@ -173,12 +188,10 @@ export default function TrendingAssetsSection() {
                       <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
                         {payload.map((entry, i) => (
                           <div key={i} style={{ color: entry.stroke }}>
-                            {entry.name}: {entry.value}
+                            {t(`trending.charts.${Object.keys(entry.payload).find(k => entry.payload[k] === entry.value)}`)}: {entry.value}
                           </div>
                         ))}
-                        <div className="text-gray-400 mt-1 text-xs">
-                          {label}
-                        </div>
+                        <div className="text-gray-400 mt-1 text-xs">{payload?.[0]?.payload?.fullLabel}</div>
                       </div>
                     ) : null
                   }
@@ -191,10 +204,12 @@ export default function TrendingAssetsSection() {
                       connectNulls={true}
                       dataKey={areaKey}
                       stroke={color}
-                      fill={`url(#gradient-${areaKey})`}
+                      fill={`url(#gradient-${key}-${areaKey})`}
                       strokeWidth={2.5}
-                      dot={{ r: 3 }}
-                      activeDot={{ r: 6 }}
+                      dot={{ r: 2 }}
+                      activeDot={{ r: 5 }}
+                      isAnimationActive={true}
+                      animationDuration={800}
                       name={t(`trending.charts.${areaKey}`)}
                     />
                   ) : null

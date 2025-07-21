@@ -12,7 +12,7 @@ const games = [
   },
   {
     id: 'chat-adventure',
-    banner: '/images/chat-banner.jpg',
+    banner: '/images/chat-banner.mp4',
     image: '/images/chat-card.jpg'
   },
   {
@@ -86,15 +86,27 @@ export default function GameShowcaseSection() {
       {/* 🖼️ MAIN BANNER */}
       <motion.div
         key={selectedGame.id}
-        className="absolute inset-x-0 top-0 mx-auto w-full max-w-7xl h-[60vh] bg-no-repeat bg-cover z-0 shadow-lg rounded-b-3xl border-b border-white/10"
-        style={{
-          backgroundImage: `url(${selectedGame.banner})`,
-          backgroundSize: 'cover'
-        }}
+        className="absolute inset-x-0 top-0 mx-auto w-full max-w-7xl h-[60vh] z-0 shadow-lg rounded-b-3xl border-b border-white/10 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
-      />
+      >
+        {selectedGame.banner.endsWith('.mp4') ? (
+          <video
+            className="w-full h-full object-cover"
+            src={selectedGame.banner}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <div
+            className="w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url(${selectedGame.banner})` }}
+          />
+        )}
+      </motion.div>
 
       {/* 📦 CONTENT */}
       <div className="relative z-10 pt-[55vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -107,7 +107,12 @@
     "sold": "Sold",
     "store": "Store",
     "users": "Users",
-    "transactions": "Transactions"
+    "transactions": "Transactions",
+    "volume_hcash": "HCASH Vol",
+    "volume_toncoin": "TON Vol",
+    "assets": "Sales",
+    "hcash": "HCASH Volume",
+    "toncoin": "TON Volume"
   },
   "item": {
     "supply": "Supply",
