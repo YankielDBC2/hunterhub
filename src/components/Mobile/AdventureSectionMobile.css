@@ -1,0 +1,71 @@
+/* Estilo para la sección de fondo de la imagen */
+.footer-background {
+  background-image: url('/images/carreta.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  z-index: 1; /* Asegura que el footer esté encima de otros elementos */
+  padding-bottom: 100px; /* Espacio adicional debajo del footer */
+}
+
+/* Estilo para las imágenes flotantes de hojas */
+.adventure-section-mobile .leaf-mobile {
+  position: absolute;
+  left: 100vw;
+  opacity: 0.9;
+  animation-name: drift-left-mobile;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes drift-left-mobile {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(-120vw) translateY(calc(30px - 60px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.adventure-section-mobile .rotate-left {
+  animation-name: drift-left-mobile, spin-left-mobile;
+}
+
+.adventure-section-mobile .rotate-right {
+  animation-name: drift-left-mobile, spin-right-mobile;
+}
+
+@keyframes spin-left-mobile {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes spin-right-mobile {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+/* Estilo específico para la imagen de razas que aparece debajo del footer */
+.razas-image {
+  position: absolute;
+  top: calc(100% + 50px); /* Ajuste para asegurar que la imagen quede justo debajo del footer */
+  left: 10%;
+  transform: translate(-10%, -70%);
+  width: 768px;
+  height: 340px;
+  z-index: 10; /* Asegura que la imagen quede debajo del footer */
+}

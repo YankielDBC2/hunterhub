@@ -9,9 +9,11 @@ import HubCarouselSectionMobile from './components/Mobile/HubCarouselSectionMobi
 import SelfEconomyMobile from './components/Mobile/SelfEconomyMobile'
 import TrendingAssetsSectionMobile from './components/Mobile/TrendingAssetsSectionMobile'
 import FloatingObjectsMobile from './components/Mobile/FloatingObjectsMobile'
-import HcashAboutSectionMobile from "./components/Mobile/HcashAboutSectionMobile"
+import HcashAboutSectionMobile from './components/Mobile/HcashAboutSectionMobile'
 import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipMobile'
-import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'  // Móvil
+import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'
+import FooterMobile from './components/Mobile/FooterMobile'
+import AdventureSectionMobile from './components/Mobile/AdventureSectionMobile'
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -22,28 +24,28 @@ import HubCarouselSection from './components/HubCarouselSection'
 import SelfEconomy from './components/SelfEconomy'
 import TrendingAssetsSection from './components/TrendingAssetsSection'
 import FloatingObjects from './components/FloatingObjects'
-import HcashAboutSection from "./components/HcashAboutSection"
+import HcashAboutSection from './components/HcashAboutSection'
 import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
-import TokenInfoCard from './components/Tokenomics/TokenInfoCard'  // Escritorio
+import TokenInfoCard from './components/Tokenomics/TokenInfoCard'
+import Footer from './components/Footer'
+import AdventureSection from './components/AdventureSection'
 
 // 🖥️ Componentes Tablet
 import GameShowcaseTablet from './components/Tablet/GameShowcaseTablet'
 import HeaderTablet from './components/Tablet/HeaderTablet'
 
-// 🌌 Fondo y efectos
+// 🌌 Fondo y efectos generales
 import FlyingShip from './components/FlyingShip'
 import StarBackground from './components/StarBackground'
-import AdventureSection from "./components/AdventureSection"
 
-// 🦶 Footer
-import Footer from './components/Footer'
-import './components/Footer.css' // Asegúrate que la ruta sea correcta
+// 🎨 Estilos globales de Footer (desktop)
+import './components/Footer.css'
 
 const App = () => {
   return (
     <div className="min-h-screen text-white font-sans bg-gradient-to-b from-[#111B28] via-[#0D1620] to-[#080D15] relative overflow-hidden">
 
-      {/* Efectos visuales */}
+      {/* ✨ Efectos visuales globales */}
       <StarBackground />
       <div className="hidden lg:block">
         <FloatingObjects />
@@ -52,10 +54,10 @@ const App = () => {
         <FloatingObjectsMobile />
       </div>
 
-      {/* Nave voladora */}
+      {/* 🚀 Nave voladora */}
       <FlyingShip />
 
-      {/* Header */}
+      {/* 🧭 Header por dispositivo */}
       <div className="block md:hidden">
         <MobileHeader />
       </div>
@@ -66,18 +68,18 @@ const App = () => {
         <Header />
       </div>
 
-      {/* Game Showcase */}
+      {/* 🕹️ Game Showcase */}
       <div className="hidden lg:block">
         <GameShowcaseSection />
       </div>
       <div className="hidden md:block lg:hidden">
         <GameShowcaseTablet />
       </div>
-      <div className="lg:hidden">
+      <div className="block md:hidden">
         <GameShowcaseMobile />
       </div>
 
-      {/* What We Are Building */}
+      {/* 🏗️ What We Are Building */}
       <div className="hidden lg:block">
         <WhatWeAreBuilding />
       </div>
@@ -85,7 +87,7 @@ const App = () => {
         <WhatWeAreBuildingMobile />
       </div>
 
-      {/* Why Join */}
+      {/* 🧠 Why Join */}
       <div className="hidden lg:block">
         <WhyJoin />
       </div>
@@ -93,7 +95,7 @@ const App = () => {
         <WhyJoinMobile />
       </div>
 
-      {/* Hub Carousel */}
+      {/* 🌀 Hub Carousel */}
       <div className="hidden lg:block">
         <HubCarouselSection />
       </div>
@@ -101,7 +103,7 @@ const App = () => {
         <HubCarouselSectionMobile />
       </div>
 
-      {/* Self Economy */}
+      {/* 🪙 Self Economy */}
       <div className="hidden lg:block">
         <SelfEconomy />
       </div>
@@ -109,7 +111,7 @@ const App = () => {
         <SelfEconomyMobile />
       </div>
 
-      {/* Trending Assets */}
+      {/* 📊 Trending Assets */}
       <div className="hidden lg:block">
         <TrendingAssetsSection />
       </div>
@@ -117,7 +119,7 @@ const App = () => {
         <TrendingAssetsSectionMobile />
       </div>
 
-      {/* Hcash About Section */}
+      {/* 💰 Hcash About */}
       <div className="hidden lg:block">
         <HcashAboutSection />
       </div>
@@ -125,22 +127,31 @@ const App = () => {
         <HcashAboutSectionMobile />
       </div>
 
-      {/* Tokenomics Desktop */}
+      {/* 🧬 Tokenomics por dispositivo */}
       <div className="hidden lg:block">
         <TokenomicsShip />
         <TokenInfoCard />
       </div>
-
-      {/* Tokenomics Mobile */}
       <div className="lg:hidden">
         <TokenomicsShipMobile />
         <TokenInfoCardMobile />
       </div>
-      {/* Adventure Section */}
-      <AdventureSection />
 
-      {/* Footer */}
-      <Footer />
+      {/* 🌌 Sección Aventura */}
+      <div className="hidden lg:block">
+        <AdventureSection />
+      </div>
+      <div className="block lg:hidden">
+        <AdventureSectionMobile />
+      </div>
+
+      {/* 🦶 Footer por dispositivo */}
+      <div className="hidden lg:block">
+        <Footer />
+      </div>
+      <div className="lg:hidden">
+        <FooterMobile />
+      </div>
     </div>
   )
 }

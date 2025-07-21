@@ -1,11 +1,14 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import App from './App'
 import './index.css'
-import App from './App.jsx'
-import './i18n' // ⬅️ Asegúrate de importar esto ANTES del render
+import './i18n'
+import { SectionProvider } from './context/SectionContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
+    <SectionProvider>
+      <App />
+    </SectionProvider>
+  </StrictMode>
 )
