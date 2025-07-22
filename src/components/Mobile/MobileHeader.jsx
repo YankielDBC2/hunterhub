@@ -5,13 +5,13 @@ import {
   X,
   ChevronDown,
   FileText,
-  BookOpen,
   Wrench,
   Globe,
   MessageCircle,
   Send,
-  Twitter,
-  Users
+  Play,
+  Newspaper,
+  Users,
 } from 'lucide-react'
 
 const MobileHeader = () => {
@@ -128,67 +128,53 @@ const MobileHeader = () => {
         </button>
       </div>
 
-      {/* Menú flotante futurista */}
+      {/* Menú flotante */}
       {menuOpen && (
         <div
           ref={menuRef}
           className="absolute top-full right-0 mt-2 w-72 max-h-[75vh] overflow-y-auto bg-black/90 border border-white/10 py-4 px-5 text-sm rounded-2xl shadow-2xl backdrop-blur-xl z-40 space-y-5 scrollbar-thin scrollbar-thumb-white/10"
         >
+          {/* Docs */}
           <div>
             <h3 className="text-white font-semibold flex items-center gap-2 mb-2 uppercase tracking-wider text-xs">
               <FileText className="w-4 h-4 text-white" /> {t('header.docs')}
             </h3>
             <ul className="space-y-2 pl-6 text-white/90">
               <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <BookOpen size={14} /> {t('header.whitepaper')}
+                <a href="https://space-hunters-game.github.io/Guides/docs/eng/en.html" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2">
+                  <FileText size={14} /> Alpha Docs
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <BookOpen size={14} /> {t('header.lore_bible')}
-                </a>
+              <li className="flex items-center gap-2 text-white/40">
+                <FileText size={14} /> Games Guide (Soon)
               </li>
-              <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <Wrench size={14} /> {t('header.dev_notes')}
-                </a>
+              <li className="flex items-center gap-2 text-white/40">
+                <FileText size={14} /> Pitch Deck (Soon)
               </li>
             </ul>
           </div>
 
+          {/* Community */}
           <div>
             <h3 className="text-white font-semibold flex items-center gap-2 mb-2 uppercase tracking-wider text-xs">
               <Globe className="w-4 h-4 text-white" /> {t('header.community')}
             </h3>
             <ul className="space-y-2 pl-6 text-white/90">
-              <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <MessageCircle size={14} /> {t('header.discord')}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <Send size={14} /> {t('header.telegram')}
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-teal-400 flex items-center gap-2">
-                  <Twitter size={14} /> {t('header.twitter')}
-                </a>
-              </li>
+              <li><a href="https://t.me/spacehunterss" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><MessageCircle size={14} /> EN Chat</a></li>
+              <li><a href="https://t.me/shspanish" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><MessageCircle size={14} /> ES Chat</a></li>
+              <li><a href="https://t.me/spacehuntersrus" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><MessageCircle size={14} /> RU Chat</a></li>
+              <li><a href="https://t.me/spacehuntersnews" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Newspaper size={14} /> General News</a></li>
+              <li><a href="https://t.me/techgenerators" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Wrench size={14} /> Generators Channel</a></li>
+              <li><a href="https://t.me/thechatadventure" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><MessageCircle size={14} /> CHAD Channel</a></li>
+              <li><a href="https://x.com/nftspacehunterss" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Send size={14} /> Space Hunters X</a></li>
+              <li><a href="https://x.com/generatorsgame" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Send size={14} /> Tech Generators X</a></li>
+              <li><a href="https://x.com/chatadventure" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Send size={14} /> Chat Adventure X</a></li>
+              <li><a href="https://www.youtube.com/@SpaceHuntersGame" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Play size={14} /> YouTube</a></li>
+              <li><a href="https://www.linkedin.com/company/space-hunters-game" target="_blank" rel="noopener noreferrer" className="hover:text-teal-400 flex items-center gap-2"><Users size={14} /> LinkedIn</a></li>
             </ul>
           </div>
 
-          <div>
-            <a
-              href="#"
-              className="flex items-center gap-2 text-white font-semibold hover:text-teal-400 transition pl-1"
-            >
-              <Users size={16} /> {t('header.team')}
-            </a>
-          </div>
-
+          {/* Language Selector */}
           <div>
             <button
               onClick={() => setLangOpen(!langOpen)}

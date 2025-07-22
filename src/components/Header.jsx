@@ -29,18 +29,24 @@ const Dropdown = ({ title, items }) => {
       </button>
 
       {open && (
-        <div className="absolute mt-2 w-40 bg-black/80 border border-white/10 backdrop-blur-lg rounded-md shadow-lg z-50">
+        <div className="absolute mt-2 w-52 bg-black/80 border border-white/10 backdrop-blur-lg rounded-md shadow-lg z-50">
           <ul className="py-2 text-sm">
             {items.map((item, i) => (
               <li key={i}>
-                <a
-                  href={item.link}
-                  className="block px-4 py-2 hover:bg-white/10 transition"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {item.label}
-                </a>
+                {item.disabled ? (
+                  <span className="block px-4 py-2 text-white/40 cursor-not-allowed">
+                    {item.label}
+                  </span>
+                ) : (
+                  <a
+                    href={item.link}
+                    className="block px-4 py-2 hover:bg-white/10 transition"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -114,15 +120,26 @@ const Header = () => {
   }
 
   const docsItems = [
-    { label: t('header.whitepaper'), link: '#' },
-    { label: t('header.lore_bible'), link: '#' },
-    { label: t('header.dev_notes'), link: '#' }
+    {
+      label: 'Alpha Docs',
+      link: 'https://space-hunters-game.github.io/Guides/docs/eng/en.html'
+    },
+    { label: 'Games Guide (Soon)', link: '', disabled: true },
+    { label: 'Pitch Deck (Soon)', link: '', disabled: true }
   ]
 
   const communityItems = [
-    { label: t('header.discord'), link: '#' },
-    { label: t('header.telegram'), link: '#' },
-    { label: t('header.twitter'), link: '#' }
+    { label: 'EN Chat', link: 'https://t.me/spacehunterss' },
+    { label: 'ES Chat', link: 'https://t.me/shspanish' },
+    { label: 'RU Chat', link: 'https://t.me/spacehuntersrus' },
+    { label: 'General News', link: 'https://t.me/spacehuntersnews' },
+    { label: 'Generators Channel', link: 'https://t.me/techgenerators' },
+    { label: 'CHAD Channel', link: 'https://t.me/thechatadventure' },
+    { label: 'Space Hunters X', link: 'https://x.com/nftspacehunterss' },
+    { label: 'Tech Generators X', link: 'https://x.com/generatorsgame' },
+    { label: 'Chat Adventure X', link: 'https://x.com/chatadventure' },
+    { label: 'YouTube', link: 'https://www.youtube.com/@SpaceHuntersGame' },
+    { label: 'LinkedIn', link: 'https://www.linkedin.com/company/space-hunters-game' }
   ]
 
   return (
@@ -173,9 +190,6 @@ const Header = () => {
       <nav className="flex items-center space-x-6 text-sm">
         <Dropdown title={t('header.docs')} items={docsItems} />
         <Dropdown title={t('header.community')} items={communityItems} />
-        <a href="#" className="hover:text-teal-400 transition">
-          {t('header.team')}
-        </a>
         <a
           href="https://t.me/spacehuntersbot"
           target="_blank"

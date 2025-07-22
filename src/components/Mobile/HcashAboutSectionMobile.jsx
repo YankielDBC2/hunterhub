@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HCASHIcon from "/images/HCASH_02.png";
 import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
+import HcashBarChartMobile from "@/components/Mobile/HcashBarChartMobile";
 
 const fallbackStats = [
   {
@@ -140,6 +141,7 @@ export default function HcashAboutSectionMobile() {
         <div className="flex items-center justify-center gap-2">
           <img src={HCASHIcon} alt="$HCASH" className="w-6 h-6" />
           <h2 className="text-xl font-orbitron tracking-wide">
+            <HcashBarChartMobile />
             <span className="text-red-500">{t("about_hcash.about")}</span>{" "}
             <span className="text-white">$HCASH</span>
           </h2>
