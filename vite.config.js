@@ -14,7 +14,8 @@ export default defineConfig({
       '/api': {
         target: 'https://api.hunterhub.online',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        secure: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
       },
     },
   },

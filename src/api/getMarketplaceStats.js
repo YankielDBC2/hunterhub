@@ -2,14 +2,10 @@
 import { formatGraphLabels } from "@/utils/formatLabel";
 
 export async function getMarketplaceStats(filter = "today") {
-  const proxyUrl = "https://corsproxy.io/?";
-  const targetUrl = encodeURIComponent(
-    `https://api.hunterhub.online/api/public/marketplace/stats?filter=${filter}`
-  );
-  const fullUrl = `${proxyUrl}${targetUrl}`;
+  const url = `/api/public/marketplace/stats?filter=${filter}`;
 
   try {
-    const res = await fetch(fullUrl);
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     const data = json.data;
@@ -42,7 +38,6 @@ export async function getMarketplaceStats(filter = "today") {
       };
     }
 
-    // 🔁 Ordenar cronológicamente
     const sorted = Object.values(merged).sort(
       (a, b) => new Date(a.time) - new Date(b.time)
     );

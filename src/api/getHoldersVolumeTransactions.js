@@ -10,11 +10,11 @@ export const getHoldersVolumeTransactions = async () => {
 
     return {
       // BARRAS:
-      total_supply: hcash.on_chain.total_supply ?? 0,     // 334,147.46
-      mined: hcash.total ?? 0,                            // 1,759,606
-      burned: hcash.burned ?? 0,                          // 1,423,086
-      ingame_circulating: hcash.circulating ?? 0,         // 281,678
-      onchain_circulating: hcash.on_chain.circulating ?? 0, // 105,369.55
+      total_supply: hcash.on_chain.total_supply ?? 0,
+      mined: hcash.total ?? 0,
+      burned: hcash.burned ?? 0,
+      ingame_circulating: hcash.circulating ?? 0,
+      onchain_circulating: hcash.on_chain.circulating ?? 0,
 
       // TARJETAS:
       holders: hcash.on_chain.holders ?? 0,

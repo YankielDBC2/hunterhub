@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HCASHIcon from "/images/HCASH_02.png";
 import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
-import HcashBarChartMobile from "@/components/Mobile/HcashBarChartMobile";
 
 const fallbackStats = [
   {
@@ -70,7 +69,7 @@ export default function HcashAboutSectionMobile() {
         {
           label1: "about_hcash.tokens_mined_label1",
           label2: "about_hcash.tokens_mined_label2",
-          value: data.total,
+          value: data.mined,
           total: 1000000000,
           description: "about_hcash.tokens_mined_desc",
           color: "emerald",
@@ -79,22 +78,22 @@ export default function HcashAboutSectionMobile() {
           label1: "about_hcash.tokens_spent_label1",
           label2: "about_hcash.tokens_spent_label2",
           value: data.burned,
-          total: data.total,
+          total: data.mined,
           description: "about_hcash.tokens_spent_desc",
           color: "red",
         },
         {
           label1: "about_hcash.tokens_ingame_label1",
           label2: "about_hcash.tokens_ingame_label2",
-          value: data.circulating,
-          total: data.total,
+          value: data.ingame_circulating,
+          total: data.mined,
           description: "about_hcash.tokens_ingame_desc",
           color: "emerald",
         },
         {
           label1: "about_hcash.tokens_onchain_label1",
           label2: "about_hcash.tokens_onchain_label2",
-          value: data.onchainCirculating,
+          value: data.onchain_circulating,
           total: data.total_supply,
           description: "about_hcash.tokens_onchain_desc",
           color: "emerald",
@@ -141,7 +140,6 @@ export default function HcashAboutSectionMobile() {
         <div className="flex items-center justify-center gap-2">
           <img src={HCASHIcon} alt="$HCASH" className="w-6 h-6" />
           <h2 className="text-xl font-orbitron tracking-wide">
-            <HcashBarChartMobile />
             <span className="text-red-500">{t("about_hcash.about")}</span>{" "}
             <span className="text-white">$HCASH</span>
           </h2>
@@ -207,7 +205,7 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
       </div>
       <div className="text-right mt-1 mb-2">
         <span className="text-emerald-400 text-xs font-mono">
-          {value.toLocaleString()}
+          {(value ?? 0).toLocaleString()}
         </span>
       </div>
       <p className="text-xs text-gray-400 leading-relaxed text-justify px-1">
@@ -223,7 +221,7 @@ function InfoCard({ icon, label, value, color, suffix = "" }) {
       <img src={icon} alt={label} className="w-16 h-16 mb-3 animate-pulse" />
       <p className="font-orbitron text-xs text-gray-300">{label}</p>
       <p className={`text-xl font-bold mt-1 ${color}`}>
-        {value.toLocaleString()} {suffix}
+        {(value ?? 0).toLocaleString()} {suffix}
       </p>
     </div>
   );
