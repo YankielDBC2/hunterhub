@@ -1,116 +1,125 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
-  CartesianGrid,
-} from "recharts";
-
 import HCASHIcon from "/images/HCASH_02.png";
 import TonIcon from "/images/tonicon.png";
+import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
 
-const defaultStats = [
+const fallbackStats = [
   {
     label1: "about_hcash.max_supply_label1",
     label2: "about_hcash.max_supply_label2",
     value: 334147.46,
     total: 1000000000,
     description: "about_hcash.max_supply_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_mined_label1",
     label2: "about_hcash.tokens_mined_label2",
-    value: 1646888,
+    value: 1759606,
     total: 1000000000,
     description: "about_hcash.tokens_mined_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_spent_label1",
     label2: "about_hcash.tokens_spent_label2",
-    value: 1284968,
-    total: 1646888,
+    value: 1423086,
+    total: 1759606,
     description: "about_hcash.tokens_spent_desc",
-    color: "red"
+    color: "red",
   },
   {
     label1: "about_hcash.tokens_ingame_label1",
     label2: "about_hcash.tokens_ingame_label2",
-    value: 1646888 - 1284968,
-    total: 1646888,
+    value: 281678,
+    total: 1759606,
     description: "about_hcash.tokens_ingame_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_onchain_label1",
     label2: "about_hcash.tokens_onchain_label2",
-    value: 111703.68,
+    value: 105369.55,
     total: 334147.46,
     description: "about_hcash.tokens_onchain_desc",
-    color: "emerald"
-  }
+    color: "emerald",
+  },
 ];
 
 export default function HcashAboutSection() {
   const { t } = useTranslation();
-  const [stats, setStats] = useState(defaultStats);
-  const [progressValues, setProgressValues] = useState(defaultStats.map(() => 0));
+  const [stats, setStats] = useState(fallbackStats);
+  const [progressValues, setProgressValues] = useState(fallbackStats.map(() => 0));
   const [chartData, setChartData] = useState([]);
-  const [lastUpdated, setLastUpdated] = useState(null);
-  const [range, setRange] = useState("24h");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchStats = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`http://localhost:3001/api/hcash?range=${range}`);
-        const data = await res.json();
+    const fetchData = async () => {
+      const data = await getHoldersVolumeTransactions();
+      if (!data) return;
 
-        if (!data || typeof data.minted !== "number") return;
+      const updatedStats = [
+        {
+          label1: "about_hcash.max_supply_label1",
+          label2: "about_hcash.max_supply_label2",
+          value: data.total_supply,
+          total: 1000000000,
+          description: "about_hcash.max_supply_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_mined_label1",
+          label2: "about_hcash.tokens_mined_label2",
+          value: data.mined,
+          total: 1000000000,
+          description: "about_hcash.tokens_mined_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_spent_label1",
+          label2: "about_hcash.tokens_spent_label2",
+          value: data.burned,
+          total: data.mined,
+          description: "about_hcash.tokens_spent_desc",
+          color: "red",
+        },
+        {
+          label1: "about_hcash.tokens_ingame_label1",
+          label2: "about_hcash.tokens_ingame_label2",
+          value: data.ingame_circulating,
+          total: data.mined,
+          description: "about_hcash.tokens_ingame_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_onchain_label1",
+          label2: "about_hcash.tokens_onchain_label2",
+          value: data.onchain_circulating,
+          total: data.total_supply,
+          description: "about_hcash.tokens_onchain_desc",
+          color: "emerald",
+        },
+      ];
 
-        const updatedStats = [
-          { ...defaultStats[0], value: data.minted },
-          { ...defaultStats[1], value: data.mined },
-          { ...defaultStats[2], value: data.spent, total: data.mined },
-          { ...defaultStats[3], value: data.mined - data.spent, total: data.mined },
-          { ...defaultStats[4], value: data.circulatingOnChain, total: data.minted },
-        ];
+      setStats(updatedStats);
+      setProgressValues(updatedStats.map(() => 0));
 
-        setStats(updatedStats);
-        setProgressValues(updatedStats.map(() => 0));
-        setChartData(prev => [
-          {
-            time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-            holders: data.holders,
-            transactions: data.transactions,
-            users: 900
-          },
-          ...prev.slice(0, 23)
-        ]);
-        setLastUpdated(data.lastUpdated || new Date().toISOString());
-      } catch (err) {
-        console.error("Error cargando datos:", err);
-      } finally {
-        setLoading(false);
-      }
+      setChartData([
+        {
+          holders: data.holders,
+          transactions: data.transactions,
+          volume: data.volume_total,
+        },
+      ]);
     };
 
-    fetchStats();
-    const intervalId = setInterval(fetchStats, 60000);
-    return () => clearInterval(intervalId);
-  }, [range]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgressValues(prev =>
+      setProgressValues((prev) =>
         stats.map((stat, i) => {
           const current = prev[i] || 0;
           const target = stat.value;
@@ -122,21 +131,24 @@ export default function HcashAboutSection() {
     return () => clearInterval(interval);
   }, [stats]);
 
+  const latestEntry = useMemo(() => {
+    if (!chartData.length) return null;
+    return chartData[0];
+  }, [chartData]);
+
   return (
-    <section className="py-20 px-4 md:px-16 lg:px-32 relative z-10 text-white">
-      <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-7xl mx-auto">
-        <div className="text-center mb-4 flex flex-col items-center gap-4">
-          <div className="flex items-center justify-center gap-2">
+    <section className="py-20 px-4 md:px-16 lg:px-32 text-white">
+      <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center gap-3">
             <img src={HCASHIcon} alt="$HCASH" className="w-10 h-10" />
             <h2 className="text-4xl font-orbitron tracking-wide">
-              <span className="text-red-500">{t("about_hcash.about")}</span> <span className="text-white">$HCASH</span>
+              <span className="text-red-500">{t("about_hcash.about")}</span>{" "}
+              <span className="text-white">$HCASH</span>
             </h2>
           </div>
+          <p className="text-sm text-gray-400 mt-2">{t("about_hcash.hcash_description")}</p>
         </div>
-
-        <p className="text-base text-gray-300 text-center max-w-3xl mx-auto mb-10">
-          {t("about_hcash.hcash_description")}
-        </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           <div className="space-y-6">
@@ -145,67 +157,27 @@ export default function HcashAboutSection() {
             ))}
           </div>
 
-          <div className="h-[360px] relative z-10">
-            <div className="flex justify-center gap-2 mb-2">
-              {["24h", "7d", "30d", "all"].map(r => (
-                <button
-                  key={r}
-                  onClick={() => setRange(r)}
-                  className={`px-3 py-1 rounded-md border text-sm transition-colors duration-300 ${
-                    range === r ? 'bg-green-500 text-white' : 'bg-transparent border-gray-500 text-gray-300'
-                  }`}
-                >
-                  {r.toUpperCase()}
-                </button>
-              ))}
-            </div>
-            <ResponsiveContainer width="100%" height="90%">
-              <AreaChart data={chartData} isAnimationActive={false}>
-                <defs>
-                  <linearGradient id="redGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#ff4d4f" stopOpacity={0.6} />
-                    <stop offset="95%" stopColor="#ff4d4f" stopOpacity={0} />
-                  </linearGradient>
-                  <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4da6ff" stopOpacity={0.6} />
-                    <stop offset="95%" stopColor="#4da6ff" stopOpacity={0} />
-                  </linearGradient>
-                  <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#00ff88" stopOpacity={0.6} />
-                    <stop offset="95%" stopColor="#00ff88" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                <XAxis dataKey="time" stroke="#aaa" />
-                <YAxis stroke="#aaa" domain={["auto", "auto"]} />
-                <Tooltip isAnimationActive={false} content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const data = payload[0].payload;
-                    return (
-                      <div className="bg-gray-900 border border-white/10 rounded-lg p-3 shadow-lg text-sm text-white font-mono">
-                        <div><span className="text-red-400">Holders:</span> {data.holders}</div>
-                        <div><span className="text-green-400">Transactions:</span> {data.transactions}</div>
-                        <div><span className="text-blue-400">Users:</span> {data.users}</div>
-                        <div className="text-gray-400 mt-1 text-xs">{data.time}</div>
-                      </div>
-                    );
-                  }
-                  return null;
-                }} />
-                <Legend verticalAlign="top" height={36} iconType="circle" />
-                <Area type="monotone" dataKey="holders" stroke="#ff4d4f" fill="url(#redGradient)" strokeWidth={2.5} />
-                <Area type="monotone" dataKey="users" stroke="#4da6ff" fill="url(#blueGradient)" strokeWidth={2.5} />
-                <Area type="monotone" dataKey="transactions" stroke="#00ff88" fill="url(#greenGradient)" strokeWidth={2.5} />
-              </AreaChart>
-            </ResponsiveContainer>
-            {lastUpdated && (
-              <p className="text-xs text-gray-400 mt-2 text-center">
-                Last updated: {new Date(lastUpdated).toLocaleString()}
-              </p>
-            )}
-            {loading && (
-              <p className="text-xs text-yellow-400 mt-1 text-center animate-pulse">Loading data...</p>
-            )}
+          {/* ⬇️ REEMPLAZO DE GRÁFICA POR TARJETAS */}
+          <div className="flex flex-col items-center justify-center gap-6">
+            <InfoCard
+              icon="/images/holders_icon.png"
+              label={t("trending.charts.holders")}
+              value={latestEntry?.holders || 0}
+              color="text-green-400"
+            />
+            <InfoCard
+              icon="/images/transactions_icon.png"
+              label={t("trending.charts.transactions")}
+              value={latestEntry?.transactions || 0}
+              color="text-pink-400"
+            />
+            <InfoCard
+              icon="/images/volume_icon.png"
+              label={t("trending.charts.volume")}
+              value={latestEntry?.volume || 0}
+              color="text-blue-400"
+              suffix="USD"
+            />
           </div>
 
           <div className="space-y-6">
@@ -227,7 +199,7 @@ export default function HcashAboutSection() {
 
 function StatBar({ t, label1, label2, value, total, description, color, currentValue }) {
   const barColor = color === "red" ? "bg-red-500" : "bg-emerald-400";
-  const percent = (currentValue / total) * 100;
+  const percent = total > 0 ? (currentValue / total) * 100 : 0;
 
   return (
     <div>
@@ -235,16 +207,30 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
         <span className="text-red-500">{t(label1)}</span>{" "}
         <span className="text-white">{t(label2)}</span>
       </p>
-      <div className="w-full h-1.5 bg-gray-700 relative mt-1 mb-2 rounded-sm">
-        <div
-          className={`${barColor} h-1.5 rounded-sm absolute left-0 top-0 transition-all duration-300`}
-          style={{ width: `${percent}%` }}
-        />
-        <span className="text-emerald-400 text-xs absolute -top-6 right-0">
-          {value.toLocaleString()}
-        </span>
+      <div className="w-full h-1.5 bg-gray-700 mt-1 mb-2 relative rounded-sm">
+        <div className={`${barColor} h-1.5 absolute top-0 left-0 transition-all duration-300`} style={{ width: `${percent}%` }} />
+        <span className="text-emerald-400 text-xs absolute -top-6 right-0 font-mono">{value.toLocaleString()}</span>
       </div>
       <p className="text-xs text-gray-400 leading-relaxed">{t(description)}</p>
     </div>
   );
 }
+
+function InfoCard({ icon, label, value, color, suffix = "" }) {
+  return (
+    <div className="flex items-center bg-white/5 px-4 py-3 rounded-xl shadow-md w-full">
+      <img
+        src={icon}
+        alt={label}
+        className="w-14 h-14 mr-4 flex-shrink-0"
+      />
+      <div className="flex flex-col justify-center">
+        <p className="font-orbitron text-xs text-gray-300 leading-none">{label}</p>
+        <p className={`text-lg font-bold mt-1 ${color}`}>
+          {(value ?? 0).toLocaleString()} {suffix}
+        </p>
+      </div>
+    </div>
+  );
+}
+

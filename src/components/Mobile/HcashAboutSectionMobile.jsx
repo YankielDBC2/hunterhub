@@ -161,7 +161,7 @@ export default function HcashAboutSectionMobile() {
           <span className="text-white">Real-Time Stats</span>
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4 px-2">
           <InfoCard
             icon="/images/holders_icon.png"
             label={t("trending.charts.holders")}
@@ -217,12 +217,19 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
 
 function InfoCard({ icon, label, value, color, suffix = "" }) {
   return (
-    <div className="flex flex-col items-center bg-white/5 p-4 rounded-2xl shadow-lg">
-      <img src={icon} alt={label} className="w-16 h-16 mb-3 animate-pulse" />
-      <p className="font-orbitron text-xs text-gray-300">{label}</p>
-      <p className={`text-xl font-bold mt-1 ${color}`}>
-        {(value ?? 0).toLocaleString()} {suffix}
-      </p>
+    <div className="flex items-center bg-white/5 px-4 py-3 rounded-xl shadow-md w-full">
+      <img
+        src={icon}
+        alt={label}
+        className="w-14 h-14 mr-4 flex-shrink-0"
+      />
+      <div className="flex flex-col justify-center">
+        <p className="font-orbitron text-xs text-gray-300 leading-none">{label}</p>
+        <p className={`text-lg font-bold mt-1 ${color}`}>
+          {(value ?? 0).toLocaleString()} {suffix}
+        </p>
+      </div>
     </div>
   );
 }
+
