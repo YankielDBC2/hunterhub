@@ -21,17 +21,18 @@
 
 @keyframes drift-left-mobile {
   0% {
-    transform: translateX(0) translateY(0) rotate(0deg);
+    transform: translateX(0vw) translateY(0px) rotate(0deg);
     opacity: 0.2;
   }
-  90% {
+  50% {
     opacity: 0.9;
   }
   100% {
-    transform: translateX(-120vw) translateY(calc(30px - 60px)) rotate(360deg);
+    transform: translateX(-120vw) translateY(var(--offsetY)) rotate(var(--rotate));
     opacity: 0;
   }
 }
+
 
 .adventure-section-mobile .rotate-left {
   animation-name: drift-left-mobile, spin-left-mobile;

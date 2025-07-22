@@ -69,3 +69,16 @@ body *:not(input):not(textarea) {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-floating {
+  animation: floating 3s ease-in-out infinite;
+}

@@ -14,6 +14,7 @@ import TokenomicsShipMobile from './components/Mobile/Tokenomics/TokenomicsShipM
 import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'
 import FooterMobile from './components/Mobile/FooterMobile'
 import AdventureSectionMobile from './components/Mobile/AdventureSectionMobile'
+import ScrollToTopButton from './utils/ScrollToTopButton';
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -152,6 +153,8 @@ const App = () => {
       <div className="lg:hidden">
         <FooterMobile />
       </div>
+      <ScrollToTopButton />
+
     </div>
   )
 }
