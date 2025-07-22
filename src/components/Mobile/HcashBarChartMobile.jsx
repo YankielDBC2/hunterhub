@@ -18,6 +18,8 @@ export default function HcashBarChart({ data, activeKeys }) {
     { key: "transactions", color: "#00FF88" },
   ];
 
+  if (!data || data.length === 0) return null; // 👈 Previene render si aún no hay datos
+
   return (
     <ResponsiveContainer width="100%" height={260}>
       <BarChart data={data}>
@@ -42,14 +44,14 @@ export default function HcashBarChart({ data, activeKeys }) {
                   .filter(({ key }) => activeKeys[key])
                   .map(({ key, color }) => (
                     <div key={key} style={{ color }}>
-                      {t(`trending.charts.${key}`)}: {item[key]?.toLocaleString?.()}
+                      {t(`trending.charts.${key}`)}:{" "}
+                      {item[key]?.toLocaleString?.() ?? "—"}
                     </div>
                   ))}
               </div>
             );
           }}
         />
-
         {chartKeys.map(({ key, color }) =>
           activeKeys[key] ? (
             <Bar

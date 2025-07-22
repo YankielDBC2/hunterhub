@@ -28,8 +28,7 @@
 
 "about_hcash": {
   "about": "About",
-  "hcash_description": "$HCASH is the core currency of the project — fully player-driven...",
-  "buy_sell": "Buy/Sell $HCASH Here",
+  "hcash_description": "$HCASH is the core currency of the project—fully powered by players, backed by multi-strategy mechanics. With a carefully planned allocation spanning over 10 years, $HCASH becomes a valuable and exclusive asset: a true luxury within the ecosystem.",  "buy_sell": "Buy/Sell $HCASH Here",
 
   "max_supply_label1": "1B Max Supply",
   "max_supply_label2": "Minted so far:",
@@ -46,7 +45,21 @@
   "tokens_mined_desc": "$HCASH earned by players as mining rewards — split each block according to player activity and performance",
   "tokens_spent_desc": "Total $HCASH reinvested by players through upgrades, store purchases, and in-game features",
   "tokens_ingame_desc": "In-game circulating $HCASH — held by players but not yet minted on the blockchain",
-  "tokens_onchain_desc": "On-chain circulating $HCASH — includes player wallets, DEX liquidity, and the main contract balance (used for withdrawals and holding user deposits)"
+  "tokens_onchain_desc": "On-chain circulating $HCASH — includes player wallets, DEX liquidity, and the main contract balance (used for withdrawals and holding user deposits)",
+
+  "holders_label1": "Holders",
+  "holders_label2": "Wallets On-Chain",
+
+  "transactions_label1": "Transactions",
+  "transactions_label2": "On-Chain Activity",
+
+  "volume_label1": "Volume Traded",
+  "volume_label2": "On-Chain",
+
+  "holders_desc": "Number of wallets currently holding $HCASH on-chain",
+  "transactions_desc": "Total number of transactions involving $HCASH on the blockchain",
+  "volume_desc": "Amount of $HCASH traded on-chain, including liquidity pools and direct swaps"
+
 },
   "header": {
     "docs": "Docs",

@@ -1,79 +1,123 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HCASHIcon from "/images/HCASH_02.png";
-import { getHoldersVolumeTransactions } from "../../api/getHoldersVolumeTransactions";
-import HcashBarChart from "./HcashBarChartMobile";
+import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
 
-const defaultStats = [
+const fallbackStats = [
   {
     label1: "about_hcash.max_supply_label1",
     label2: "about_hcash.max_supply_label2",
     value: 334147.46,
     total: 1000000000,
     description: "about_hcash.max_supply_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_mined_label1",
     label2: "about_hcash.tokens_mined_label2",
-    value: 1646888,
+    value: 1759606,
     total: 1000000000,
     description: "about_hcash.tokens_mined_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_spent_label1",
     label2: "about_hcash.tokens_spent_label2",
-    value: 1284968,
-    total: 1646888,
+    value: 1423086,
+    total: 1759606,
     description: "about_hcash.tokens_spent_desc",
-    color: "red"
+    color: "red",
   },
   {
     label1: "about_hcash.tokens_ingame_label1",
     label2: "about_hcash.tokens_ingame_label2",
-    value: 1646888 - 1284968,
-    total: 1646888,
+    value: 281678,
+    total: 1759606,
     description: "about_hcash.tokens_ingame_desc",
-    color: "emerald"
+    color: "emerald",
   },
   {
     label1: "about_hcash.tokens_onchain_label1",
     label2: "about_hcash.tokens_onchain_label2",
-    value: 111703.68,
+    value: 105369.55,
     total: 334147.46,
     description: "about_hcash.tokens_onchain_desc",
-    color: "emerald"
-  }
+    color: "emerald",
+  },
 ];
 
 export default function HcashAboutSectionMobile() {
   const { t } = useTranslation();
-  const [stats, setStats] = useState(defaultStats);
-  const [progressValues, setProgressValues] = useState(defaultStats.map(() => 0));
+  const [stats, setStats] = useState(fallbackStats);
+  const [progressValues, setProgressValues] = useState(fallbackStats.map(() => 0));
   const [chartData, setChartData] = useState([]);
-  const [activeKeys, setActiveKeys] = useState({
-    holders: true,
-    transactions: true,
-    volume: true,
-  });
 
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const data = await getHoldersVolumeTransactions();
-        if (data && data.length > 0) setChartData(data);
-      } catch (err) {
-        console.error("Error fetching HCASH stats:", err);
-      }
+    const fetchData = async () => {
+      const data = await getHoldersVolumeTransactions();
+      if (!data) return;
+
+      const updatedStats = [
+        {
+          label1: "about_hcash.max_supply_label1",
+          label2: "about_hcash.max_supply_label2",
+          value: data.total_supply,
+          total: 1000000000,
+          description: "about_hcash.max_supply_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_mined_label1",
+          label2: "about_hcash.tokens_mined_label2",
+          value: data.total,
+          total: 1000000000,
+          description: "about_hcash.tokens_mined_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_spent_label1",
+          label2: "about_hcash.tokens_spent_label2",
+          value: data.burned,
+          total: data.total,
+          description: "about_hcash.tokens_spent_desc",
+          color: "red",
+        },
+        {
+          label1: "about_hcash.tokens_ingame_label1",
+          label2: "about_hcash.tokens_ingame_label2",
+          value: data.circulating,
+          total: data.total,
+          description: "about_hcash.tokens_ingame_desc",
+          color: "emerald",
+        },
+        {
+          label1: "about_hcash.tokens_onchain_label1",
+          label2: "about_hcash.tokens_onchain_label2",
+          value: data.onchainCirculating,
+          total: data.total_supply,
+          description: "about_hcash.tokens_onchain_desc",
+          color: "emerald",
+        },
+      ];
+
+      setStats(updatedStats);
+      setProgressValues(updatedStats.map(() => 0));
+
+      setChartData([
+        {
+          holders: data.holders,
+          transactions: data.transactions,
+          volume: data.volume_total,
+        },
+      ]);
     };
 
-    fetchStats();
+    fetchData();
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgressValues(prev =>
+      setProgressValues((prev) =>
         stats.map((stat, i) => {
           const current = prev[i] || 0;
           const target = stat.value;
@@ -85,15 +129,10 @@ export default function HcashAboutSectionMobile() {
     return () => clearInterval(interval);
   }, [stats]);
 
-  const toggleKey = (key) => {
-    setActiveKeys(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const chartKeys = [
-    { key: "holders", color: "#FF4D4F" },
-    { key: "volume", color: "#4DA6FF" },
-    { key: "transactions", color: "#00FF88" },
-  ];
+  const latestEntry = useMemo(() => {
+    if (!chartData.length) return null;
+    return chartData[chartData.length - 1];
+  }, [chartData]);
 
   return (
     <section className="py-10 px-4 text-white">
@@ -116,31 +155,33 @@ export default function HcashAboutSectionMobile() {
         ))}
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 space-y-6">
         <h3 className="text-sm font-orbitron text-center mb-3">
           <span className="text-cyan-400">HCASH</span>{" "}
-          <span className="text-white">Distribution</span>
+          <span className="text-white">Real-Time Stats</span>
         </h3>
 
-        <div className="mb-3 flex justify-center flex-wrap gap-3 text-xs font-semibold">
-          {chartKeys.map(({ key, color }) => (
-            <div
-              key={key}
-              className="flex items-center gap-1 cursor-pointer"
-              onClick={() => toggleKey(key)}
-            >
-              <span
-                className="w-3 h-3 rounded-full inline-block"
-                style={{ backgroundColor: activeKeys[key] ? color : "#444" }}
-              />
-              <span className={activeKeys[key] ? "" : "opacity-40 line-through"}>
-                {t(`trending.charts.${key}`)}
-              </span>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <InfoCard
+            icon="/images/holders_icon.png"
+            label={t("trending.charts.holders")}
+            value={latestEntry?.holders || 0}
+            color="text-green-400"
+          />
+          <InfoCard
+            icon="/images/transactions_icon.png"
+            label={t("trending.charts.transactions")}
+            value={latestEntry?.transactions || 0}
+            color="text-pink-400"
+          />
+          <InfoCard
+            icon="/images/volume_icon.png"
+            label={t("trending.charts.volume")}
+            value={latestEntry?.volume || 0}
+            color="text-blue-400"
+            suffix="HCASH"
+          />
         </div>
-
-        <HcashBarChart data={chartData} activeKeys={activeKeys} />
       </div>
     </section>
   );
@@ -148,7 +189,7 @@ export default function HcashAboutSectionMobile() {
 
 function StatBar({ t, label1, label2, value, total, description, color, currentValue }) {
   const barColor = color === "red" ? "bg-red-500" : "bg-emerald-400";
-  const percent = (currentValue / total) * 100;
+  const percent = total > 0 ? (currentValue / total) * 100 : 0;
 
   return (
     <div className="px-2">
@@ -156,22 +197,31 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
         <span className="text-red-500">{t(label1)}</span>{" "}
         <span className="text-white">{t(label2)}</span>
       </p>
-
       <div className="w-full h-3 bg-gray-700 rounded relative overflow-hidden">
         <div
           className={`${barColor} h-full rounded transition-all duration-300`}
           style={{ width: `${percent}%` }}
         />
       </div>
-
       <div className="text-right mt-1 mb-2">
         <span className="text-emerald-400 text-xs font-mono">
           {value.toLocaleString()}
         </span>
       </div>
-
       <p className="text-xs text-gray-400 leading-relaxed text-justify px-1">
         {t(description)}
+      </p>
+    </div>
+  );
+}
+
+function InfoCard({ icon, label, value, color, suffix = "" }) {
+  return (
+    <div className="flex flex-col items-center bg-white/5 p-4 rounded-2xl shadow-lg">
+      <img src={icon} alt={label} className="w-16 h-16 mb-3 animate-pulse" />
+      <p className="font-orbitron text-xs text-gray-300">{label}</p>
+      <p className={`text-xl font-bold mt-1 ${color}`}>
+        {value.toLocaleString()} {suffix}
       </p>
     </div>
   );
