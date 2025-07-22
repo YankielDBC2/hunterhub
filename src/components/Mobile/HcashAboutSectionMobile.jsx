@@ -179,7 +179,7 @@ export default function HcashAboutSectionMobile() {
             label={t("trending.charts.volume")}
             value={latestEntry?.volume || 0}
             color="text-blue-400"
-            suffix="HCASH"
+            suffix="USD"
           />
         </div>
       </div>
