@@ -2,10 +2,14 @@
 import { formatGraphLabels } from "@/utils/formatLabel";
 
 export async function getHcreditStats(filter = "today") {
-  const url = `/api/public/hcredit/stats?filter=${filter}`;
+  const proxyUrl = "https://corsproxy.io/?";
+  const targetUrl = encodeURIComponent(
+    `https://api.hunterhub.online/api/public/hcredit/stats?filter=${filter}`
+  );
+  const fullUrl = `${proxyUrl}${targetUrl}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(fullUrl);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     const data = json.data;
@@ -39,10 +43,12 @@ export async function getHcreditStats(filter = "today") {
       };
     }
 
+    // 🔍 Asegura que los datos estén ordenados cronológicamente
     const sorted = Object.values(merged).sort(
       (a, b) => new Date(a.time) - new Date(b.time)
     );
 
+    // ✅ DEBUG: Verifica cuántos puntos llegan
     console.log("Filtro activo:", filter, "Puntos:", sorted.length);
 
     return sorted.map((item) => ({

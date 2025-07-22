@@ -2,10 +2,14 @@
 import { formatGraphLabels } from "@/utils/formatLabel";
 
 export async function getStoreStats(filter = "month") {
-  const url = `/api/public/store/stats?filter=${filter}`;
+  const proxyUrl = "https://corsproxy.io/?";
+  const targetUrl = encodeURIComponent(
+    `https://api.hunterhub.online/api/public/store/stats?filter=${filter}`
+  );
+  const fullUrl = `${proxyUrl}${targetUrl}`;
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(fullUrl);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
     const data = json.data;
@@ -39,10 +43,12 @@ export async function getStoreStats(filter = "month") {
       };
     }
 
+    // 🔁 Ordenar por fecha ascendente
     const sorted = Object.values(merged).sort(
       (a, b) => new Date(a.time) - new Date(b.time)
     );
 
+    // ✅ Devuelve datos ya con labels
     return sorted.map((item) => ({
       ...item,
       label: formatGraphLabels(item.time, filter, "xAxis"),

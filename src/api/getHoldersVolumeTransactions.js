@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getHoldersVolumeTransactions = async () => {
   try {
-    const response = await axios.get('/api/public/stats/tokens');
+    const response = await axios.get('https://api.hunterhub.online/api/public/stats/tokens');
     const hcash = response.data.data.find((t) => t.token === 'HCASH');
 
     if (!hcash || !hcash.on_chain) return null;
