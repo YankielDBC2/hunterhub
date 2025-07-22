@@ -12,7 +12,7 @@ const games = [
   },
   {
     id: 'chat-adventure',
-    banner: '/images/chat-banner.mp4',
+    banner: '/images/chat-banner.jpg',
     image: '/images/chat-card.jpg'
   },
   {
@@ -133,6 +133,39 @@ export default function GameShowcaseSection() {
                   {tag}
                 </span>
               ))}
+            </div>
+
+            {/* 🔘 BUTTONS */}
+            <div className="flex gap-3 mt-6">
+              {gameData.appUrl ? (
+                <a href={gameData.appUrl} target="_blank" rel="noopener noreferrer">
+                  <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                    Open App
+                  </button>
+                </a>
+              ) : (
+                <button
+                  className="bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold opacity-50 cursor-not-allowed"
+                  disabled
+                >
+                  Game App
+                </button>
+              )}
+
+              {gameData.whitepaperUrl ? (
+                <a href={gameData.whitepaperUrl} target="_blank" rel="noopener noreferrer">
+                  <button className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                    Whitepaper
+                  </button>
+                </a>
+              ) : (
+                <button
+                  className="border border-gray-500 text-gray-400 px-4 py-2 rounded-lg text-sm font-semibold opacity-50 cursor-not-allowed"
+                  disabled
+                >
+                  Whitepaper
+                </button>
+              )}
             </div>
           </motion.div>
 

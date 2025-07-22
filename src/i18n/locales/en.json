@@ -1,4 +1,5 @@
 {
+
 "tokenomics": {
   "title": "HASH Allocation",
   "name": "Token Name",
@@ -10,8 +11,7 @@
   "expected": "Expected",
   "mined": "Mined"
 
-}
-,
+},
 
   "top_players": {
     "title": "Meet Our <span class='text-red-500'>Top Players</span>",
@@ -97,6 +97,8 @@
   "title": "Trending Assets Cap",
   "description": "Track the top Hunter assets in real time with live statistics and performance metrics.",
   "charts": {
+    "holders": "Holders",
+    "volume": "Volume (USD)",
     "fees": "Fees",
     "hunter_credit": "HCREDIT",
     "burned": "Burned",
@@ -122,13 +124,12 @@
     "prev": "Previous",
     "next": "Next"
   }
-  
 },
 
   "what_we_are_building": {
     "title": "What We Are Building?",
-    "paragraph_1": "We are crafting an interconnected universe — from games and tools to community platforms and rewards systems.",
-    "paragraph_2": "Everything is powered by blockchain and enhanced by player engagement."
+    "paragraph_1": "We are engineering the Space Hunters Ecosystem — a fully immersive, interoperable gaming metaverse powered by blockchain and player ambition.",
+    "paragraph_2": "The Web Hub App connects everything — track progress, participate in live events, manage NFTs, engage with the community, and unlock future features like collectibles, staking tools, and social systems."
   },
 "why_join": {
   "animated_title": "The Ultimate Web3 {{value}}",
@@ -137,27 +138,27 @@
     "Free-To-Play",
     "Engage-To-Earn"
   ],
-  "description": "Sign up now to dive into exclusive content, track your progress, and connect with a global community of gamers. Don’t miss out on special offers made just for you!",
+  "description": "Join the SH universe! Register now for an immersive gaming experience, dive into thrilling adventures, have fun, and earn $HCASH coins to fuel your journey!",
   "benefits": [
     {
       "title": "Access",
       "highlight": "Exclusive Games",
-      "description": "Get early access to new releases and hidden gems, only for registered members. Be the first to play!"
+      "description": "Dive into addictive mid-core games in the SH universe! Join now to experience thrilling gameplay and check your progress anytime."
     },
     {
       "title": "Explore",
       "highlight": "Memberships & Benefits",
-      "description": "Monitor gameplay stats, track achievements, and share your progress with fellow gamers easily."
+      "description": "Unlock unlimited benefits with our memberships! Enjoy double $HCASH earnings, extra gameplay, exclusive rewards, and more."
     },
     {
       "title": "Real",
       "highlight": "Community Engagement",
-      "description": "Connect with a passionate community of gamers. Share tips, strategies, and gaming experiences."
+      "description": "Join a vibrant SH universe community! Connect with gamers, share strategies, and earn free $HCASH rewards 24/7."
     },
     {
-      "title": "Long-Term &",
-      "highlight": "Deflationary Tokenomic",
-      "description": "Enjoy member-only discounts on top-rated games, DLCs, and in-game items. Save on your favorites!"
+      "title": "Long-Term",
+      "highlight": "Deflationary Tokenomics",
+      "description": "Experience a unique Web3 economy! Over 70% of $HCASH tokens burned daily, ensuring a sustainable and rewarding tokenomic system."
     }
   ]
 },
@@ -168,40 +169,49 @@
     "economy": "Our economy runs on $HCASH and $HCREDIT, allowing for staking, enhancements, in-game purchases, and trading.",
     "webhub": "The Web Hub App connects everything — track progress, participate in live events, manage NFTs, engage with the community, and unlock future features like collectibles, staking tools, and social systems."
   },
-
-  "games": {
-    "tech-generators": {
-      "title": "Tech Generators",
-      "description": "Tech Generators is a sci‑fi mining game developed by the Space Hunters team. It offers real‑time gameplay, unique mechanics, and play‑to‑earn rewards.",
-      "release": "Dec 23, 2024",
-      "genre": "Sci‑Fi - Mining - RPG",
-      "tags": [
-        "TMA",
-        "Browser",
-        "TON Chain"
-      ]
-    },
-    "chat-adventure": {
-      "title": "Chat Adventure",
-      "description": "Chat Adventure is a narrative‑driven game where players build characters, explore factions, and unlock achievements through AI‑powered interaction.",
-      "release": "Mar 10, 2025",
-      "genre": "Text RPG - AI - Interactive",
-      "tags": [
-        "Telegram",
-        "AI",
-        "Roleplay"
-      ]
-    },
-    "space-hunters": {
-      "title": "The Reborn",
-      "description": "An intense multiplayer experience combining space combat, exploration and faction wars in the revived Space Hunters universe.",
-      "release": "Q3 2025",
-      "genre": "Shooter - MMO - Space",
-      "tags": [
-        "Shooter",
-        "MMO",
-        "Unity"
-      ]
-    }
+"games": {
+  "tech-generators": {
+    "title": "Tech Generators",
+    "description": "Tech Generators is a sci-fi mid-core mining game with real-time gameplay, unique mechanics, no direct competitors, and exciting play-to-earn rewards!",    
+    "release": "Dec 23, 2024",
+    "genre": "TMA - Browser - NFT - Crypto",
+    "tags": [
+      "TMA",
+      "Browser",
+      "NFT",
+      "Crypto"
+    ],
+    "appUrl": "https://t.me/SpaceHuntersBot?start=Y9D91KXZ",
+    "whitepaperUrl": null
+  },
+  "chat-adventure": {
+    "title": "Chat Adventure",
+    "description": "CHAD is an immersive text-based MMORPG with solo and multiplayer modes. Explore a fantastical world, engage in thrilling PvP battles, hunt epic creatures, become a Creature Master, and more!",    
+    "release": "TBA",
+    "genre": "TG BOT - Browser - NFT - Crypto",
+    "tags": [
+      "Telegram",
+      "NFT",
+      "PvP",
+      "Crypto"
+    ],
+    "appUrl": null,
+    "whitepaperUrl": null
+  },
+  "space-hunters": {
+    "title": "The Reborn",
+    "description": "Own NFT Tools, Avatars, Lands, and Boosters to prepare for epic excavations, thrilling mercenary missions, and more in an immersive adventure!",    
+    "release": "TBA",
+    "genre": "TMA - Browser - NFT - Crypto",
+    "tags": [
+      "P2E",
+      "RPG",
+      "NFT",
+      "Crypto"
+    ],
+    "appUrl": null,
+    "whitepaperUrl": null
   }
+}
+
 }

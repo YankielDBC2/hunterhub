@@ -4,7 +4,7 @@ import { formatGraphLabels } from "@/utils/formatLabel";
 export async function getHcreditStats(filter = "today") {
   const proxyUrl = "https://corsproxy.io/?";
   const targetUrl = encodeURIComponent(
-    `https://api.hunterhub.online/api/public/hcash/stats?filter=${filter}`
+    `https://api.hunterhub.online/api/public/hcredit/stats?filter=${filter}`
   );
   const fullUrl = `${proxyUrl}${targetUrl}`;
 

@@ -32,7 +32,7 @@ export default function GameShowcaseMobile() {
   useEffect(() => {
     const timer = setInterval(() => {
       setSelectedIndex((prev) => (prev + 1) % games.length)
-    }, 12000)
+    }, 30000)
     return () => clearInterval(timer)
   }, [])
 
@@ -97,7 +97,6 @@ export default function GameShowcaseMobile() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           />
-
         </AnimatePresence>
 
         {/* 🔁 Botones de navegación */}
@@ -139,12 +138,34 @@ export default function GameShowcaseMobile() {
           ))}
         </div>
         <div className="flex justify-center gap-3 mt-2">
-          <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-semibold">
-            Open App
-          </button>
-          <button className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold">
-            Whitepaper
-          </button>
+          {gameData.appUrl ? (
+            <a href={gameData.appUrl} target="_blank" rel="noopener noreferrer">
+              <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                Open App
+              </button>
+            </a>
+          ) : (
+            <button
+              className="bg-gray-700 px-4 py-2 rounded-lg text-sm font-semibold opacity-50 cursor-not-allowed"
+              disabled
+            >
+              Game App
+            </button>
+          )}
+          {gameData.whitepaperUrl ? (
+            <a href={gameData.whitepaperUrl} target="_blank" rel="noopener noreferrer">
+              <button className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold">
+                Whitepaper
+              </button>
+            </a>
+          ) : (
+            <button
+              className="border border-gray-500 text-gray-400 px-4 py-2 rounded-lg text-sm font-semibold opacity-50 cursor-not-allowed"
+              disabled
+            >
+              Whitepaper
+            </button>
+          )}
         </div>
       </motion.div>
     </motion.section>
