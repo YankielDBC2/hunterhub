@@ -1,4 +1,9 @@
 {
+  "tooltips": {
+  "holders": "Total number of unique wallets holding HCASH.",
+  "transactions": "Total number of HCASH-related transactions today.",
+  "volume": "Total trade volume in USD within the selected period."
+},
   "mvp_assets": {
   "title": "Top Selling Items",
   "empty": "No assets available.",

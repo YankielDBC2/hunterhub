@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import HCASHIcon from "/images/HCASH_02.png";
 import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 const fallbackStats = [
   {
@@ -167,12 +168,14 @@ export default function HcashAboutSectionMobile() {
             label={t("trending.charts.holders")}
             value={latestEntry?.holders || 0}
             color="text-green-400"
+            tooltipText={t("tooltips.holders")}
           />
           <InfoCard
             icon="/images/transactions_icon.png"
             label={t("trending.charts.transactions")}
             value={latestEntry?.transactions || 0}
             color="text-pink-400"
+            tooltipText={t("tooltips.transactions")}
           />
           <InfoCard
             icon="/images/volume_icon.png"
@@ -180,6 +183,7 @@ export default function HcashAboutSectionMobile() {
             value={latestEntry?.volume || 0}
             color="text-blue-400"
             suffix="USD"
+            tooltipText={t("tooltips.volume")}
           />
         </div>
       </div>
@@ -215,21 +219,40 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
   );
 }
 
-function InfoCard({ icon, label, value, color, suffix = "" }) {
+function InfoCard({ icon, label, value, color, suffix = "", tooltipText }) {
   return (
-    <div className="flex items-center bg-white/5 px-4 py-3 rounded-xl shadow-md w-full">
-      <img
-        src={icon}
-        alt={label}
-        className="w-14 h-14 mr-4 flex-shrink-0"
-      />
-      <div className="flex flex-col justify-center">
-        <p className="font-orbitron text-xs text-gray-300 leading-none">{label}</p>
-        <p className={`text-lg font-bold mt-1 ${color}`}>
-          {(value ?? 0).toLocaleString()} {suffix}
-        </p>
-      </div>
-    </div>
+    <Tooltip.Provider delayDuration={100}>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
+          <div className="relative overflow-hidden rounded-xl px-3 py-3 flex items-center justify-between border border-white/10 bg-[#0f172a]/70 backdrop-blur-sm shadow-md hover:border-cyan-400 transition-all cursor-pointer">
+            <div className="flex items-center gap-3">
+              <img
+                src={icon}
+                alt={label}
+                className="w-20 h-20 object-contain flex-shrink-0 -ml-1"
+              />
+              <div className="flex flex-col justify-center">
+                <p className="font-orbitron text-sm text-white mb-1 leading-tight">{label}</p>
+                <p className={`text-lg font-bold ${color}`}>
+                  {(value ?? 0).toLocaleString()} {suffix}
+                </p>
+              </div>
+            </div>
+            <div className="absolute top-2 right-4 text-xs text-cyan-300 font-mono">
+              TODAY
+            </div>
+          </div>
+        </Tooltip.Trigger>
+
+        <Tooltip.Content
+          side="top"
+          sideOffset={6}
+          className="bg-black px-3 py-2 rounded-lg text-xs text-white shadow-lg max-w-xs z-50"
+        >
+          {tooltipText}
+          <Tooltip.Arrow className="fill-black" />
+        </Tooltip.Content>
+      </Tooltip.Root>
+    </Tooltip.Provider>
   );
 }
-
