@@ -1,30 +1,44 @@
-import { FaTwitter, FaTelegramPlane, FaDiscord, FaYoutube } from 'react-icons/fa';
+import React from "react";
+import {
+  FaTwitter,
+  FaTelegramPlane,
+  FaYoutube,
+  FaDiscord,
+} from "react-icons/fa";
+import "./Footer.css";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer
-      className="relative text-white py-12 bg-[#181622] overflow-hidden"
-      style={{
-        backgroundImage: `url('/images/footer-bg.jpg')`, // opcional
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Humo animado */}
-      <div className="footer-smoke" />
+    <footer className="footer-glow">
+      <div className="footer-horizontal">
+        <p className="footer-text">© 2025 Space Hunters. All rights reserved.</p>
 
-      {/* Contenido */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-sm text-gray-400">© 2025 Space Hunters. All rights reserved.</p>
-          <div className="flex gap-6 text-xl">
-            <a href="#" className="hover:text-red-500" title="Twitter"><FaTwitter /></a>
-            <a href="#" className="hover:text-red-500" title="Telegram"><FaTelegramPlane /></a>
-            <a href="#" className="hover:text-red-500" title="Discord"><FaDiscord /></a>
-            <a href="#" className="hover:text-red-500" title="YouTube"><FaYoutube /></a>
-          </div>
+        <div className="footer-links">
+          <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+            Privacy Policy
+          </a>
+          <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">
+            Terms & Conditions
+          </a>
+        </div>
+
+        <div className="footer-icons">
+          <a href="https://x.com/nftspacehunterss" target="_blank" rel="noopener noreferrer">
+            <FaTwitter />
+          </a>
+          <a href="https://t.me/spacehunterss" target="_blank" rel="noopener noreferrer">
+            <FaTelegramPlane />
+          </a>
+          <a href="https://discord.gg/spacehunters" target="_blank" rel="noopener noreferrer">
+            <FaDiscord />
+          </a>
+          <a href="https://www.youtube.com/@SpaceHuntersGame" target="_blank" rel="noopener noreferrer">
+            <FaYoutube />
+          </a>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

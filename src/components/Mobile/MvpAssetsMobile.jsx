@@ -10,21 +10,18 @@ const formatNumber = (num) => {
   return n.toFixed(0);
 };
 
-const ITEMS_PER_PAGE = 5;
-
 const MvpAssetsMobile = () => {
   const [assets, setAssets] = useState([]);
   const [filter, setFilter] = useState("today");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [expandedIndexes, setExpandedIndexes] = useState([]);
 
   const toggleDescription = (index) => {
     setExpandedIndexes((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
@@ -57,11 +54,7 @@ const MvpAssetsMobile = () => {
         `https://corsproxy.io/?https://api.hunterhub.online/api/public/marketplace/sales?filter=${filter}`
       );
       const json = await res.json();
-      if (
-        json &&
-        json.data &&
-        Array.isArray(json.data.interval_data)
-      ) {
+      if (json?.data?.interval_data) {
         const merged = mergeAssets(json.data.interval_data);
         setAssets(merged);
         setError("");
@@ -83,9 +76,9 @@ const MvpAssetsMobile = () => {
     fetchAssets();
   }, [filter]);
 
-  const startIdx = (page - 1) * ITEMS_PER_PAGE;
-  const paginatedAssets = assets.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-  const totalPages = Math.ceil(assets.length / ITEMS_PER_PAGE);
+  const startIdx = (page - 1) * itemsPerPage;
+  const paginatedAssets = assets.slice(startIdx, startIdx + itemsPerPage);
+  const totalPages = Math.ceil(assets.length / itemsPerPage);
 
   return (
     <section className="px-4 mt-10">
@@ -94,7 +87,7 @@ const MvpAssetsMobile = () => {
       </h2>
 
       {/* Filtros */}
-      <div className="flex justify-center gap-3 mb-6">
+      <div className="flex flex-wrap justify-center gap-3 mb-6">
         {[
           { key: "today", label: "24H" },
           { key: "week", label: "7D" },
@@ -112,6 +105,22 @@ const MvpAssetsMobile = () => {
             {label}
           </button>
         ))}
+
+        {/* Items por página */}
+        <select
+          value={itemsPerPage}
+          onChange={(e) => {
+            setItemsPerPage(Number(e.target.value));
+            setPage(1);
+          }}
+          className="ml-2 px-3 py-1 bg-gray-800 border border-cyan-400 rounded-md text-sm"
+        >
+          {[5, 10, 15].map((num) => (
+            <option key={num} value={num}>
+              Show {num}
+            </option>
+          ))}
+        </select>
       </div>
 
       {loading && (
@@ -142,10 +151,7 @@ const MvpAssetsMobile = () => {
                     data-tooltip-id={`tooltip-${index}`}
                     data-tooltip-content={item.description || "No description"}
                   />
-                  <Tooltip
-                    id={`tooltip-${index}`}
-                    className="text-xs max-w-[200px]"
-                  />
+                  <Tooltip id={`tooltip-${index}`} className="text-xs max-w-[200px]" />
                 </div>
 
                 <div className="ml-3 flex flex-col justify-between w-full text-sm text-white">
@@ -153,43 +159,55 @@ const MvpAssetsMobile = () => {
                     <h3 className="font-semibold text-base leading-snug font-orbitron">
                       {item.item}
                     </h3>
-                    <p
-                      className={`text-gray-400 text-xs mt-1 leading-tight ${
-                        isExpanded ? "" : "line-clamp-1"
-                      }`}
-                    >
-                      {item.description}
-                    </p>
-                    {item.description.length > 50 && (
-                      <button
-                        onClick={() => toggleDescription(globalIndex)}
-                        className="text-cyan-400 text-xs mt-1 underline"
-                      >
-                        {isExpanded ? "Read less" : "Read more"}
-                      </button>
-                    )}
+                    <div className="text-gray-400 text-xs mt-1 leading-tight">
+                      {item.description ? (
+                        <span>
+                          {isExpanded
+                            ? item.description
+                            : `${item.description.split(" ").slice(0, 3).join(" ")}...`}
+                          <button
+                            onClick={() => toggleDescription(globalIndex)}
+                            className="ml-1 text-cyan-400 underline"
+                          >
+                            {isExpanded ? "Read less" : "Read more"}
+                          </button>
+                        </span>
+                      ) : (
+                        "-"
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex justify-between items-center mt-2 text-xs text-gray-300">
-                    <div className="flex gap-1 items-center">
+                    <div
+                      className="flex gap-1 items-center"
+                      data-tooltip-id={`tooltip-count-${index}`}
+                      data-tooltip-content="Number of times this item was sold in the selected period."
+                    >
                       <img
                         src="/images/inventory_icon.png"
                         alt="Count"
                         className="w-4 h-4"
                       />
                       <span>{formatNumber(item.count)}</span>
+                      <Tooltip id={`tooltip-count-${index}`} className="text-xs" />
                     </div>
-                    <div className="flex gap-1 items-center">
+
+                    <div
+                      className="flex gap-1 items-center"
+                      data-tooltip-id={`tooltip-vol-${index}`}
+                      data-tooltip-content="Total HCASH volume generated by this item."
+                    >
                       <img
                         src="/images/HCASH001.png"
                         alt="Volume"
                         className="w-4 h-4"
                       />
                       <span>{formatNumber(item.total_volume)}</span>
+                      <Tooltip id={`tooltip-vol-${index}`} className="text-xs" />
                     </div>
-                    <span className="text-cyan-400 ml-2">
-                      {filter.toUpperCase()}
-                    </span>
+
+                    <span className="text-cyan-400 ml-2">{filter.toUpperCase()}</span>
                   </div>
                 </div>
               </div>
@@ -197,20 +215,18 @@ const MvpAssetsMobile = () => {
           })
         ) : (
           !loading && (
-            <p className="text-center text-gray-400 text-sm">
-              No assets available.
-            </p>
+            <p className="text-center text-gray-400 text-sm">No assets available.</p>
           )
         )}
       </div>
 
-      {/* Paginado con mismo estilo que los filtros */}
-      {assets.length > ITEMS_PER_PAGE && (
+      {/* Paginación */}
+      {assets.length > itemsPerPage && (
         <div className="flex justify-center mt-6 gap-3">
           <button
             disabled={page === 1}
             onClick={() => setPage((p) => p - 1)}
-            className={`px-4 py-1 border-2 rounded-md font-mono text-sm tracking-wide transition-all duration-200 ${
+            className={`px-4 py-1 border-2 rounded-md font-mono text-sm ${
               page === 1
                 ? "border-gray-600 bg-gray-700 text-gray-400 cursor-not-allowed"
                 : "border-cyan-400 bg-cyan-700 text-white"
@@ -224,7 +240,7 @@ const MvpAssetsMobile = () => {
           <button
             disabled={page === totalPages}
             onClick={() => setPage((p) => p + 1)}
-            className={`px-4 py-1 border-2 rounded-md font-mono text-sm tracking-wide transition-all duration-200 ${
+            className={`px-4 py-1 border-2 rounded-md font-mono text-sm ${
               page === totalPages
                 ? "border-gray-600 bg-gray-700 text-gray-400 cursor-not-allowed"
                 : "border-cyan-400 bg-cyan-700 text-white"

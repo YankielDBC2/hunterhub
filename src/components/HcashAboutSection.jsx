@@ -158,7 +158,7 @@ export default function HcashAboutSection() {
           </div>
 
           {/* ⬇️ REEMPLAZO DE GRÁFICA POR TARJETAS */}
-          <div className="flex flex-col items-center justify-center gap-6">
+          <div className="flex flex-col gap-4 w-full">
             <InfoCard
               icon="/images/holders_icon.png"
               label={t("trending.charts.holders")}
@@ -218,13 +218,18 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
 
 function InfoCard({ icon, label, value, color, suffix = "" }) {
   return (
-    <div className="flex flex-col items-center bg-[#0f1723] border border-[#1f2d3a] rounded-3xl px-5 py-6 w-full max-w-[220px] text-center">
-      <img src={icon} alt={label} className="w-16 h-16 mb-3" />
-      <p className="font-orbitron text-sm text-white mb-1">{label}</p>
-      <p className={`text-2xl font-bold ${color}`}>
-        {(value ?? 0).toLocaleString()} {suffix}
-      </p>
+    <div className="flex items-center bg-[#0b121d]/90 backdrop-blur-sm border border-[#1a2733] rounded-2xl px-5 py-4 w-full max-w-sm shadow-[0_0_6px_#00ffff20] hover:shadow-[0_0_12px_#00ffff40] transition-all duration-300">
+      <img src={icon} alt={label} className="w-10 h-10 mr-4 drop-shadow-md" />
+      <div className="flex flex-col">
+        <p className="font-orbitron text-sm text-white">{label}</p>
+        <p className={`text-xl font-bold mt-1 ${color}`}>
+          {(value ?? 0).toLocaleString()} {suffix}
+        </p>
+      </div>
     </div>
   );
 }
+
+
+
 

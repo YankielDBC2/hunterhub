@@ -10,19 +10,13 @@ const ScrollToTopButton = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // Mostrar el botón si bajamos suficiente
-      if (scrollTop > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(scrollTop > 300);
 
-      // Marcar como en scroll y resetear temporizador
       setIsScrolling(true);
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrolling(false);
-      }, 3000); // 3 segundos sin moverse = ocultar
+      }, 3000);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -33,7 +27,27 @@ const ScrollToTopButton = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const startY = window.scrollY;
+    const duration = 1200;
+    let startTime = null;
+
+    const easeInOutQuad = (t) =>
+      t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const step = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeInOutQuad(progress);
+
+      window.scrollTo(0, startY * (1 - ease));
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
   };
 
   const show = isVisible && isScrolling;

@@ -1,0 +1,16 @@
+.mvp-assets-desktop table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.mvp-assets-desktop th,
+.mvp-assets-desktop td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mvp-assets-desktop img {
+  transition: transform 0.3s ease;
+}
+.mvp-assets-desktop img:hover {
+  transform: scale(1.1);
+}

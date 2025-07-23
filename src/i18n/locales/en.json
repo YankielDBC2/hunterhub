@@ -25,7 +25,33 @@
   "capDetail": "9% annually (90M), decreasing each year. Unused portion rolls over as backup for next year.",
   "planned": "Planned",
   "expected": "Expected",
-  "mined": "Mined"
+  "mined": "Mined",
+  "zones": {
+    "players": {
+      "label": "Players 💰",
+      "content": "70% for Games and Player Incentives"
+    },
+    "marketing": {
+      "label": "Marketing 📢",
+      "content": "6.5% for Marketing Efforts"
+    },
+    "liquidity": {
+      "label": "Liquidity 💧",
+      "content": "3.5% for Liquidity Pools"
+    },
+    "innovation": {
+      "label": "Innovation 🚀",
+      "content": "15% for Innovation and Expansion"
+    },
+    "partners": {
+      "label": "Partners 🤝",
+      "content": "5% for Partners and Investors"
+    },
+    "team": {
+      "label": "Team 🧠",
+      "content": "The team holds 0 tokens"
+    }
+  }
 
 },
 
@@ -143,7 +169,11 @@
     "volume_toncoin": "TON Vol",
     "assets": "Sales",
     "hcash": "HCASH Volume",
-    "toncoin": "TON Volume"
+    "toncoin": "TON Volume",
+    "title_red": "Economic",
+    "title_white": "Overview",
+    "description": "Track the pulse of our economy flow — and make data-driven decisions with confidence."
+
   },
   "item": {
     "supply": "Supply",

@@ -15,6 +15,7 @@ import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'
 import FooterMobile from './components/Mobile/FooterMobile'
 import AdventureSectionMobile from './components/Mobile/AdventureSectionMobile'
 import ScrollToTopButton from './utils/ScrollToTopButton';
+import ScrollToEconomyButton from "@/utils/ScrollToEconomyButton";
 import MvpAssetsMobile from "./components/Mobile/MvpAssetsMobile";
 
 // 💻 Componentes de escritorio
@@ -30,7 +31,7 @@ import HcashAboutSection from './components/HcashAboutSection'
 import TokenomicsShip from './components/Tokenomics/TokenomicsShip'
 import TokenInfoCard from './components/Tokenomics/TokenInfoCard'
 import Footer from './components/Footer'
-import AdventureSection from './components/AdventureSection'
+import MvpAssetsDesktop from './components/MvpAssetsDesktop';
 
 // 🖥️ Componentes Tablet
 import GameShowcaseTablet from './components/Tablet/GameShowcaseTablet'
@@ -113,14 +114,6 @@ const App = () => {
         <SelfEconomyMobile />
       </div>
 
-      {/* 📊 Trending Assets */}
-      <div className="hidden lg:block">
-        <TrendingAssetsSection />
-      </div>
-      <div className="lg:hidden">
-        <TrendingAssetsSectionMobile />
-      </div>
-
       {/* 💰 Hcash About */}
       <div className="hidden lg:block">
         <HcashAboutSection />
@@ -139,15 +132,26 @@ const App = () => {
         <TokenInfoCardMobile />
       </div>
       
+
+      {/* 📊 Trending Assets */}
+      <div className="hidden lg:block">
+        <TrendingAssetsSection />
+      </div>
+      <div className="lg:hidden">
+        <TrendingAssetsSectionMobile />
+      </div>
+
+
       {/* 🛍️ MVP Assets - Productos más vendidos */}
       <div className="lg:hidden">
         <MvpAssetsMobile />
       </div>
+      <div className="hidden lg:block">
+        <MvpAssetsDesktop />
+      </div>
+
 
       {/* 🌌 Sección Aventura */}
-      <div className="hidden lg:block">
-        <AdventureSection />
-      </div>
       <div className="block lg:hidden">
         <AdventureSectionMobile />
       </div>
@@ -159,6 +163,7 @@ const App = () => {
       <div className="lg:hidden">
         <FooterMobile />
       </div>
+      <ScrollToEconomyButton />
       <ScrollToTopButton />
 
     </div>

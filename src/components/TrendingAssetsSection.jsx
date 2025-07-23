@@ -105,7 +105,17 @@ export default function TrendingAssetsSection() {
   ];
 
   return (
-    <section className="hidden lg:block px-8 py-12 text-white">
+    <section id="economic-overview" className="hidden lg:block px-8 py-12 text-white">
+      <div className="mb-6 text-center">
+        <h2 className="text-2xl font-orbitron font-bold tracking-wide">
+          <span className="text-red-500">{t("trending.charts.title_red")}</span>
+          <span className="text-white"> {t("trending.charts.title_white")}</span>
+        </h2>
+        <p className="mt-2 text-sm text-gray-300 font-sans leading-relaxed max-w-md mx-auto">
+          {t("trending.charts.description")}
+        </p>
+      </div>
+
       <div className="flex justify-center gap-4 mb-10">
         {["24h", "7d", "30d"].map((time) => (
           <button
