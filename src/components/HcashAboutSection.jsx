@@ -4,9 +4,49 @@ import { useTranslation } from "react-i18next";
 import HCASHIcon from "/images/HCASH_02.png";
 import TonIcon from "/images/tonicon.png";
 import { getHoldersVolumeTransactions } from "@/api/getHoldersVolumeTransactions";
-import * as Tooltip from "@radix-ui/react-tooltip";
 
-const fallbackStats = [/* ... mismo array que ya tienes ... */];
+const fallbackStats = [
+  {
+    label1: "about_hcash.max_supply_label1",
+    label2: "about_hcash.max_supply_label2",
+    value: 334147.46,
+    total: 1000000000,
+    description: "about_hcash.max_supply_desc",
+    color: "emerald",
+  },
+  {
+    label1: "about_hcash.tokens_mined_label1",
+    label2: "about_hcash.tokens_mined_label2",
+    value: 1759606,
+    total: 1000000000,
+    description: "about_hcash.tokens_mined_desc",
+    color: "emerald",
+  },
+  {
+    label1: "about_hcash.tokens_spent_label1",
+    label2: "about_hcash.tokens_spent_label2",
+    value: 1423086,
+    total: 1759606,
+    description: "about_hcash.tokens_spent_desc",
+    color: "red",
+  },
+  {
+    label1: "about_hcash.tokens_ingame_label1",
+    label2: "about_hcash.tokens_ingame_label2",
+    value: 281678,
+    total: 1759606,
+    description: "about_hcash.tokens_ingame_desc",
+    color: "emerald",
+  },
+  {
+    label1: "about_hcash.tokens_onchain_label1",
+    label2: "about_hcash.tokens_onchain_label2",
+    value: 105369.55,
+    total: 334147.46,
+    description: "about_hcash.tokens_onchain_desc",
+    color: "emerald",
+  },
+];
 
 export default function HcashAboutSection() {
   const { t } = useTranslation();
@@ -117,20 +157,19 @@ export default function HcashAboutSection() {
             ))}
           </div>
 
+          {/* ⬇️ REEMPLAZO DE GRÁFICA POR TARJETAS */}
           <div className="flex flex-col items-center justify-center gap-6">
             <InfoCard
               icon="/images/holders_icon.png"
               label={t("trending.charts.holders")}
               value={latestEntry?.holders || 0}
               color="text-green-400"
-              tooltipText={t("tooltips.holders")}
             />
             <InfoCard
               icon="/images/transactions_icon.png"
               label={t("trending.charts.transactions")}
               value={latestEntry?.transactions || 0}
               color="text-pink-400"
-              tooltipText={t("tooltips.transactions")}
             />
             <InfoCard
               icon="/images/volume_icon.png"
@@ -138,7 +177,6 @@ export default function HcashAboutSection() {
               value={latestEntry?.volume || 0}
               color="text-blue-400"
               suffix="USD"
-              tooltipText={t("tooltips.volume")}
             />
           </div>
 
@@ -178,40 +216,14 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
   );
 }
 
-function InfoCard({ icon, label, value, color, suffix = "", tooltipText }) {
+function InfoCard({ icon, label, value, color, suffix = "" }) {
   return (
-    <Tooltip.Provider delayDuration={100}>
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild>
-          <div className="relative overflow-hidden rounded-xl px-4 py-4 flex items-center justify-between border border-white/10 bg-[#0f172a]/70 backdrop-blur-sm shadow-md hover:border-cyan-400 transition-all cursor-pointer w-full">
-            <div className="flex items-center gap-4">
-              <img
-                src={icon}
-                alt={label}
-                className="w-20 h-20 object-contain flex-shrink-0 -ml-1"
-              />
-              <div className="flex flex-col justify-center">
-                <p className="font-orbitron text-sm text-white mb-1">{label}</p>
-                <p className={`text-lg font-bold ${color}`}>
-                  {(value ?? 0).toLocaleString()} {suffix}
-                </p>
-              </div>
-            </div>
-            <div className="absolute top-2 right-4 text-xs text-cyan-300 font-mono">
-              TODAY
-            </div>
-          </div>
-        </Tooltip.Trigger>
-
-        <Tooltip.Content
-          side="top"
-          sideOffset={6}
-          className="bg-black px-3 py-2 rounded-lg text-xs text-white shadow-lg max-w-xs z-50"
-        >
-          {tooltipText}
-          <Tooltip.Arrow className="fill-black" />
-        </Tooltip.Content>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+    <div className="flex flex-col items-center bg-white/5 p-6 rounded-2xl shadow-lg">
+      <img src={icon} alt={label} className="w-16 h-16 mb-3 animate-pulse" />
+      <p className="font-orbitron text-sm text-gray-300">{label}</p>
+      <p className={`text-2xl font-bold mt-1 ${color}`}>
+        {(value ?? 0).toLocaleString()} {suffix}
+      </p>
+    </div>
   );
 }
