@@ -218,12 +218,13 @@ function StatBar({ t, label1, label2, value, total, description, color, currentV
 
 function InfoCard({ icon, label, value, color, suffix = "" }) {
   return (
-    <div className="flex flex-col items-center bg-white/5 p-6 rounded-2xl shadow-lg">
-      <img src={icon} alt={label} className="w-16 h-16 mb-3 animate-pulse" />
-      <p className="font-orbitron text-sm text-gray-300">{label}</p>
-      <p className={`text-2xl font-bold mt-1 ${color}`}>
+    <div className="flex flex-col items-center bg-[#0f1723] border border-[#1f2d3a] rounded-3xl px-5 py-6 w-full max-w-[220px] text-center">
+      <img src={icon} alt={label} className="w-16 h-16 mb-3" />
+      <p className="font-orbitron text-sm text-white mb-1">{label}</p>
+      <p className={`text-2xl font-bold ${color}`}>
         {(value ?? 0).toLocaleString()} {suffix}
       </p>
     </div>
   );
 }
+
