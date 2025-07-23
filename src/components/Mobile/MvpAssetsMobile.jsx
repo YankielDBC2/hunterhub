@@ -1,48 +1,92 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from "react";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 
-function formatNumber(num) {
-  if (num >= 1e6) return (num / 1e6).toFixed(1) + "M";
-  if (num >= 1e3) return (num / 1e3).toFixed(1) + "K";
-  return num?.toString() || "0";
-}
+const formatNumber = (num) => {
+  if (!num) return "0";
+  const n = parseFloat(num);
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(1) + "K";
+  return n.toFixed(0);
+};
 
-const MvpAssetsMobile = ({ assets = [] }) => {
-  const { t } = useTranslation();
+const MvpAssetsMobile = () => {
+  const [assets, setAssets] = useState([]);
+  const [filter, setFilter] = useState("today");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchAssets = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(
+          `https://corsproxy.io/?https://api.hunterhub.online/api/public/marketplace/sales?interval=${filter}`
+        );
+        const json = await res.json();
+        setAssets(json.data || []);
+        setError("");
+      } catch (err) {
+        setError("Error fetching data.");
+        setAssets([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAssets();
+  }, [filter]);
 
   return (
     <section className="px-4 mt-10">
-      <h2 className="text-left text-2xl font-bold mb-4">
-        {t("mvp_assets.title", "MVP Assets")}
-      </h2>
+      <h2 className="text-left text-2xl font-bold mb-4">Top Selling Items</h2>
+
+      {/* Botones de filtro */}
+      <div className="flex justify-center gap-2 mb-6">
+        {["today", "week", "month"].map((type) => (
+          <button
+            key={type}
+            onClick={() => setFilter(type)}
+            className={`px-4 py-1 rounded-full border transition-all duration-200 ${
+              filter === type
+                ? "bg-white text-black font-bold"
+                : "bg-gray-700 text-white"
+            }`}
+          >
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {loading && (
+        <p className="text-center text-gray-400 text-sm">Loading...</p>
+      )}
+      {error && (
+        <p className="text-center text-red-400 text-sm">{error}</p>
+      )}
 
       <div className="grid grid-cols-2 gap-4">
-        {assets?.length > 0 ? (
+        {!loading && assets?.length > 0 ? (
           assets.map((item, index) => (
             <div
               key={index}
-              className="relative bg-gray-800 bg-opacity-30 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-gray-700"
+              className="bg-gray-800 bg-opacity-30 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-gray-700"
             >
-              <div className="relative group">
-                {item.image ? (
+              <div className="relative">
+                {item.img ? (
                   <>
                     <img
-                      src={item.image}
-                      alt={item.name || "asset"}
+                      src={item.img}
+                      alt={item.item}
                       className="w-full h-auto rounded-xl"
-                      data-tooltip-id={`img-${index}`}
-                      data-tooltip-content={t(
-                        "mvp_assets.tooltip.image",
-                        "Tap to view a quick description of the item."
-                      )}
-                      onError={(e) =>
-                        (e.target.src = "/images/default_item.png")
-                      }
+                      data-tooltip-id={`desc-${index}`}
+                      data-tooltip-content={item.description}
+                      onError={(e) => {
+                        e.target.src = "/images/default_item.png";
+                      }}
                     />
                     <Tooltip
-                      id={`img-${index}`}
+                      id={`desc-${index}`}
                       place="top"
                       className="z-50 max-w-[220px] text-xs"
                     />
@@ -53,54 +97,35 @@ const MvpAssetsMobile = ({ assets = [] }) => {
               </div>
 
               <h3 className="text-lg mt-3 font-semibold text-white">
-                {item.name || "Unnamed"}
+                {item.item || "Unnamed"}
               </h3>
 
-              <div className="flex items-center justify-between mt-2 text-sm text-gray-300">
-                <div className="flex items-center gap-1">
+              <div className="flex justify-between mt-2 text-sm text-gray-300">
+                <div className="flex gap-1 items-center">
                   <img
                     src="/images/inventory_icon.png"
-                    alt="Supply"
+                    alt="Count"
                     className="w-5 h-5"
-                    data-tooltip-id={`supply-${index}`}
-                    data-tooltip-content={t(
-                      "mvp_assets.tooltip.supply",
-                      "This represents the total supply available of this item across the ecosystem."
-                    )}
                   />
-                  <span>{formatNumber(item.supply)}</span>
-                  <Tooltip
-                    id={`supply-${index}`}
-                    place="top"
-                    className="z-50 max-w-[220px] text-xs"
-                  />
+                  <span>{formatNumber(item.count)}</span>
                 </div>
-
-                <div className="flex items-center gap-1">
+                <div className="flex gap-1 items-center">
                   <img
                     src="/images/HCASH001.png"
-                    alt="Value"
+                    alt="Volume"
                     className="w-5 h-5"
-                    data-tooltip-id={`value-${index}`}
-                    data-tooltip-content={t(
-                      "mvp_assets.tooltip.value",
-                      "This is the estimated value of the asset based on recent marketplace activity."
-                    )}
                   />
-                  <span>{formatNumber(item.value)}</span>
-                  <Tooltip
-                    id={`value-${index}`}
-                    place="top"
-                    className="z-50 max-w-[220px] text-xs"
-                  />
+                  <span>{formatNumber(item.total_volume)}</span>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-sm text-gray-400 col-span-2 text-center">
-            {t("mvp_assets.empty", "No assets available.")}
-          </p>
+          !loading && (
+            <p className="text-sm text-gray-400 col-span-2 text-center">
+              No assets available.
+            </p>
+          )
         )}
       </div>
     </section>

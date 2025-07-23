@@ -1,0 +1,18 @@
+// src/api/getTopSellingAssets.js
+export async function getTopSellingAssets(filter = "today") {
+  const proxyUrl = "https://corsproxy.io/?";
+  const targetUrl = encodeURIComponent(
+    `https://api.hunterhub.online/api/public/marketplace/sales?filter=${filter}`
+  );
+  const fullUrl = `${proxyUrl}${targetUrl}`;
+
+  try {
+    const res = await fetch(fullUrl);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json.data || [];
+  } catch (err) {
+    console.error("Error fetching top-selling assets:", err);
+    return [];
+  }
+}

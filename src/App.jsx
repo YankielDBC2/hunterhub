@@ -15,6 +15,7 @@ import TokenInfoCardMobile from './components/Tokenomics/TokenInfoCardMobile'
 import FooterMobile from './components/Mobile/FooterMobile'
 import AdventureSectionMobile from './components/Mobile/AdventureSectionMobile'
 import ScrollToTopButton from './utils/ScrollToTopButton';
+import MvpAssetsMobile from "./components/Mobile/MvpAssetsMobile";
 
 // 💻 Componentes de escritorio
 import Header from './components/Header'
@@ -136,6 +137,11 @@ const App = () => {
       <div className="lg:hidden">
         <TokenomicsShipMobile />
         <TokenInfoCardMobile />
+      </div>
+      
+      {/* 🛍️ MVP Assets - Productos más vendidos */}
+      <div className="lg:hidden">
+        <MvpAssetsMobile />
       </div>
 
       {/* 🌌 Sección Aventura */}
